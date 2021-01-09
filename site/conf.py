@@ -30,7 +30,7 @@ needs_sphinx = '3.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'myst_parser'
+    'myst_nb'
 ]
 
 templates_path = ['_templates']
@@ -262,3 +262,6 @@ texinfo_documents = [
 # TODO: REMOVE ONCE NOTEBOOKS ARE RENDERED TO HTML AND DIRECTLY INCLUDED IN
 # THE AS PART OF THE BUILD
 linkcheck_ignore = [r'https://nbviewer.jupyter.org/']
+
+# -- Options for MyST and MyST-NB -----------------------------------------
+jupyter_execute_notebooks = 'cache'
