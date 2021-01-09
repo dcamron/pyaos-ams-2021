@@ -5,7 +5,7 @@
 
 agenda
 setup
-projects/index
+projects
 resources
 showcase
 ```

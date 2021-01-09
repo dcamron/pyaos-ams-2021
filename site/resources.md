@@ -12,11 +12,17 @@ This is critical, as lines that end with two empty space characters will be rend
 The end result is a tighter vertical spacing between the opening line of the bullet point (the link) and the notebook description.
 
 -->
-## Complete list of training notebooks
 
-### Data Access
+```{toctree}
+:hidden:
 
-* [**python-awips: How to Access Data**](https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/dataAccess/python-awips-HowToAccessData.ipynb)  
+notebooks/dataAccess
+notebooks/visualization
+notebooks/index
+```
+
+## [Data Access](notebooks/dataAccess)
+* **python-awips - How to Access Data**
   This notebook covers the relevant methods for accessing EDEX and investigating what data is available. For this example we look at the "grid" data type and investigate the Global Forcast System (GFS) model. We will talk quite a bit about the DataAccessLayer utility, and its [online documentation](http://unidata.github.io/python-awips/api/DataAccessLayer.html#) might be a helpful reference.
 
 * Siphon (TDS intro)
@@ -141,5 +147,7 @@ The end result is a tighter vertical spacing between the opening line of the bul
 ### Notebook Enhancements
 * [Notebook widgets](https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/notebook_enhancements/NotebookWidgetsTraining.ipynb)  
   This notebook explores various interactive [Jupyter Widgets](https://ipywidgets.readthedocs.io/en/stable/user_guide.html) and how they might be used to create dynamic visulizations and user interaction in a Jupyter Notebook.
+
+## [Notebook Index](notebooks/index)
 
 ## Links to other various Python resources
