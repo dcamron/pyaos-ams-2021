@@ -1,0 +1,984 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Siphon (remote_access) &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Siphon (remote_open)" href="siphon-RemoteOpen.html" />
+    <link rel="prev" title="python-awips: How to Access Data" href="python-awips-HowToAccessData.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../agenda.html">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../../resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+        
+        
+        
+          
+            
+                <li class="">
+                    <a href="../dataAccess.html">Data Access Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../analysis.html">Analysis Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../visualization.html">Visualization Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../notebook_enhancements.html">Enhancing Your Notebooks</a>
+                </li>
+            
+          
+            
+  
+                <li class="active">
+                    <a href="../index.html">Notebook Index</a>
+                    <ul>
+                    
+                        <li class="">
+                            <a href="../analysis/metpy_basics.html">MetPy Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../analysis/numpy.html">Numpy</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../analysis/pandas.html">Pandas</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="pandas_and_numpy_csv.html">Pandas and Numpy for CSV files</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-HowToAccessData.html">python-awips: How to Access Data</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href="">Siphon (remote_access)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="siphon-RemoteOpen.html">Siphon (remote_open)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../notebook_enhancements/NotebookWidgetsTraining.html">Working with Jupyter Widgets</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/Declarative-Example.html">Declarative Syntax Example</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/MetPy%20SkewT.html">MetPy Skew-T</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/isentropic_introduction.html">Overview of Isentropic Analysis</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-basics.html">Matplotlib: Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-intermediate.html">Matplotlib: Intermediate</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithMapsTopoDatabases.html">python-awips: Working with the Maps and Topo Databases</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithModels.html">python-awips: Working with Models</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSatelliteData.html">python-awips: Working with Satellite Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSurfaceObs.html">python-awips: Working with Surface Obs</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithUpperAirObs.html">python-awips: Working with Upper Air Obs</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+          
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#unidata-ams-2021-student-conference" class="nav-link">Unidata AMS 2021 Student Conference</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#focuses" class="nav-link">Focuses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#objectives" class="nav-link">Objectives</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#imports" class="nav-link">Imports</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#find-a-dataset-in-a-tds-catalog" class="nav-link">1. Find a dataset in a TDS Catalog</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#access-the-dataset-using-remote-access" class="nav-link">2. Access the dataset using remote_access</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#access-via-cdm-remote" class="nav-link">Access via CDM Remote</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#access-via-opendap" class="nav-link">Access via OPENDAP</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#use-the-remote-dataset-to-subset-download-and-display-data" class="nav-link">3. Use the remote dataset to subset, download, and display data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#see-also" class="nav-link">See also</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <p><a name="top"></a></p>
+<div style="width:1000 px">
+<div style="float:right; width:98 px; height:98px;">
+<img src="https://raw.githubusercontent.com/Unidata/MetPy/master/src/metpy/plots/_static/unidata_150x150.png" alt="Unidata Logo" style="height: 98px;">
+</div>
+<div class="section" id="siphon-remote-access">
+<h1>Siphon (remote_access)<a class="headerlink" href="#siphon-remote-access" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unidata-ams-2021-student-conference">
+<h2>Unidata AMS 2021 Student Conference<a class="headerlink" href="#unidata-ams-2021-student-conference" title="Permalink to this headline">¶</a></h2>
+<div style="clear:both"></div>
+</div>
+<hr class="docutils" />
+<p>In this notebook, we’ll cover opening, inspecting, subsetting, and plotting a TDS dataset using Siphon’s <code class="docutils literal notranslate"><span class="pre">remote_access</span></code> method.</p>
+<div style="float:right; width:250 px"><img src="../../instructors/images/siphon_remote_access_preview.png" alt="plot of data accessed via Siphon's remote_access" style="height: 300px;"></div>
+</div>
+<div class="section" id="focuses">
+<h2>Focuses<a class="headerlink" href="#focuses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Use Siphon <code class="docutils literal notranslate"><span class="pre">remote_access</span></code> to open a TDS dataset</p></li>
+<li><p>Access dataset using both <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf-java/v4.5/reference/stream/CdmRemote.html">CDM Remote</a> and <a class="reference external" href="https://www.opendap.org/">OPENDAP</a></p></li>
+<li><p>Subset and download variables in dataset</p></li>
+<li><p>Plot downloaded data</p></li>
+</ul>
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#1.-Find-a-dataset-in-a-TDS-Catalog">Find a dataset in a TDS Catalog</a></p></li>
+<li><p><a class="reference external" href="#2.-Access-the-dataset-using-remote_access">Access the dataset using <code class="docutils literal notranslate"><span class="pre">remote_access</span></code></a></p></li>
+<li><p><a class="reference external" href="#3.-Use-the-remote-dataset-to-subset,-download,-and-display-data">Use the remote dataset to subset, download, and display data</a></p></li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>Before beginning, let’s import the packages to be used throughout this training:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">siphon.catalog</span> <span class="kn">import</span> <span class="n">TDSCatalog</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="find-a-dataset-in-a-tds-catalog">
+<h2>1. Find a dataset in a TDS Catalog<a class="headerlink" href="#find-a-dataset-in-a-tds-catalog" title="Permalink to this headline">¶</a></h2>
+<p>Before we use <code class="docutils literal notranslate"><span class="pre">remote_access</span></code>, we need to find a dataset that we’d like to access.<br />
+As an example, we’ll use this <a class="reference external" href="https://thredds-test.unidata.ucar.edu/thredds/catalog/casestudies/harvey/model/gfs/GFS_Global_0p5deg_20170825_1800.grib2/catalog.html?dataset=casestudies/harvey/model/gfs/GFS_Global_0p5deg_20170825_1800.grib2">dataset</a> from the Unidata THREDDS test catalog.</p>
+<p>To access a dataset, we need to know two things:</p>
+<ul class="simple">
+<li><p>the url of the catalog where the dataset lives</p></li>
+<li><p>the dataset name</p></li>
+</ul>
+<p>The dataset name can be found on the <a class="reference external" href="https://thredds-test.unidata.ucar.edu/thredds/catalog/casestudies/harvey/model/gfs/GFS_Global_0p5deg_20170825_1800.grib2/catalog.html?dataset=casestudies/harvey/model/gfs/GFS_Global_0p5deg_20170825_1800.grib2">dataset HTML page</a>, e.g. “GFS_Global_0p5deg_20170825_1800.grib2”.<br />
+The catalog URL is the URL of the dataset page up to “.html”, replacing “.html” with “.xml”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catUrl</span> <span class="o">=</span> <span class="s2">&quot;https://thredds-test.unidata.ucar.edu/thredds/catalog/casestudies/harvey/model/gfs/GFS_Global_0p5deg_20170825_1800.grib2/catalog.xml&quot;</span><span class="p">;</span>
+<span class="n">datasetName</span> <span class="o">=</span> <span class="s2">&quot;GFS_Global_0p5deg_20170825_1800.grib2&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you have another TDS dataset in mind, you can replace the catlog URL and dataset name above to point to that dataset instead.</p>
+<p>Next, we access the catalog using the catalog URL:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catalog</span> <span class="o">=</span> <span class="n">TDSCatalog</span><span class="p">(</span><span class="n">catUrl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And then select our dataset using the dataset name:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">datasets</span><span class="p">[</span><span class="n">datasetName</span><span class="p">]</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;GFS_Global_0p5deg_20170825_1800.grib2&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now view the access protocols available for our dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">access_urls</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;OPENDAP&#39;,
+ &#39;CdmRemote&#39;,
+ &#39;CdmrFeature&#39;,
+ &#39;HTTPServer&#39;,
+ &#39;JupyterNotebook&#39;,
+ &#39;NetcdfSubset&#39;,
+ &#39;WMS&#39;,
+ &#39;WCS&#39;,
+ &#39;ISO&#39;,
+ &#39;NCML&#39;,
+ &#39;UDDC&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="access-the-dataset-using-remote-access">
+<h2>2. Access the dataset using <code class="docutils literal notranslate"><span class="pre">remote_access</span></code><a class="headerlink" href="#access-the-dataset-using-remote-access" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our dataset and know its access protocols, we can access the remote dataset.</p>
+<div class="section" id="access-via-cdm-remote">
+<h3>Access via CDM Remote<a class="headerlink" href="#access-via-cdm-remote" title="Permalink to this headline">¶</a></h3>
+<p>If the name of the service is not provided, <code class="docutils literal notranslate"><span class="pre">remote_access</span></code> defaults to using the <code class="docutils literal notranslate"><span class="pre">CdmRemote</span></code> service.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">remote_access</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The call to <code class="docutils literal notranslate"><span class="pre">ds.remote_access</span></code> opens the remote dataset and returns a netCDF4-like dataset object, which provides access to the metadata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list attributes</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Originating_or_generating_Center&#39;,
+ &#39;Originating_or_generating_Subcenter&#39;,
+ &#39;GRIB_table_version&#39;,
+ &#39;Type_of_generating_process&#39;,
+ &#39;Analysis_or_forecast_generating_process_identifier_defined_by_originating_centre&#39;,
+ &#39;file_format&#39;,
+ &#39;Conventions&#39;,
+ &#39;history&#39;,
+ &#39;featureType&#39;,
+ &#39;_CoordSysBuilder&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list variables</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;LatLon_Projection&#39;,
+ &#39;time1_bounds&#39;,
+ &#39;height_above_ground_layer_bounds&#39;,
+ &#39;pressure_difference_layer_bounds&#39;,
+ &#39;pressure_difference_layer1_bounds&#39;,
+ &#39;sigma_layer_bounds&#39;,
+ &#39;height_above_ground_layer1_bounds&#39;,
+ &#39;pressure_difference_layer2_bounds&#39;,
+ &#39;depth_below_surface_layer_bounds&#39;,
+ &#39;Absolute_vorticity_isobaric&#39;,
+ &#39;Albedo_surface_Mixed_intervals_Average&#39;,
+ &#39;Apparent_temperature_height_above_ground&#39;,
+ &#39;Cloud_mixing_ratio_isobaric&#39;,
+ &#39;Cloud_water_entire_atmosphere_single_layer&#39;,
+ &#39;Convective_available_potential_energy_surface&#39;,
+ &#39;Convective_available_potential_energy_pressure_difference_layer&#39;,
+ &#39;Convective_inhibition_pressure_difference_layer&#39;,
+ &#39;Convective_inhibition_surface&#39;,
+ &#39;Convective_precipitation_surface_Mixed_intervals_Accumulation&#39;,
+ &#39;Dewpoint_temperature_height_above_ground&#39;,
+ &#39;Geopotential_height_potential_vorticity_surface&#39;,
+ &#39;Geopotential_height_surface&#39;,
+ &#39;Geopotential_height_isobaric&#39;,
+ &#39;Geopotential_height_zeroDegC_isotherm&#39;,
+ &#39;Geopotential_height_maximum_wind&#39;,
+ &#39;Geopotential_height_tropopause&#39;,
+ &#39;Geopotential_height_highest_tropospheric_freezing&#39;,
+ &#39;Haines_index_surface&#39;,
+ &#39;ICAO_Standard_Atmosphere_Reference_Height_maximum_wind&#39;,
+ &#39;ICAO_Standard_Atmosphere_Reference_Height_tropopause&#39;,
+ &#39;Ice_cover_surface&#39;,
+ &#39;Land_cover_0__sea_1__land_surface&#39;,
+ &#39;Latent_heat_net_flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Maximum_temperature_height_above_ground_Mixed_intervals_Maximum&#39;,
+ &#39;Minimum_temperature_height_above_ground_Mixed_intervals_Minimum&#39;,
+ &#39;Momentum_flux_u-component_surface_Mixed_intervals_Average&#39;,
+ &#39;Momentum_flux_v-component_surface_Mixed_intervals_Average&#39;,
+ &#39;Per_cent_frozen_precipitation_surface&#39;,
+ &#39;Potential_temperature_sigma&#39;,
+ &#39;Precipitable_water_entire_atmosphere_single_layer&#39;,
+ &#39;Precipitation_rate_surface_Mixed_intervals_Average&#39;,
+ &#39;Pressure_middle_cloud_bottom_Mixed_intervals_Average&#39;,
+ &#39;Pressure_high_cloud_bottom_Mixed_intervals_Average&#39;,
+ &#39;Pressure_middle_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Pressure_low_cloud_bottom_Mixed_intervals_Average&#39;,
+ &#39;Pressure_low_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Pressure_high_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Pressure_potential_vorticity_surface&#39;,
+ &#39;Pressure_convective_cloud_bottom&#39;,
+ &#39;Pressure_convective_cloud_top&#39;,
+ &#39;Pressure_surface&#39;,
+ &#39;Pressure_maximum_wind&#39;,
+ &#39;Pressure_tropopause&#39;,
+ &#39;Pressure_height_above_ground&#39;,
+ &#39;Pressure_reduced_to_MSL_msl&#39;,
+ &#39;Relative_humidity_highest_tropospheric_freezing&#39;,
+ &#39;Relative_humidity_entire_atmosphere_single_layer&#39;,
+ &#39;Relative_humidity_sigma_layer&#39;,
+ &#39;Relative_humidity_pressure_difference_layer&#39;,
+ &#39;Relative_humidity_isobaric&#39;,
+ &#39;Relative_humidity_zeroDegC_isotherm&#39;,
+ &#39;Relative_humidity_height_above_ground&#39;,
+ &#39;Relative_humidity_sigma&#39;,
+ &#39;Sensible_heat_net_flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Snow_depth_surface&#39;,
+ &#39;Soil_temperature_depth_below_surface_layer&#39;,
+ &#39;Specific_humidity_pressure_difference_layer&#39;,
+ &#39;Specific_humidity_height_above_ground&#39;,
+ &#39;Storm_relative_helicity_height_above_ground_layer&#39;,
+ &#39;Temperature_low_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Temperature_middle_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Temperature_high_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Temperature_potential_vorticity_surface&#39;,
+ &#39;Temperature_pressure_difference_layer&#39;,
+ &#39;Temperature_surface&#39;,
+ &#39;Temperature_isobaric&#39;,
+ &#39;Temperature_altitude_above_msl&#39;,
+ &#39;Temperature_maximum_wind&#39;,
+ &#39;Temperature_tropopause&#39;,
+ &#39;Temperature_height_above_ground&#39;,
+ &#39;Temperature_sigma&#39;,
+ &#39;Total_cloud_cover_low_cloud_Mixed_intervals_Average&#39;,
+ &#39;Total_cloud_cover_middle_cloud_Mixed_intervals_Average&#39;,
+ &#39;Total_cloud_cover_high_cloud_Mixed_intervals_Average&#39;,
+ &#39;Total_cloud_cover_boundary_layer_cloud_Mixed_intervals_Average&#39;,
+ &#39;Total_cloud_cover_entire_atmosphere_Mixed_intervals_Average&#39;,
+ &#39;Total_cloud_cover_convective_cloud&#39;,
+ &#39;Total_ozone_entire_atmosphere_single_layer&#39;,
+ &#39;Total_precipitation_surface_Mixed_intervals_Accumulation&#39;,
+ &#39;Categorical_Rain_surface_Mixed_intervals_Average&#39;,
+ &#39;Categorical_Freezing_Rain_surface_Mixed_intervals_Average&#39;,
+ &#39;Categorical_Ice_Pellets_surface_Mixed_intervals_Average&#39;,
+ &#39;Categorical_Snow_surface_Mixed_intervals_Average&#39;,
+ &#39;Convective_Precipitation_Rate_surface_Mixed_intervals_Average&#39;,
+ &#39;Potential_Evaporation_Rate_surface&#39;,
+ &#39;Ozone_Mixing_Ratio_isobaric&#39;,
+ &#39;Icing_Severity_isobaric&#39;,
+ &#39;Vertical_Speed_Shear_potential_vorticity_surface&#39;,
+ &#39;Vertical_Speed_Shear_tropopause&#39;,
+ &#39;U-Component_Storm_Motion_height_above_ground_layer&#39;,
+ &#39;V-Component_Storm_Motion_height_above_ground_layer&#39;,
+ &#39;Ventilation_Rate_planetary_boundary&#39;,
+ &#39;MSLP_Eta_model_reduction_msl&#39;,
+ &#39;5-Wave_Geopotential_Height_isobaric&#39;,
+ &#39;Zonal_Flux_of_Gravity_Wave_Stress_surface_Mixed_intervals_Average&#39;,
+ &#39;Meridional_Flux_of_Gravity_Wave_Stress_surface_Mixed_intervals_Average&#39;,
+ &#39;Planetary_Boundary_Layer_Height_surface&#39;,
+ &#39;Pressure_of_level_from_which_parcel_was_lifted_pressure_difference_layer&#39;,
+ &#39;Downward_Short-Wave_Radiation_Flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Upward_Short-Wave_Radiation_Flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Upward_Short-Wave_Radiation_Flux_atmosphere_top_Mixed_intervals_Average&#39;,
+ &#39;Downward_Long-Wave_Radp_Flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Upward_Long-Wave_Radp_Flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Upward_Long-Wave_Radp_Flux_atmosphere_top_Mixed_intervals_Average&#39;,
+ &#39;Cloud_Work_Function_entire_atmosphere_single_layer_Mixed_intervals_Average&#39;,
+ &#39;Sunshine_Duration_surface&#39;,
+ &#39;Surface_Lifted_Index_surface&#39;,
+ &#39;Best_4_layer_Lifted_Index_surface&#39;,
+ &#39;Volumetric_Soil_Moisture_Content_depth_below_surface_layer&#39;,
+ &#39;Ground_Heat_Flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Wilting_Point_surface&#39;,
+ &#39;Land-sea_coverage_nearest_neighbor_land1sea0_surface&#39;,
+ &#39;Field_Capacity_surface&#39;,
+ &#39;Vertical_velocity_pressure_isobaric&#39;,
+ &#39;Vertical_velocity_pressure_sigma&#39;,
+ &#39;Visibility_surface&#39;,
+ &#39;Water_equivalent_of_accumulated_snow_depth_surface&#39;,
+ &#39;Water_runoff_surface_Mixed_intervals_Accumulation&#39;,
+ &#39;Wind_speed_gust_surface&#39;,
+ &#39;u-component_of_wind_planetary_boundary&#39;,
+ &#39;u-component_of_wind_potential_vorticity_surface&#39;,
+ &#39;u-component_of_wind_pressure_difference_layer&#39;,
+ &#39;u-component_of_wind_isobaric&#39;,
+ &#39;u-component_of_wind_maximum_wind&#39;,
+ &#39;u-component_of_wind_altitude_above_msl&#39;,
+ &#39;u-component_of_wind_height_above_ground&#39;,
+ &#39;u-component_of_wind_tropopause&#39;,
+ &#39;u-component_of_wind_sigma&#39;,
+ &#39;v-component_of_wind_planetary_boundary&#39;,
+ &#39;v-component_of_wind_potential_vorticity_surface&#39;,
+ &#39;v-component_of_wind_pressure_difference_layer&#39;,
+ &#39;v-component_of_wind_isobaric&#39;,
+ &#39;v-component_of_wind_maximum_wind&#39;,
+ &#39;v-component_of_wind_altitude_above_msl&#39;,
+ &#39;v-component_of_wind_height_above_ground&#39;,
+ &#39;v-component_of_wind_tropopause&#39;,
+ &#39;v-component_of_wind_sigma&#39;,
+ &#39;lat&#39;,
+ &#39;lon&#39;,
+ &#39;reftime&#39;,
+ &#39;time&#39;,
+ &#39;time1&#39;,
+ &#39;time2&#39;,
+ &#39;isobaric&#39;,
+ &#39;height_above_ground&#39;,
+ &#39;height_above_ground_layer&#39;,
+ &#39;pressure_difference_layer&#39;,
+ &#39;height_above_ground1&#39;,
+ &#39;height_above_ground2&#39;,
+ &#39;sigma&#39;,
+ &#39;isobaric1&#39;,
+ &#39;pressure_difference_layer1&#39;,
+ &#39;isobaric2&#39;,
+ &#39;isobaric3&#39;,
+ &#39;sigma_layer&#39;,
+ &#39;height_above_ground_layer1&#39;,
+ &#39;height_above_ground3&#39;,
+ &#39;altitude_above_msl&#39;,
+ &#39;potential_vorticity_surface&#39;,
+ &#39;height_above_ground4&#39;,
+ &#39;isobaric4&#39;,
+ &#39;pressure_difference_layer2&#39;,
+ &#39;isobaric5&#39;,
+ &#39;depth_below_surface_layer&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="access-via-opendap">
+<h3>Access via OPENDAP<a class="headerlink" href="#access-via-opendap" title="Permalink to this headline">¶</a></h3>
+<p>We can also use <code class="docutils literal notranslate"><span class="pre">remote_access</span></code> to open the dataset via OPENDAP.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">remote_access</span><span class="p">(</span><span class="s1">&#39;OPENDAP&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The returned netCDF4-like dataset object contains the same metadata as that returned by access via CdmRemote.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Originating_or_generating_Center&#39;,
+ &#39;Originating_or_generating_Subcenter&#39;,
+ &#39;GRIB_table_version&#39;,
+ &#39;Type_of_generating_process&#39;,
+ &#39;Analysis_or_forecast_generating_process_identifier_defined_by_originating_centre&#39;,
+ &#39;file_format&#39;,
+ &#39;Conventions&#39;,
+ &#39;history&#39;,
+ &#39;featureType&#39;,
+ &#39;_CoordSysBuilder&#39;,
+ &#39;EXTRA_DIMENSION.reftime&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;lat&#39;,
+ &#39;lon&#39;,
+ &#39;reftime&#39;,
+ &#39;time&#39;,
+ &#39;time1&#39;,
+ &#39;time2&#39;,
+ &#39;isobaric&#39;,
+ &#39;height_above_ground&#39;,
+ &#39;height_above_ground_layer&#39;,
+ &#39;pressure_difference_layer&#39;,
+ &#39;height_above_ground1&#39;,
+ &#39;height_above_ground2&#39;,
+ &#39;sigma&#39;,
+ &#39;isobaric1&#39;,
+ &#39;pressure_difference_layer1&#39;,
+ &#39;isobaric2&#39;,
+ &#39;isobaric3&#39;,
+ &#39;sigma_layer&#39;,
+ &#39;height_above_ground_layer1&#39;,
+ &#39;height_above_ground3&#39;,
+ &#39;altitude_above_msl&#39;,
+ &#39;potential_vorticity_surface&#39;,
+ &#39;height_above_ground4&#39;,
+ &#39;isobaric4&#39;,
+ &#39;pressure_difference_layer2&#39;,
+ &#39;isobaric5&#39;,
+ &#39;depth_below_surface_layer&#39;,
+ &#39;LatLon_Projection&#39;,
+ &#39;time1_bounds&#39;,
+ &#39;height_above_ground_layer_bounds&#39;,
+ &#39;pressure_difference_layer_bounds&#39;,
+ &#39;pressure_difference_layer1_bounds&#39;,
+ &#39;sigma_layer_bounds&#39;,
+ &#39;height_above_ground_layer1_bounds&#39;,
+ &#39;pressure_difference_layer2_bounds&#39;,
+ &#39;depth_below_surface_layer_bounds&#39;,
+ &#39;Absolute_vorticity_isobaric&#39;,
+ &#39;Albedo_surface_Mixed_intervals_Average&#39;,
+ &#39;Apparent_temperature_height_above_ground&#39;,
+ &#39;Cloud_mixing_ratio_isobaric&#39;,
+ &#39;Cloud_water_entire_atmosphere_single_layer&#39;,
+ &#39;Convective_available_potential_energy_surface&#39;,
+ &#39;Convective_available_potential_energy_pressure_difference_layer&#39;,
+ &#39;Convective_inhibition_pressure_difference_layer&#39;,
+ &#39;Convective_inhibition_surface&#39;,
+ &#39;Convective_precipitation_surface_Mixed_intervals_Accumulation&#39;,
+ &#39;Dewpoint_temperature_height_above_ground&#39;,
+ &#39;Geopotential_height_potential_vorticity_surface&#39;,
+ &#39;Geopotential_height_surface&#39;,
+ &#39;Geopotential_height_isobaric&#39;,
+ &#39;Geopotential_height_zeroDegC_isotherm&#39;,
+ &#39;Geopotential_height_maximum_wind&#39;,
+ &#39;Geopotential_height_tropopause&#39;,
+ &#39;Geopotential_height_highest_tropospheric_freezing&#39;,
+ &#39;Haines_index_surface&#39;,
+ &#39;ICAO_Standard_Atmosphere_Reference_Height_maximum_wind&#39;,
+ &#39;ICAO_Standard_Atmosphere_Reference_Height_tropopause&#39;,
+ &#39;Ice_cover_surface&#39;,
+ &#39;Land_cover_0__sea_1__land_surface&#39;,
+ &#39;Latent_heat_net_flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Maximum_temperature_height_above_ground_Mixed_intervals_Maximum&#39;,
+ &#39;Minimum_temperature_height_above_ground_Mixed_intervals_Minimum&#39;,
+ &#39;Momentum_flux_u-component_surface_Mixed_intervals_Average&#39;,
+ &#39;Momentum_flux_v-component_surface_Mixed_intervals_Average&#39;,
+ &#39;Per_cent_frozen_precipitation_surface&#39;,
+ &#39;Potential_temperature_sigma&#39;,
+ &#39;Precipitable_water_entire_atmosphere_single_layer&#39;,
+ &#39;Precipitation_rate_surface_Mixed_intervals_Average&#39;,
+ &#39;Pressure_middle_cloud_bottom_Mixed_intervals_Average&#39;,
+ &#39;Pressure_high_cloud_bottom_Mixed_intervals_Average&#39;,
+ &#39;Pressure_middle_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Pressure_low_cloud_bottom_Mixed_intervals_Average&#39;,
+ &#39;Pressure_low_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Pressure_high_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Pressure_potential_vorticity_surface&#39;,
+ &#39;Pressure_convective_cloud_bottom&#39;,
+ &#39;Pressure_convective_cloud_top&#39;,
+ &#39;Pressure_surface&#39;,
+ &#39;Pressure_maximum_wind&#39;,
+ &#39;Pressure_tropopause&#39;,
+ &#39;Pressure_height_above_ground&#39;,
+ &#39;Pressure_reduced_to_MSL_msl&#39;,
+ &#39;Relative_humidity_highest_tropospheric_freezing&#39;,
+ &#39;Relative_humidity_entire_atmosphere_single_layer&#39;,
+ &#39;Relative_humidity_sigma_layer&#39;,
+ &#39;Relative_humidity_pressure_difference_layer&#39;,
+ &#39;Relative_humidity_isobaric&#39;,
+ &#39;Relative_humidity_zeroDegC_isotherm&#39;,
+ &#39;Relative_humidity_height_above_ground&#39;,
+ &#39;Relative_humidity_sigma&#39;,
+ &#39;Sensible_heat_net_flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Snow_depth_surface&#39;,
+ &#39;Soil_temperature_depth_below_surface_layer&#39;,
+ &#39;Specific_humidity_pressure_difference_layer&#39;,
+ &#39;Specific_humidity_height_above_ground&#39;,
+ &#39;Storm_relative_helicity_height_above_ground_layer&#39;,
+ &#39;Temperature_low_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Temperature_middle_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Temperature_high_cloud_top_Mixed_intervals_Average&#39;,
+ &#39;Temperature_potential_vorticity_surface&#39;,
+ &#39;Temperature_pressure_difference_layer&#39;,
+ &#39;Temperature_surface&#39;,
+ &#39;Temperature_isobaric&#39;,
+ &#39;Temperature_altitude_above_msl&#39;,
+ &#39;Temperature_maximum_wind&#39;,
+ &#39;Temperature_tropopause&#39;,
+ &#39;Temperature_height_above_ground&#39;,
+ &#39;Temperature_sigma&#39;,
+ &#39;Total_cloud_cover_low_cloud_Mixed_intervals_Average&#39;,
+ &#39;Total_cloud_cover_middle_cloud_Mixed_intervals_Average&#39;,
+ &#39;Total_cloud_cover_high_cloud_Mixed_intervals_Average&#39;,
+ &#39;Total_cloud_cover_boundary_layer_cloud_Mixed_intervals_Average&#39;,
+ &#39;Total_cloud_cover_entire_atmosphere_Mixed_intervals_Average&#39;,
+ &#39;Total_cloud_cover_convective_cloud&#39;,
+ &#39;Total_ozone_entire_atmosphere_single_layer&#39;,
+ &#39;Total_precipitation_surface_Mixed_intervals_Accumulation&#39;,
+ &#39;Categorical_Rain_surface_Mixed_intervals_Average&#39;,
+ &#39;Categorical_Freezing_Rain_surface_Mixed_intervals_Average&#39;,
+ &#39;Categorical_Ice_Pellets_surface_Mixed_intervals_Average&#39;,
+ &#39;Categorical_Snow_surface_Mixed_intervals_Average&#39;,
+ &#39;Convective_Precipitation_Rate_surface_Mixed_intervals_Average&#39;,
+ &#39;Potential_Evaporation_Rate_surface&#39;,
+ &#39;Ozone_Mixing_Ratio_isobaric&#39;,
+ &#39;Icing_Severity_isobaric&#39;,
+ &#39;Vertical_Speed_Shear_potential_vorticity_surface&#39;,
+ &#39;Vertical_Speed_Shear_tropopause&#39;,
+ &#39;U-Component_Storm_Motion_height_above_ground_layer&#39;,
+ &#39;V-Component_Storm_Motion_height_above_ground_layer&#39;,
+ &#39;Ventilation_Rate_planetary_boundary&#39;,
+ &#39;MSLP_Eta_model_reduction_msl&#39;,
+ &#39;5-Wave_Geopotential_Height_isobaric&#39;,
+ &#39;Zonal_Flux_of_Gravity_Wave_Stress_surface_Mixed_intervals_Average&#39;,
+ &#39;Meridional_Flux_of_Gravity_Wave_Stress_surface_Mixed_intervals_Average&#39;,
+ &#39;Planetary_Boundary_Layer_Height_surface&#39;,
+ &#39;Pressure_of_level_from_which_parcel_was_lifted_pressure_difference_layer&#39;,
+ &#39;Downward_Short-Wave_Radiation_Flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Upward_Short-Wave_Radiation_Flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Upward_Short-Wave_Radiation_Flux_atmosphere_top_Mixed_intervals_Average&#39;,
+ &#39;Downward_Long-Wave_Radp_Flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Upward_Long-Wave_Radp_Flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Upward_Long-Wave_Radp_Flux_atmosphere_top_Mixed_intervals_Average&#39;,
+ &#39;Cloud_Work_Function_entire_atmosphere_single_layer_Mixed_intervals_Average&#39;,
+ &#39;Sunshine_Duration_surface&#39;,
+ &#39;Surface_Lifted_Index_surface&#39;,
+ &#39;Best_4_layer_Lifted_Index_surface&#39;,
+ &#39;Volumetric_Soil_Moisture_Content_depth_below_surface_layer&#39;,
+ &#39;Ground_Heat_Flux_surface_Mixed_intervals_Average&#39;,
+ &#39;Wilting_Point_surface&#39;,
+ &#39;Land-sea_coverage_nearest_neighbor_land1sea0_surface&#39;,
+ &#39;Field_Capacity_surface&#39;,
+ &#39;Vertical_velocity_pressure_isobaric&#39;,
+ &#39;Vertical_velocity_pressure_sigma&#39;,
+ &#39;Visibility_surface&#39;,
+ &#39;Water_equivalent_of_accumulated_snow_depth_surface&#39;,
+ &#39;Water_runoff_surface_Mixed_intervals_Accumulation&#39;,
+ &#39;Wind_speed_gust_surface&#39;,
+ &#39;u-component_of_wind_planetary_boundary&#39;,
+ &#39;u-component_of_wind_potential_vorticity_surface&#39;,
+ &#39;u-component_of_wind_pressure_difference_layer&#39;,
+ &#39;u-component_of_wind_isobaric&#39;,
+ &#39;u-component_of_wind_maximum_wind&#39;,
+ &#39;u-component_of_wind_altitude_above_msl&#39;,
+ &#39;u-component_of_wind_height_above_ground&#39;,
+ &#39;u-component_of_wind_tropopause&#39;,
+ &#39;u-component_of_wind_sigma&#39;,
+ &#39;v-component_of_wind_planetary_boundary&#39;,
+ &#39;v-component_of_wind_potential_vorticity_surface&#39;,
+ &#39;v-component_of_wind_pressure_difference_layer&#39;,
+ &#39;v-component_of_wind_isobaric&#39;,
+ &#39;v-component_of_wind_maximum_wind&#39;,
+ &#39;v-component_of_wind_altitude_above_msl&#39;,
+ &#39;v-component_of_wind_height_above_ground&#39;,
+ &#39;v-component_of_wind_tropopause&#39;,
+ &#39;v-component_of_wind_sigma&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Other than possible reordering of listed attributes and variables, users should see no difference in the object returned by <code class="docutils literal notranslate"><span class="pre">remote_acesss</span></code> using OPENDAP versus CdmRemote. To read more about the two services, see the <a class="reference external" href="#See-also">resource links</a>.</p>
+<p><a href="#top">Top</a></p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="use-the-remote-dataset-to-subset-download-and-display-data">
+<h2>3. Use the remote dataset to subset, download, and display data<a class="headerlink" href="#use-the-remote-dataset-to-subset-download-and-display-data" title="Permalink to this headline">¶</a></h2>
+<p>We can access variables by name using the dataset’s <code class="docutils literal notranslate"><span class="pre">variables</span></code> dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;Precipitable_water_entire_atmosphere_single_layer&#39;</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And view the variable’s metadata:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">dimensions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(93, 361, 720)
+(&#39;time&#39;, &#39;lat&#39;, &#39;lon&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can start plotting our data. Let’s plot our variable, <code class="docutils literal notranslate"><span class="pre">Precipitable_water_entire_atmosphere_single_layer</span></code>, for all <code class="docutils literal notranslate"><span class="pre">lat</span></code> and <code class="docutils literal notranslate"><span class="pre">lon</span></code> at <code class="docutils literal notranslate"><span class="pre">time=0</span></code>. First, we need to access the <code class="docutils literal notranslate"><span class="pre">lat</span></code> and <code class="docutils literal notranslate"><span class="pre">lon</span></code> variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lat</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span>
+<span class="n">lon</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Note:</em> At this point, no data have been transferred over the network. Data will not be transferred until a variable is sliced, and only data corresponding to the slice are downloaded.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:])</span> <span class="c1"># precipitable water data are subsetted and downloaded here</span>
+
+<span class="c1"># plot reflectivity</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">lon</span><span class="p">[:],</span> <span class="n">lat</span><span class="p">[:],</span> <span class="n">v</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span> <span class="c1"># lat and lon data are subsetted and downloaded here.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/siphon-RemoteAccess_37_0.png" src="../../_images/siphon-RemoteAccess_37_0.png" />
+</div>
+</div>
+<p>Data are finally downloaded when we slice our variables to plot the data. Try changing the indices to request a different subset of data.</p>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>For more information on Siphon and <code class="docutils literal notranslate"><span class="pre">remote_access</span></code>, see the <a class="reference external" href="https://unidata.github.io/siphon/latest/api/catalog.html?highlight=remote%20open#siphon.catalog.Dataset.remote_access">Siphon docs</a>.</p>
+<p>You may also be interested in  reading more about <a class="reference external" href="https://www.opendap.org/">OPENDAP</a> and <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf-java/v4.5/reference/stream/CdmRemote.html">CDM Remote</a>.</p>
+<p><a href="#top">Top</a></p>
+<hr class="docutils" />
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="python-awips-HowToAccessData.html" title="previous page">python-awips: How to Access Data</a>
+    <a class='right-next' id="next-link" href="siphon-RemoteOpen.html" title="next page">Siphon (remote_open)</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

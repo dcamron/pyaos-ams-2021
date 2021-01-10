@@ -1,0 +1,9 @@
+Enhancing Your Notebooks
+========================
+
+```{toctree}
+:titlesonly:
+:glob:
+
+notebook_enhancements/*
+```

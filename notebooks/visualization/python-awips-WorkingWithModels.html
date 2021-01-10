@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>python-awips: Working with Models &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="python-awips: Working with Satellite Data" href="python-awips-WorkingWithSatelliteData.html" />
+    <link rel="prev" title="python-awips: Working with the Maps and Topo Databases" href="python-awips-WorkingWithMapsTopoDatabases.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../agenda.html">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../../resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+        
+        
+        
+          
+            
+                <li class="">
+                    <a href="../dataAccess.html">Data Access Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../analysis.html">Analysis Notebooks</a>
+                </li>
+            
+          
+            
+  
+                <li class="active">
+                    <a href="../visualization.html">Visualization Notebooks</a>
+                    <ul>
+                    
+                        <li class="">
+                            <a href="Declarative-Example.html">Declarative Syntax Example</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="MetPy%20SkewT.html">MetPy Skew-T</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="isentropic_introduction.html">Overview of Isentropic Analysis</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="matplotlib-basics.html">Matplotlib: Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="matplotlib-intermediate.html">Matplotlib: Intermediate</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithMapsTopoDatabases.html">python-awips: Working with the Maps and Topo Databases</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href="">python-awips: Working with Models</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithSatelliteData.html">python-awips: Working with Satellite Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithSurfaceObs.html">python-awips: Working with Surface Obs</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithUpperAirObs.html">python-awips: Working with Upper Air Obs</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../notebook_enhancements.html">Enhancing Your Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../index.html">Notebook Index</a>
+                </li>
+            
+          
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#unidata-ams-2021-student-conference" class="nav-link">Unidata AMS 2021 Student Conference</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#focuses" class="nav-link">Focuses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#objectives" class="nav-link">Objectives</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#imports" class="nav-link">Imports</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#define-data-request" class="nav-link">1. Define Data Request</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#limit-results-based-on-time" class="nav-link">2. Limit Results Based on Time</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#define-map-properties" class="nav-link">3. Define Map Properties</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#use-the-grid-data" class="nav-link">4. Use the Grid Data!</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#plot-using-pcolormesh" class="nav-link">5. Plot Using pcolormesh</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#plot-using-contourf" class="nav-link">6. Plot Using contourf</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#see-also" class="nav-link">See also</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#related-notebooks" class="nav-link">Related Notebooks</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <p><a name="top"></a></p>
+<div style="width:1000 px">
+<div style="float:right; width:98 px; height:98px;">
+<img src="https://raw.githubusercontent.com/Unidata/MetPy/master/src/metpy/plots/_static/unidata_150x150.png" alt="Unidata Logo" style="height: 98px;">
+</div>
+<div class="section" id="python-awips-working-with-models">
+<h1>python-awips: Working with Models<a class="headerlink" href="#python-awips-working-with-models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unidata-ams-2021-student-conference">
+<h2>Unidata AMS 2021 Student Conference<a class="headerlink" href="#unidata-ams-2021-student-conference" title="Permalink to this headline">¶</a></h2>
+<div style="clear:both"></div>
+</div>
+<hr class="docutils" />
+<div style="float:right; width:250 px"><img src="../../_static/images/python-awips-model-preview.png" alt="Colorized RAP13 CONUS image" style="height: 300px;"></div>
+</div>
+<div class="section" id="focuses">
+<h2>Focuses<a class="headerlink" href="#focuses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Create a colorized plot for the continental US of model data (grib).</p></li>
+<li><p>Access the model data from an EDEX server and limit the data returned by using model specific parameters.</p></li>
+<li><p>Use both <em>pcolormesh</em> and <em>contourf</em> to create colorized plots, and compare the differences between the two.</p></li>
+</ul>
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#1.-Define-Data-Request">Define Data Request</a></p></li>
+<li><p><a class="reference external" href="#2.-Limit-Results-Based-on-Time">Limit Results Based on Time</a></p></li>
+<li><p><a class="reference external" href="#3.-Define-Map-Properties">Define Map Properties</a></p></li>
+<li><p><a class="reference external" href="#4.-Use-the-Grid-Data%21">Use the Grid Data!</a></p></li>
+<li><p><a class="reference external" href="#5.-Plot-Using-pcolormesh">Plot Using pcolormesh</a></p></li>
+<li><p><a class="reference external" href="#6.-Plot-Using-contourf">Plot Using contourf</a></p></li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">awips.dataaccess</span> <span class="kn">import</span> <span class="n">DataAccessLayer</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">cartopy.mpl.gridliner</span> <span class="kn">import</span> <span class="n">LONGITUDE_FORMATTER</span><span class="p">,</span> <span class="n">LATITUDE_FORMATTER</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">convert_temperature</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-data-request">
+<h2>1. Define Data Request<a class="headerlink" href="#define-data-request" title="Permalink to this headline">¶</a></h2>
+<p>If you read through the <a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/dataAccess/python-awips-HowToAccessData.ipynb">python-awips: How to Access Data</a> training, you will know that we need to set an EDEX url to access our server, and then we create a data request.  In this example we use <em>grid</em> as the data type to define our request.
+In addition to setting the data type, the location, parameters and levels are also set as <strong>RAP13</strong>, <strong>T</strong> (for temperature), and <strong>2.0FHAG</strong> (for Fixed Height Above Ground in meters), respectively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">changeEDEXHost</span><span class="p">(</span><span class="s2">&quot;edex-cloud.unidata.ucar.edu&quot;</span><span class="p">)</span>
+<span class="n">request</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">newDataRequest</span><span class="p">()</span>
+<span class="n">request</span><span class="o">.</span><span class="n">setDatatype</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="n">setLocationNames</span><span class="p">(</span><span class="s2">&quot;RAP13&quot;</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="n">setParameters</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="n">setLevels</span><span class="p">(</span><span class="s2">&quot;2.0FHAG&quot;</span><span class="p">)</span>
+
+<span class="c1"># Take a look at our request</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DefaultDataRequest(datatype=grid, identifiers={}, parameters=[&#39;T&#39;], levels=[&lt;dynamicserialize.dstypes.com.raytheon.uf.common.dataplugin.level.Level.Level object at 0x110ee7070&gt;], locationNames=[&#39;RAP13&#39;], envelope=None)
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="limit-results-based-on-time">
+<h2>2. Limit Results Based on Time<a class="headerlink" href="#limit-results-based-on-time" title="Permalink to this headline">¶</a></h2>
+<p>Models produce many different time variants during their runs, so let’s limit the data to the most recent time and forecast run.</p>
+<blockquote>
+<div><p>Note: You can play around with different times and forecast runs to see the differences.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cycles</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getAvailableTimes</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">times</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getAvailableTimes</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="n">fcstRun</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getForecastRun</span><span class="p">(</span><span class="n">cycles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">times</span><span class="p">)</span>
+
+<span class="c1"># Get the most recent grid data</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getGridData</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="p">[</span><span class="n">fcstRun</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of available times:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of available forecast runs:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fcstRun</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of available times: 66
+Number of available forecast runs: 22
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="define-map-properties">
+<h2>3. Define Map Properties<a class="headerlink" href="#define-map-properties" title="Permalink to this headline">¶</a></h2>
+<p>In order to plot more than one image, it’s easiest to define common logic in a function.  Here, a new function called <strong>make_map</strong> is defined.  This function uses the <a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.html">matplotlib.pyplot package (plt)</a> to create a figure and axis.  The coastlines (continental boundaries) are added, along with lat/lon grids.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_map</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+            <span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">bbox</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;50m&#39;</span><span class="p">)</span>
+    <span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">draw_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">gl</span><span class="o">.</span><span class="n">top_labels</span> <span class="o">=</span> <span class="n">gl</span><span class="o">.</span><span class="n">right_labels</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">gl</span><span class="o">.</span><span class="n">xformatter</span> <span class="o">=</span> <span class="n">LONGITUDE_FORMATTER</span>
+    <span class="n">gl</span><span class="o">.</span><span class="n">yformatter</span> <span class="o">=</span> <span class="n">LATITUDE_FORMATTER</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="use-the-grid-data">
+<h2>4. Use the Grid Data!<a class="headerlink" href="#use-the-grid-data" title="Permalink to this headline">¶</a></h2>
+<p>Here we get our grid data object from our previous response, and then get the raw data array off that object.  We also get the latitude and longitude arrays, and create a bounding box that we’ll use when creating our plots (by calling <strong>make_map</strong> defined above).  Finally, we’ll convert our data from degrees Kelvin to Farenheit to make the plot more understandable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">getRawData</span><span class="p">()</span>
+<span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">getLatLonCoords</span><span class="p">()</span>
+<span class="n">bbox</span> <span class="o">=</span> <span class="p">[</span><span class="n">lons</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">lons</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">lats</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">lats</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
+
+<span class="c1"># Convert temp from Kelvin to F</span>
+<span class="n">destUnit</span> <span class="o">=</span> <span class="s1">&#39;F&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">convert_temperature</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">destUnit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="plot-using-pcolormesh">
+<h2>5. Plot Using pcolormesh<a class="headerlink" href="#plot-using-pcolormesh" title="Permalink to this headline">¶</a></h2>
+<p>This example shows how to use <a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.pcolormesh.html">matplotlib.pyplot.pcolormesh</a> to create a colorized plot. We use our <strong>make_map</strong> function to create a subplot and then we create a color scale (cs) and colorbar (cbar) with a label for our plot.</p>
+<blockquote>
+<div><p>Note: You may see a warning appear with a red background, this is okay, and will go away with subsequent runs of the cell.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;rainbow&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">make_map</span><span class="p">(</span><span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">)</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">getLocationName</span><span class="p">()</span> <span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span> <span class="n">grid</span><span class="o">.</span><span class="n">getLevel</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> \
+               <span class="o">+</span> <span class="n">grid</span><span class="o">.</span><span class="n">getParameter</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; (&quot;</span> <span class="o">+</span> <span class="n">destUnit</span> <span class="o">+</span> <span class="s2">&quot;) &quot;</span> \
+               <span class="o">+</span> <span class="s2">&quot;valid &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">getDataTime</span><span class="p">()</span><span class="o">.</span><span class="n">getRefTime</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/drewcamron/miniconda3/envs/pyaos-ams-2021/lib/python3.9/site-packages/cartopy/mpl/geoaxes.py:1597: UserWarning: The input coordinates to pcolormesh are interpreted as cell centers, but are not monotonically increasing or decreasing. This may lead to incorrectly calculated cell edges, in which case, please supply explicit cell edges to pcolormesh.
+  X, Y, C, shading = self._pcolorargs(&#39;pcolormesh&#39;, *args,
+</pre></div>
+</div>
+<img alt="../../_images/python-awips-WorkingWithModels_12_1.png" src="../../_images/python-awips-WorkingWithModels_12_1.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="plot-using-contourf">
+<h2>6. Plot Using contourf<a class="headerlink" href="#plot-using-contourf" title="Permalink to this headline">¶</a></h2>
+<p>This example shows how to use <a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.contourf.html">matplotlib.pyplot.contourf</a> to create a colorized plot. We use our <strong>make_map</strong> function to create a subplot and then we create a color scale (cs2) and colorbar (cbar2) with a label for our plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">make_map</span><span class="p">(</span><span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">)</span>
+<span class="n">cs2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+                  <span class="n">vmin</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">vmax</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">cbar2</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs2</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+<span class="n">cbar2</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">getLocationName</span><span class="p">()</span> <span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span> <span class="n">grid</span><span class="o">.</span><span class="n">getLevel</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> \
+               <span class="o">+</span> <span class="n">grid</span><span class="o">.</span><span class="n">getParameter</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; (&quot;</span> <span class="o">+</span> <span class="n">destUnit</span> <span class="o">+</span> <span class="s2">&quot;) &quot;</span> \
+               <span class="o">+</span> <span class="s2">&quot;valid &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">getDataTime</span><span class="p">()</span><span class="o">.</span><span class="n">getRefTime</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/python-awips-WorkingWithModels_14_0.png" src="../../_images/python-awips-WorkingWithModels_14_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>Documentation for:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html">awips.DataAccessLayer</a></p></li>
+<li><p><a class="reference external" href="http://unidata.github.io/python-awips/api/PyGridData.html">awips.PyGridData</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.html">matplotlib.pyplot</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.subplot.html">matplotlib.pyplot.subplot</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.pcolormesh.html">matplotlib.pyplot.pcolormesh</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.contourf.html">matplotlib.pyplot.contourf</a></p></li>
+</ul>
+<div class="section" id="related-notebooks">
+<h3>Related Notebooks<a class="headerlink" href="#related-notebooks" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/dataAccess/python-awips-HowToAccessData.ipynb">python-awips: How to Access Data</a></p></li>
+</ul>
+<p><a href="#top">Top</a></p>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="python-awips-WorkingWithMapsTopoDatabases.html" title="previous page">python-awips: Working with the Maps and Topo Databases</a>
+    <a class='right-next' id="next-link" href="python-awips-WorkingWithSatelliteData.html" title="next page">python-awips: Working with Satellite Data</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

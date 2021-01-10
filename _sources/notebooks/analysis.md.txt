@@ -1,0 +1,9 @@
+Analysis Notebooks
+==================
+
+```{toctree}
+:titlesonly:
+:glob:
+
+analysis/*
+```

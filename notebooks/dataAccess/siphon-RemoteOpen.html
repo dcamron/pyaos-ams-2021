@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Siphon (remote_open) &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Analysis Notebooks" href="../analysis.html" />
+    <link rel="prev" title="Siphon (remote_access)" href="siphon-RemoteAccess.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../agenda.html">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../../resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+        
+        
+        
+          
+            
+                <li class="">
+                    <a href="../dataAccess.html">Data Access Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../analysis.html">Analysis Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../visualization.html">Visualization Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../notebook_enhancements.html">Enhancing Your Notebooks</a>
+                </li>
+            
+          
+            
+  
+                <li class="active">
+                    <a href="../index.html">Notebook Index</a>
+                    <ul>
+                    
+                        <li class="">
+                            <a href="../analysis/metpy_basics.html">MetPy Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../analysis/numpy.html">Numpy</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../analysis/pandas.html">Pandas</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="pandas_and_numpy_csv.html">Pandas and Numpy for CSV files</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-HowToAccessData.html">python-awips: How to Access Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="siphon-RemoteAccess.html">Siphon (remote_access)</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href="">Siphon (remote_open)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../notebook_enhancements/NotebookWidgetsTraining.html">Working with Jupyter Widgets</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/Declarative-Example.html">Declarative Syntax Example</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/MetPy%20SkewT.html">MetPy Skew-T</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/isentropic_introduction.html">Overview of Isentropic Analysis</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-basics.html">Matplotlib: Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-intermediate.html">Matplotlib: Intermediate</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithMapsTopoDatabases.html">python-awips: Working with the Maps and Topo Databases</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithModels.html">python-awips: Working with Models</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSatelliteData.html">python-awips: Working with Satellite Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSurfaceObs.html">python-awips: Working with Surface Obs</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithUpperAirObs.html">python-awips: Working with Upper Air Obs</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+          
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#unidata-ams-2021-student-conference" class="nav-link">Unidata AMS 2021 Student Conference</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#focuses" class="nav-link">Focuses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#objectives" class="nav-link">Objectives</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#imports" class="nav-link">Imports</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#find-a-dataset-in-a-tds-catalog" class="nav-link">1. Find a dataset in a TDS Catalog</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#open-the-dataset-using-remote-open" class="nav-link">2. Open the dataset using remote_open</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#read-the-returned-object-like-a-local-file" class="nav-link">3. Read the returned object like a local file</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#see-also" class="nav-link">See also</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#related-notebooks" class="nav-link">Related notebooks</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <p><a name="top"></a></p>
+<div style="width:1000 px">
+<div style="float:right; width:98 px; height:98px;">
+<img src="https://raw.githubusercontent.com/Unidata/MetPy/master/src/metpy/plots/_static/unidata_150x150.png" alt="Unidata Logo" style="height: 98px;">
+</div>
+<div class="section" id="siphon-remote-open">
+<h1>Siphon (remote_open)<a class="headerlink" href="#siphon-remote-open" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unidata-ams-2021-student-conference">
+<h2>Unidata AMS 2021 Student Conference<a class="headerlink" href="#unidata-ams-2021-student-conference" title="Permalink to this headline">¶</a></h2>
+<div style="clear:both"></div>
+</div>
+<hr class="docutils" />
+<p>This notebook demonstrates the Siphon <code class="docutils literal notranslate"><span class="pre">remote_open</span></code> function, which opens a TDS Catalog remote dataset for random access. The <code class="docutils literal notranslate"><span class="pre">remote_open</span></code> method returns a file-like object that can be used similarly to a local file to read raw data.</p>
+<div style="float:right; width:250 px"><img src="../../instructors/images/siphon_remote_open_preview.png" alt="raw GRIB data read using remote open" style="height: 300px;"></div>
+</div>
+<div class="section" id="focuses">
+<h2>Focuses<a class="headerlink" href="#focuses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Open remote datasets on the TDS</p></li>
+<li><p>Use the returned object to read the dataset as raw bytes</p></li>
+<li><p>Interface with the dataset as if stored in a local file</p></li>
+</ul>
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#1.-Find-a-dataset-in-a-TDS-Catalog">Find a dataset in a TDS Catalog</a></p></li>
+<li><p><a class="reference external" href="#2.-Open-the-dataset-using-remote_open">Open the dataset using remote_open</a></p></li>
+<li><p><a class="reference external" href="#3.-Read-the-returned-object-like-a-local-file">Read the returned object like a local file</a></p></li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>Before beginning, let’s import the packages to be used throughout this training:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">siphon.catalog</span> <span class="kn">import</span> <span class="n">TDSCatalog</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="find-a-dataset-in-a-tds-catalog">
+<h2>1. Find a dataset in a TDS Catalog<a class="headerlink" href="#find-a-dataset-in-a-tds-catalog" title="Permalink to this headline">¶</a></h2>
+<p>Before we use <code class="docutils literal notranslate"><span class="pre">remote_open</span></code>, we need to find a dataset that we’d like to access.<br />
+As an example, we’ll use this <a class="reference external" href="https://thredds-test.unidata.ucar.edu/thredds/catalog/casestudies/harvey/model/gfs/GFS_Global_0p5deg_20170825_1800.grib2/catalog.html?dataset=casestudies/harvey/model/gfs/GFS_Global_0p5deg_20170825_1800.grib2">dataset</a> from the NOAA NCEI THREDDS catalog.</p>
+<p>To access a dataset, we need to know two things:</p>
+<ul class="simple">
+<li><p>the url of the catalog where the dataset lives</p></li>
+<li><p>the dataset name</p></li>
+</ul>
+<p>The dataset name can be found on the <a class="reference external" href="https://www.ncei.noaa.gov/thredds/catalog/model-namanl/202101/20210104/catalog.html?dataset=model-namanl/202101/20210104/nam_218_20210104_0600_006.grb2">dataset HTML page</a>, e.g. “nam_218_20210104_0600_006.grb2”.<br />
+The catalog URL is the URL of the dataset page up to “.html”, replacing “.html” with “.xml”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catUrl</span><span class="o">=</span><span class="s2">&quot;https://www.ncei.noaa.gov/thredds/catalog/model-namanl/202101/20210104/catalog.xml&quot;</span>
+<span class="n">datasetName</span><span class="o">=</span><span class="s2">&quot;nam_218_20210104_0600_006.grb2&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we access the catalog using the catalog URL:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catalog</span> <span class="o">=</span> <span class="n">TDSCatalog</span><span class="p">(</span><span class="n">catUrl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And then select our dataset using the dataset name:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">datasets</span><span class="p">[</span><span class="n">datasetName</span><span class="p">]</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;nam_218_20210104_0600_006.grb2&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now view the access protocols available for our dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">access_urls</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;OPENDAP&#39;, &#39;HTTPServer&#39;, &#39;WCS&#39;, &#39;WMS&#39;, &#39;NetcdfSubset&#39;, &#39;NCML&#39;, &#39;UDDC&#39;, &#39;ISO&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The list of services available for this dataset includes <code class="docutils literal notranslate"><span class="pre">HTTPServer</span></code>, which we’ll need to open the dataset using <code class="docutils literal notranslate"><span class="pre">remote_open</span></code>.</p>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="open-the-dataset-using-remote-open">
+<h2>2. Open the dataset using <code class="docutils literal notranslate"><span class="pre">remote_open</span></code><a class="headerlink" href="#open-the-dataset-using-remote-open" title="Permalink to this headline">¶</a></h2>
+<p>We’ll now use Siphon’s <code class="docutils literal notranslate"><span class="pre">remote_open</span></code> to obtain a file-like object representing the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_file</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">remote_open</span><span class="p">()</span>
+<span class="n">data_file</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;_io.BytesIO at 0x10c01bdb0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now have an object that we can read similar to a local file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data_file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;GRIB\x00\x00\x00\x02\x00\x00\x00\x00\x00\x04\x02\x00\x00\x00\x00\x15\x01\x00\x07\x00\x00\x02\x01\x01\x07\xe5\x01\x04\x06\x00\x00\x00\x01\x00\x00\x00Q\x03\x00\x00\x04\x02\x88\x00\x00\x00\x1e\x06\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02f\x00\x00\x01\xac\x00\xba\x010\r\x80\xbd\xc88\x01}x@\x0f\xcb\x94@\x00\xba\x05\x18\x00\xba\x05\x18\x00@\x01}x@\x01}x@\x85]J\x80\x00\x00\x00\x00\x00\x00\x00&quot;\x04\x00\x00\x00\x00\x03\x01\x02\x00T\x00\x00\x00\x01\x00\x00\x00\x06e\x00\x00\x00\x00\x00\xff\x00\x00\x00\x00\x00\x00\x00\x001\x05\x00\x04\x02\x88\x00\x03K\x13|\x14\x00\x04\x00\x02\x10\x00\x01\x00bX\xd1\x9a\xff\xff\xff\xff\x00\x00\x1f^\x00\x04\x00\x00\x00\x01\x01\x00\x00\x003\x07\x02\x02\x00\x00\x00\x06\x06\xff\x00\x04\x01-\x07u!u\x19\xd5\xa7U\x97U\x86U\x96U\x82U\xa7U\x99UxU\xa4R\x0bUhU\x9eUpU\x01U\x8aU\xe7U\x8eUkU|ScU\x9bUyU\x95U`U\x8cUqU\x95UpU\x88U\x9eU=Q\xc4U\x86U]U\xa1UNUHU\x88UzU\x8bSdU\x9dU\x90U\x9bU\x89UjU\x7fUzU\x94U\x9eT\xddR\xa4T\x06U\x8fUkU\x98U\x8dT\xb5U]U\x8dSfU\x8bU\x96U\x8aUfU\x83U\xa4T\x03U\x80UuU`U\x8cT\xf3U`U\x89U\x9aSjU\x9fU\x99U\x81U\x8fUlU\x8aU\x87U\xa6S\xd7T\xa3TRU\x87UsU\x99T\xf7U\x87StU\xa2U\x9cU\x98U\x85U|U\x94UtU\x9aU\x81U\xa6TyTjU\x90UhU\x8eU\x16U&lt;U\x8eU\x86S\x85U\x9fUoU\x88U\x9aUyU\x9aU\x90U\xa5T_T\x80UUU\x8cUkU\x8bU\x88U\x89U\x1bU\x94UyU\x8fS\x90U\x9cU\xa2U\x92U&lt;U\x96U\x8dU}U\x91U\x90U\x9cU\x8fU\x9aT\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Note:</em> When we use <code class="docutils literal notranslate"><span class="pre">remote_open</span></code> to read a dataset, we are reading raw data from a file-like object, rather than formatted data. The <code class="docutils literal notranslate"><span class="pre">b</span></code> at the start of the data indicates that the string should be interpreted as bytes.</p>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="read-the-returned-object-like-a-local-file">
+<h2>3. Read the returned object like a local file<a class="headerlink" href="#read-the-returned-object-like-a-local-file" title="Permalink to this headline">¶</a></h2>
+<p>We can now read our dataset using random access.</p>
+<p>We can read a line, as we did in the previous section, or we can read a specified number of bytes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;U\x87UoU\x99U\x90U\x05UVU\x85U\x8aU\x99S\xbeU\x94U\x7fU\x9fU\x87U{U\x92U\x8cU\x9cU\x92S\xbeU\x85U\x80U\x99U\x8fUUT\xf3U\x92UpUzS\xe0U\xa2U\x8eU\x9bU\x82U\x99U\x8eT\xdbS\xbaUxU\x93U3U\x8dT\xf0U\x8eUXU\x88T\x07U\xa0U\x93U\x9c&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can change the our position in the file using <code class="docutils literal notranslate"><span class="pre">seek</span></code>, similar to moving a cursor in a file. The position is given as bytes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># move &quot;cursor&quot; to start of file</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># print first 4 bytes</span>
+<span class="n">data_file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># move &quot;cursor&quot; to byte 50</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="c1"># print 10 more bytes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;GRIB&#39;
+b&#39;\x1e\x06\x00\x00\x00\x00\x00\x00\x00\x00&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we can read the data directly into a byte array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># create a byte array of length 100</span>
+<span class="n">data_file</span><span class="o">.</span><span class="n">readinto</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1"># read 100 bytes into the byte array</span>
+<span class="n">b</span><span class="p">[:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bytearray(b&#39;\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02f\x00\x00\x01\xac\x00\xba\x010\r\x80\xbd\xc88\x01}x@\x0f\xcb\x94@\x00\xba\x05\x18\x00\xba\x05\x18\x00@\x01}x@\x01}x@\x85]J\x80\x00\x00\x00\x00\x00\x00\x00&quot;\x04\x00\x00\x00\x00\x03\x01\x02\x00T\x00\x00\x00\x01\x00\x00\x00\x06e\x00\x00\x00\x00\x00\xff\x00\x00\x00\x00\x00\x00\x00\x001\x05\x00\x04\x02&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">getbuffer</span></code> returns the location in memory where the dataset is being stored locally.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">data_file</span><span class="o">.</span><span class="n">getbuffer</span><span class="p">()</span>
+<span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;memory at 0x10c47c100&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use the memory buffer to make local writes. Write to the buffer will change the contents of <code class="docutils literal notranslate"><span class="pre">data_file</span></code> in memory, but will not write to the remote file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># move &quot;cursor&quot; position to byte 100</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">110</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;helloworld&quot;</span><span class="p">;</span> <span class="c1"># we include the `b` before &quot;helloword&quot; to tell Python to interpret it as bytes</span>
+<span class="n">data_file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># return &quot;cursor&quot; to byte 100</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">data_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># read back the written bytes</span>
+<span class="n">n</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;helloworld&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have opened a remote dataset and read parts of it using random access! Use <code class="docutils literal notranslate"><span class="pre">remote_open</span></code> when you want access to the raw data in a dataset, e.g., if you have Python code to read bytes in a particular format.</p>
+<p><em>Note:</em> Without some prior knowledge about the format of the dataset, <code class="docutils literal notranslate"><span class="pre">remote_open</span></code> is not an effective method of parsing data. Since we are reading a raw file object, we need to know layout of the data and the data types (e.g. ints, floats, etc.). To read a dataset as a netCDF object, use <a class="reference external" href="https://unidata.github.io/siphon/latest/api/catalog.html?highlight=remote%20open#siphon.catalog.Dataset.remote_access"><code class="docutils literal notranslate"><span class="pre">remote_access</span></code></a></p>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>For more information on Siphon and <code class="docutils literal notranslate"><span class="pre">remote_open</span></code>, see the <a class="reference external" href="https://unidata.github.io/siphon/latest/api/catalog.html?highlight=remote%20open#siphon.catalog.Dataset.remote_open">Siphon docs</a>.</p>
+<p>You may also be interested in reading more about the <a class="reference external" href="https://docs.python.org/3/library/io.html#io.BytesIO">file-like object</a> returned by <code class="docutils literal notranslate"><span class="pre">remote_open</span></code>.</p>
+<div class="section" id="related-notebooks">
+<h3>Related notebooks<a class="headerlink" href="#related-notebooks" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/dataAccess/siphon-RemoteAccess.ipynb">Siphon (remote_access)</a></p>
+<p><a href="#top">Top</a></p>
+<hr class="docutils" />
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="siphon-RemoteAccess.html" title="previous page">Siphon (remote_access)</a>
+    <a class='right-next' id="next-link" href="../analysis.html" title="next page">Analysis Notebooks</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

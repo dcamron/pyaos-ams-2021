@@ -1,0 +1,585 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pandas and Numpy for CSV files &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="python-awips: How to Access Data" href="python-awips-HowToAccessData.html" />
+    <link rel="prev" title="Data Access Notebooks" href="../dataAccess.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../agenda.html">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../../resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+        
+        
+        
+          
+            
+                <li class="">
+                    <a href="../dataAccess.html">Data Access Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../analysis.html">Analysis Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../visualization.html">Visualization Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../notebook_enhancements.html">Enhancing Your Notebooks</a>
+                </li>
+            
+          
+            
+  
+                <li class="active">
+                    <a href="../index.html">Notebook Index</a>
+                    <ul>
+                    
+                        <li class="">
+                            <a href="../analysis/metpy_basics.html">MetPy Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../analysis/numpy.html">Numpy</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../analysis/pandas.html">Pandas</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href="">Pandas and Numpy for CSV files</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-HowToAccessData.html">python-awips: How to Access Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="siphon-RemoteAccess.html">Siphon (remote_access)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="siphon-RemoteOpen.html">Siphon (remote_open)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../notebook_enhancements/NotebookWidgetsTraining.html">Working with Jupyter Widgets</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/Declarative-Example.html">Declarative Syntax Example</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/MetPy%20SkewT.html">MetPy Skew-T</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/isentropic_introduction.html">Overview of Isentropic Analysis</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-basics.html">Matplotlib: Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-intermediate.html">Matplotlib: Intermediate</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithMapsTopoDatabases.html">python-awips: Working with the Maps and Topo Databases</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithModels.html">python-awips: Working with Models</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSatelliteData.html">python-awips: Working with Satellite Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSurfaceObs.html">python-awips: Working with Surface Obs</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithUpperAirObs.html">python-awips: Working with Upper Air Obs</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+          
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#unidata-ams-2021-student-conference" class="nav-link">Unidata AMS 2021 Student Conference</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#focuses" class="nav-link">Focuses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#objectives" class="nav-link">Objectives</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#imports" class="nav-link">Imports</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#read-in-a-csv-file" class="nav-link">1. Read in a csv file</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#pd-read-csv" class="nav-link">pd.read_csv()</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#replace-missing-data-with-nans" class="nav-link">2. Replace Missing Data With NaNs</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#plot-data-from-csv-file" class="nav-link">3. Plot data from csv file</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#woohoo" class="nav-link">Woohoo!</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#almost-done" class="nav-link">Almost done!</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#nice-job-you-now-know-the-basics-of-working-with-csv-data" class="nav-link">Nice job! You now know the basics of working with csv data!</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <p><a name="top"></a></p>
+<div style="width:1000 px">
+<div style="float:right; width:98 px; height:98px;">
+<img src="https://raw.githubusercontent.com/Unidata/MetPy/master/src/metpy/plots/_static/unidata_150x150.png" alt="Unidata Logo" style="height: 98px;">
+</div>
+<div class="section" id="pandas-and-numpy-for-csv-files">
+<h1>Pandas and Numpy for CSV files<a class="headerlink" href="#pandas-and-numpy-for-csv-files" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unidata-ams-2021-student-conference">
+<h2>Unidata AMS 2021 Student Conference<a class="headerlink" href="#unidata-ams-2021-student-conference" title="Permalink to this headline">¶</a></h2>
+<div style="clear:both"></div>
+</div>
+<hr class="docutils" />
+<div style="float:right; width:250 px"><img src="../../instructors/images/csv_sample.png" alt="Population by country from csv file" style="height: 300px;"></div>
+</div>
+<div class="section" id="focuses">
+<h2>Focuses<a class="headerlink" href="#focuses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Using this notebook we will read in and manipulate a csv file full of data! <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">What is a csv file?</a></p></li>
+<li><p>We will use pandas to organize, process, and plot miscellaneous data</p></li>
+<li><p>Plot data from a csv file with <a class="reference external" href="https://matplotlib.org/">Matplotlib</a></p></li>
+</ul>
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#1.-Read-in-a-csv-file">Read in a csv file</a></p></li>
+<li><p><a class="reference external" href="#2.-Replace-Missing-Data-With-NaNs">Replace Missing Data With NaNs</a></p></li>
+<li><p><a class="reference external" href="#3.-Plot-data-from-csv-file">Plot data from our csv file</a></p></li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="read-in-a-csv-file">
+<h2>1. Read in a csv file<a class="headerlink" href="#read-in-a-csv-file" title="Permalink to this headline">¶</a></h2>
+<p>CSV stands for Comma Separated Values. These files are easy to work with and ubiquitous in atmospheric science.
+In this first goal, we will read in a csv file that has data on global populations.</p>
+<p>The data we will work with is stored at ‘../../instructors/practice_files/populationbycountry19802010millions.csv’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_to_data</span> <span class="o">=</span> <span class="s1">&#39;../../instructors/practice_files/populationbycountry19802010millions.csv&#39;</span>
+
+<span class="c1"># To generate data from the csv file we can use pandas&#39;s read_csv() function</span>
+<span class="n">population_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
+<span class="c1"># delimiter tells python what distinguishes one entry from the next</span>
+<span class="c1"># index_col tells the read_csv() function which column will be used as the index</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">population_data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">population_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">c0044649b742</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># To generate data from the csv file we can use pandas&#39;s read_csv() function</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">population_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># delimiter tells python what distinguishes one entry from the next</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># index_col tells the read_csv() function which column will be used as the index</span>
+
+<span class="nn">~/miniconda3/envs/pyaos-ams-2021/lib/python3.9/site-packages/pandas/io/parsers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">603</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">604</span> 
+<span class="ne">--&gt; </span><span class="mi">605</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">606</span> 
+<span class="g g-Whitespace">    </span><span class="mi">607</span> 
+
+<span class="nn">~/miniconda3/envs/pyaos-ams-2021/lib/python3.9/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span> 
+<span class="g g-Whitespace">    </span><span class="mi">456</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">457</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">458</span> 
+<span class="g g-Whitespace">    </span><span class="mi">459</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/miniconda3/envs/pyaos-ams-2021/lib/python3.9/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">812</span>             <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">813</span> 
+<span class="ne">--&gt; </span><span class="mi">814</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">815</span> 
+<span class="g g-Whitespace">    </span><span class="mi">816</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/miniconda3/envs/pyaos-ams-2021/lib/python3.9/site-packages/pandas/io/parsers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1043</span>             <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1044</span>         <span class="c1"># error: Too many arguments for &quot;ParserBase&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1045</span>         <span class="k">return</span> <span class="n">mapping</span><span class="p">[</span><span class="n">engine</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>  <span class="c1"># type: ignore[call-arg]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1046</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1047</span>     <span class="k">def</span> <span class="nf">_failover_to_python</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/miniconda3/envs/pyaos-ams-2021/lib/python3.9/site-packages/pandas/io/parsers.py</span> in <span class="ni">__init__</span><span class="nt">(self, src, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1860</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1861</span>         <span class="c1"># open handles</span>
+<span class="ne">-&gt; </span><span class="mi">1862</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_open_handles</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1863</span>         <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1864</span>         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="s2">&quot;compression&quot;</span><span class="p">):</span>
+
+<span class="nn">~/miniconda3/envs/pyaos-ams-2021/lib/python3.9/site-packages/pandas/io/parsers.py</span> in <span class="ni">_open_handles</span><span class="nt">(self, src, kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1355</span>         <span class="n">Let</span> <span class="n">the</span> <span class="n">readers</span> <span class="nb">open</span> <span class="n">IOHanldes</span> <span class="n">after</span> <span class="n">they</span> <span class="n">are</span> <span class="n">done</span> <span class="k">with</span> <span class="n">their</span> <span class="n">potential</span> <span class="n">raises</span><span class="o">.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1356</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1357</span><span class="s2">         self.handles = get_handle(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1358</span><span class="s2">             src,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1359</span><span class="s2">             &quot;r&quot;,</span>
+
+<span class="nn">~/miniconda3/envs/pyaos-ams-2021/lib/python3.9/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">637</span><span class="s2">         if ioargs.encoding and &quot;b&quot; not in ioargs.mode:</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span><span class="s2">             # Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">639</span><span class="s2">             handle = open(</span>
+<span class="g g-Whitespace">    </span><span class="mi">640</span><span class="s2">                 handle,</span>
+<span class="g g-Whitespace">    </span><span class="mi">641</span><span class="s2">                 ioargs.mode,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../../instructors/practice_files/populationbycountry19802010millions.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="pd-read-csv">
+<h2>pd.read_csv()<a class="headerlink" href="#pd-read-csv" title="Permalink to this headline">¶</a></h2>
+<p>pd.read_csv() returns a pandas DataFrame object for us to work with. The ‘index_col=0’ was very helpful here. Because the data we wanted to read from our csv had the first column filled with the names of countries for the population data, selecting this to be our index was a natural choice. At the bottom of the printed DataFrame, we can see the shape of the DataFrame, [64 rows x 31 columns] for 64 countries and 31 years of data.</p>
+<p>Missing data is entered as ‘–’, this may make our plotting more difficult so lets replace those values with NaN values. NaN stands for Not a Number and using these python designated data types with numpy will simplify analysis when working with incomplete data.</p>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="replace-missing-data-with-nans">
+<h2>2. Replace Missing Data With NaNs<a class="headerlink" href="#replace-missing-data-with-nans" title="Permalink to this headline">¶</a></h2>
+<p>Here we will find and replace all missing data from our csv with NaN values. To do this we will use the replace() function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To use replace function, input the first entry with what you want to replace, and the second by its replacement</span>
+<span class="n">population_data</span> <span class="o">=</span> <span class="n">population_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">)</span>
+
+<span class="n">population_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perfect! We can now see that the population data has NaN values for missing entries.</p>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="plot-data-from-csv-file">
+<h2>3. Plot data from csv file<a class="headerlink" href="#plot-data-from-csv-file" title="Permalink to this headline">¶</a></h2>
+<p>We can plot temperature and pressure data by using subsetting the columns as we did above and using matplotlib. Instead, we will try to use the pandas built in plot functions!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the pandas .plot() function on our DataFrame</span>
+<span class="n">population_data</span><span class="o">=</span><span class="n">population_data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">population_data</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Currently our pd.DataFrame() is plotting with countries on the x-axis. We would like to have each line represent its own country.</p>
+<p><a href="#top">Top</a></p>
+<hr class="docutils" />
+<p>To plot each countries population growth, we have to swap the rows and columns of the DataFrame. This can be done uing the transpose function, or including a .T after the DataFrame you want to transpose.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">population_data_transpose</span> <span class="o">=</span> <span class="n">population_data</span><span class="o">.</span><span class="n">T</span> <span class="c1"># Flip rows and columns of the population DataFrame</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Plot the data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="woohoo">
+<h3>Woohoo!<a class="headerlink" href="#woohoo" title="Permalink to this headline">¶</a></h3>
+<p>We found a work around for the problem of plotting the data by country, but it looks like we may be trying to show too much data at once. Lets just focus on 5 countries from the DataFrame: Mali, Bhutan, Uzbekistan, Guinea, and Cambodia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#lets just plot 5 different countries</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">Mali</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">Bhutan</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">Uzbekistan</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">Guinea</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">Cambodia</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="almost-done">
+<h2>Almost done!<a class="headerlink" href="#almost-done" title="Permalink to this headline">¶</a></h2>
+<p>Finally, lets add some labels and a title before finishing with our plot!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#lets just plot 5 different countries</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">Mali</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">Bhutan</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">Uzbekistan</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">Guinea</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">population_data_transpose</span><span class="o">.</span><span class="n">Cambodia</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Population of 5 countries fromm 1980 to 2010&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Population in Millions&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="nice-job-you-now-know-the-basics-of-working-with-csv-data">
+<h2>Nice job! You now know the basics of working with csv data!<a class="headerlink" href="#nice-job-you-now-know-the-basics-of-working-with-csv-data" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="../dataAccess.html" title="previous page">Data Access Notebooks</a>
+    <a class='right-next' id="next-link" href="python-awips-HowToAccessData.html" title="next page">python-awips: How to Access Data</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

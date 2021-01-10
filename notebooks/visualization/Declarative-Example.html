@@ -1,0 +1,1100 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Declarative Syntax Example &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="MetPy Skew-T" href="MetPy%20SkewT.html" />
+    <link rel="prev" title="Visualization Notebooks" href="../visualization.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../agenda.html">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../../resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+        
+        
+        
+          
+            
+                <li class="">
+                    <a href="../dataAccess.html">Data Access Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../analysis.html">Analysis Notebooks</a>
+                </li>
+            
+          
+            
+  
+                <li class="active">
+                    <a href="../visualization.html">Visualization Notebooks</a>
+                    <ul>
+                    
+                        <li class="active">
+                            <a href="">Declarative Syntax Example</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="MetPy%20SkewT.html">MetPy Skew-T</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="isentropic_introduction.html">Overview of Isentropic Analysis</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="matplotlib-basics.html">Matplotlib: Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="matplotlib-intermediate.html">Matplotlib: Intermediate</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithMapsTopoDatabases.html">python-awips: Working with the Maps and Topo Databases</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithModels.html">python-awips: Working with Models</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithSatelliteData.html">python-awips: Working with Satellite Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithSurfaceObs.html">python-awips: Working with Surface Obs</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithUpperAirObs.html">python-awips: Working with Upper Air Obs</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../notebook_enhancements.html">Enhancing Your Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../index.html">Notebook Index</a>
+                </li>
+            
+          
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#unidata-ams-2021-student-conference" class="nav-link">Unidata AMS 2021 Student Conference</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#focuses" class="nav-link">Focuses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#objectives" class="nav-link">Objectives</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#imports" class="nav-link">Imports</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#satellite-observations" class="nav-link">1. Satellite Observations</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#accessing-data-via-siphon" class="nav-link">Accessing data via Siphon</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#plotting-satellite-data" class="nav-link">Plotting Satellite Data</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#surface-observations" class="nav-link">2. Surface Observations</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#bring-in-surface-data" class="nav-link">Bring in surface data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#plotting-the-surface-data" class="nav-link">Plotting the surface data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#working-with-metar-data" class="nav-link">Working with METAR data</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#upper-air-observations" class="nav-link">3. Upper-air observations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#model-data" class="nav-link">4. Model data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#see-also" class="nav-link">See Also</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#related-notebooks" class="nav-link">Related Notebooks</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <p><a name="top"></a></p>
+<div style="width:1000 px">
+<div style="float:right; width:98 px; height:98px;">
+<img src="https://raw.githubusercontent.com/Unidata/MetPy/master/src/metpy/plots/_static/unidata_150x150.png" alt="Unidata Logo" style="height: 98px;">
+</div>
+<div class="section" id="declarative-syntax-example">
+<h1>Declarative Syntax Example<a class="headerlink" href="#declarative-syntax-example" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unidata-ams-2021-student-conference">
+<h2>Unidata AMS 2021 Student Conference<a class="headerlink" href="#unidata-ams-2021-student-conference" title="Permalink to this headline">¶</a></h2>
+<div style="clear:both"></div>
+</div>
+<hr class="docutils" />
+<div style="float:right; width:1200 px"><img src="../../instructors/images/declarative_surface.png" alt="declarative_surface" style="height: 300px;"></div>
+</div>
+<div class="section" id="focuses">
+<h2>Focuses<a class="headerlink" href="#focuses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Read in satellite data using Siphon</p></li>
+<li><p>Plot satellite, surface, and upper air observations using the declarative interface</p></li>
+<li><p>Utilize MetPy’s METAR functionality to load recent surface observations</p></li>
+</ul>
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#1.-Satellite-Observations">Satellite Data</a></p></li>
+<li><p><a class="reference external" href="#2.-Surface-Observations">Surface Observations</a></p></li>
+<li><p><a class="reference external" href="#3.-Upper-air-observations">Upper-air Observations</a></p></li>
+<li><p><a class="reference external" href="#4.-Model-data">Model Data</a></p></li>
+</ol>
+<hr class="docutils" />
+<p>The MetPy declarative syntax, similar to GEMPAK, allows for a simplified interface to create common meteorological analyses including surface observation plots</p>
+</div>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">metpy.cbook</span> <span class="kn">import</span> <span class="n">get_test_data</span>
+<span class="kn">from</span> <span class="nn">metpy.io</span> <span class="kn">import</span> <span class="n">metar</span>
+<span class="kn">import</span> <span class="nn">metpy.plots</span> <span class="k">as</span> <span class="nn">mpplots</span>
+<span class="kn">from</span> <span class="nn">metpy.units</span> <span class="kn">import</span> <span class="n">units</span>
+<span class="kn">from</span> <span class="nn">siphon.catalog</span> <span class="kn">import</span> <span class="n">TDSCatalog</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="satellite-observations">
+<h2>1. Satellite Observations<a class="headerlink" href="#satellite-observations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="accessing-data-via-siphon">
+<h3>Accessing data via Siphon<a class="headerlink" href="#accessing-data-via-siphon" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create variables for URL generation</span>
+<span class="n">image_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+<span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;CONUS&#39;</span>
+<span class="n">channel</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="c1"># Create the URL to provide to siphon</span>
+<span class="n">data_url</span> <span class="o">=</span>  <span class="p">(</span><span class="s1">&#39;https://thredds.ucar.edu/thredds/catalog/satellite/goes/east/products/&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;CloudAndMoistureImagery/</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s1">/Channel</span><span class="si">{</span><span class="n">channel</span><span class="si">:</span><span class="s1">02d</span><span class="si">}</span><span class="s1">/&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">image_date</span><span class="si">:</span><span class="s1">%Y%m%d</span><span class="si">}</span><span class="s1">/catalog.xml&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a catalog for the dataset</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">TDSCatalog</span><span class="p">(</span><span class="n">data_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the second dataset and print the output</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">datasets</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OR_ABI-L2-CMIPC-M6C08_G16_s20210100026160_e20210100026160_c20210100026160.nc
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we read it in using xarray</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">remote_access</span><span class="p">(</span><span class="n">use_xarray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="plotting-satellite-data">
+<h3>Plotting Satellite Data<a class="headerlink" href="#plotting-satellite-data" title="Permalink to this headline">¶</a></h3>
+<p>To plot our data we’ll be using MetPy’s new declarative plotting functionality. You can write lots of matplotlib based code, but this interface greatly reduces the number of lines you need to write to get a great starting plot and then lets you customize it. The declarative plotting interface consists of three fundamental objects/concepts:</p>
+<ul class="simple">
+<li><p><strong>Plot</strong> - This is the actual representation of the data and can be ImagePlot, ContourPlot, Plot2D, FilledContourPlot and BarbPlot.</p></li>
+<li><p><strong>Panel</strong> - This is a single panel (i.e. coordinate system). Panels contain plots. Currently the MapPanel is the only panel type available.</p></li>
+<li><p><strong>Panel Container</strong> - The container can hold multiple panels to make a multi-pane figure. Panel Containers can be thought of as the whole figure object in matplotlib.</p></li>
+</ul>
+<p>So containers have panels which have plots. It takes a second to get that straight in your mind, but it makes setting up complex figures very simple.</p>
+<p>For this plot we need a single panel and we want to plot the satellite image, so we’ll use the <code class="docutils literal notranslate"><span class="pre">ImagePlot</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">ImagePlot</span><span class="p">()</span>
+<span class="n">img</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">ds</span>
+<span class="n">img</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;Sectorized_CMI&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we’ll make the panel that our image will go into, the MapPanel object and add the image to the plots on the panel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">panel</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">MapPanel</span><span class="p">()</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">img</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we make the PanelContainer and add the panel to its container. Remember that since we can have multiple plots on a panel and multiple panels on a plot, we use lists. In this case is just happens to be a list of length 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pc</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PanelContainer</span><span class="p">()</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">[</span><span class="n">panel</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Unlike working with matplotlib directly in the notebooks, this figure hasn’t actually been rendered yet. Calling the show method of the panel container builds up everything, renders, and shows it to us.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pc</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Declarative-Example_15_0.png" src="../../_images/Declarative-Example_15_0.png" />
+</div>
+</div>
+<p>Now, let’s add a few more labels/colors onto there and include this whole process in a single cell</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make the image plot</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">ImagePlot</span><span class="p">()</span>
+<span class="n">img</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">ds</span>
+<span class="n">img</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;Sectorized_CMI&#39;</span>
+<span class="n">img</span><span class="o">.</span><span class="n">colormap</span> <span class="o">=</span> <span class="s1">&#39;WVCIMSS_r&#39;</span>
+<span class="n">img</span><span class="o">.</span><span class="n">image_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">195</span><span class="p">,</span> <span class="mi">265</span><span class="p">)</span>
+
+<span class="c1"># Make the map panel and add the image to it</span>
+<span class="n">panel</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">MapPanel</span><span class="p">()</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coastline&#39;</span><span class="p">,</span> <span class="s1">&#39;borders&#39;</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">]</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">img</span><span class="p">]</span>
+
+<span class="c1"># Make the panel container and add the panel to it</span>
+<span class="n">pc</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PanelContainer</span><span class="p">()</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">[</span><span class="n">panel</span><span class="p">]</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+<span class="c1"># Add a timestamp</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">start_date_time</span><span class="p">,</span> <span class="s1">&#39;%Y%j%H%M%S&#39;</span><span class="p">)</span>
+<span class="n">mpplots</span><span class="o">.</span><span class="n">add_timestamp</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">ax</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">start_time</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Declarative-Example_17_0.png" src="../../_images/Declarative-Example_17_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="surface-observations">
+<h2>2. Surface Observations<a class="headerlink" href="#surface-observations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bring-in-surface-data">
+<h3>Bring in surface data<a class="headerlink" href="#bring-in-surface-data" title="Permalink to this headline">¶</a></h3>
+<p>In this example, data is originally from the Iowa State ASOS archive (https://mesonet.agron.iastate.edu/request/download.phtml) downloaded through a separate Python script. The data are pre-processed to determine sky cover and weather symbols from text output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">get_test_data</span><span class="p">(</span><span class="s1">&#39;SFC_obs.csv&#39;</span><span class="p">,</span> <span class="n">as_file_obj</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                   <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plotting-the-surface-data">
+<h3>Plotting the surface data<a class="headerlink" href="#plotting-the-surface-data" title="Permalink to this headline">¶</a></h3>
+<p>Use the declarative plotting interface to plot surface observations over the state of Georgia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting the Observations using a 15 minute time window for surface observations</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PlotObs</span><span class="p">()</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">1993</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">time_window</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tmpf&#39;</span><span class="p">,</span> <span class="s1">&#39;dwpf&#39;</span><span class="p">,</span> <span class="s1">&#39;emsl&#39;</span><span class="p">,</span> <span class="s1">&#39;cloud_cover&#39;</span><span class="p">,</span> <span class="s1">&#39;wxsym&#39;</span><span class="p">]</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NW&#39;</span><span class="p">,</span> <span class="s1">&#39;SW&#39;</span><span class="p">,</span> <span class="s1">&#39;NE&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">]</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">formats</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">format</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">v</span><span class="p">,</span> <span class="s1">&#39;.0f&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:],</span> <span class="s1">&#39;sky_cover&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;current_weather&#39;</span><span class="p">]</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">vector_field</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;uwind&#39;</span><span class="p">,</span> <span class="s1">&#39;vwind&#39;</span><span class="p">)</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">reduce_points</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Add map features for the particular panel</span>
+<span class="n">panel</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">MapPanel</span><span class="p">()</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="s1">&#39;ga&#39;</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">projection</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coastline&#39;</span><span class="p">,</span> <span class="s1">&#39;borders&#39;</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">]</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">obs</span><span class="p">]</span>
+
+<span class="c1"># Collecting panels for complete figure</span>
+<span class="n">pc</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PanelContainer</span><span class="p">()</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">[</span><span class="n">panel</span><span class="p">]</span>
+
+<span class="c1"># Showing the results</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Declarative-Example_21_0.png" src="../../_images/Declarative-Example_21_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="working-with-metar-data">
+<h3>Working with METAR data<a class="headerlink" href="#working-with-metar-data" title="Permalink to this headline">¶</a></h3>
+<p>One can also use the realtime METARs as a datasource, utilizing MetPy’s METAR parsing functionality</p>
+<p>Data is from the <a class="reference external" href="https://thredds-test.unidata.ucar.edu/thredds/catalog/noaaport/text/metar/catalog.html">Unidata Thredds Test Server</a> which includes data from thirty days in the past to current observations</p>
+<p>Another data source is the Iowa State ASOS Archive, described previously</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use siphon to read in a METAR text file from the Unidata Thredds server</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">TDSCatalog</span><span class="p">(</span><span class="s1">&#39;https://thredds-test.unidata.ucar.edu/thredds/catalog/noaaport/text/metar/catalog.xml&#39;</span><span class="p">)</span>
+
+<span class="c1"># Load in the latest hour&#39;s data, subtracting 30 minutes to ensure the observations have enough time to be read</span>
+<span class="n">metar_ds</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">filter_time_nearest</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+
+<span class="c1"># Download the file</span>
+<span class="n">metar_ds</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+
+<span class="c1"># Parse the text file and create a Pandas dataframe</span>
+<span class="n">sfc_data</span> <span class="o">=</span> <span class="n">metar</span><span class="o">.</span><span class="n">parse_metar_file</span><span class="p">(</span><span class="n">metar_ds</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we want to make sure we convert the temperature and dewpoint from degrees Celsius to degrees Fahrenheit</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sfc_data</span><span class="p">[</span><span class="s1">&#39;air_temperature&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="p">(</span><span class="n">sfc_data</span><span class="p">[</span><span class="s1">&#39;air_temperature&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="n">sfc_data</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;air_temperature&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;degF&#39;</span><span class="p">)</span>
+<span class="n">sfc_data</span><span class="p">[</span><span class="s1">&#39;dew_point_temperature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">sfc_data</span><span class="p">[</span><span class="s1">&#39;dew_point_temperature&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="n">sfc_data</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;dew_point_temperature&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;degF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we setup our <code class="docutils literal notranslate"><span class="pre">PlotObs</span></code> object</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup the PlotObs</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PlotObs</span><span class="p">()</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">sfc_data</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;air_temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;dew_point_temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;air_pressure_at_sea_level&#39;</span><span class="p">,</span> <span class="s1">&#39;cloud_coverage&#39;</span><span class="p">,</span> <span class="s1">&#39;present_weather&#39;</span><span class="p">,</span> <span class="s1">&#39;past_weather&#39;</span><span class="p">]</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NW&#39;</span><span class="p">,</span> <span class="s1">&#39;SW&#39;</span><span class="p">,</span> <span class="s1">&#39;NE&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;SE&#39;</span><span class="p">]</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">formats</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">format</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">v</span><span class="p">,</span> <span class="s1">&#39;.0f&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">3</span><span class="p">:],</span> <span class="s1">&#39;sky_cover&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;current_weather&#39;</span><span class="p">,</span> <span class="s1">&#39;current_weather&#39;</span><span class="p">]</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">vector_field</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;eastward_wind&#39;</span><span class="p">,</span> <span class="s1">&#39;northward_wind&#39;</span><span class="p">)</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">reduce_points</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Setup the MapPanel</span>
+<span class="n">panel</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">MapPanel</span><span class="p">()</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coastline&#39;</span><span class="p">,</span> <span class="s1">&#39;borders&#39;</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="s1">&#39;land&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean&#39;</span><span class="p">]</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="s1">&#39;centus&#39;</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;lcc&#39;</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">obs</span><span class="p">]</span>
+<span class="c1">#panel.title = &#39;Surface Observations&#39;</span>
+
+<span class="n">pc</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PanelContainer</span><span class="p">()</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">[</span><span class="n">panel</span><span class="p">]</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">mpplots</span><span class="o">.</span><span class="n">add_timestamp</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">ax</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">start_time</span><span class="p">)</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Declarative-Example_28_0.png" src="../../_images/Declarative-Example_28_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="upper-air-observations">
+<h2>3. Upper-air observations<a class="headerlink" href="#upper-air-observations" title="Permalink to this headline">¶</a></h2>
+<p>Plot upper level data using test data - the test data was pulled from the Iowa State upper-air archive which also requires preprocessing to add lats/lons. For now, we will use the test data from MetPy</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">get_test_data</span><span class="p">(</span><span class="s1">&#39;UPA_obs.csv&#39;</span><span class="p">,</span> <span class="n">as_file_obj</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pressure</th>
+      <th>height</th>
+      <th>temperature</th>
+      <th>dewpoint</th>
+      <th>direction</th>
+      <th>speed</th>
+      <th>station</th>
+      <th>time</th>
+      <th>u_wind</th>
+      <th>v_wind</th>
+      <th>latitude</th>
+      <th>longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>500.0</td>
+      <td>5377.0</td>
+      <td>-28.7</td>
+      <td>-39.8</td>
+      <td>316.0</td>
+      <td>75.0</td>
+      <td>1M1</td>
+      <td>1993-03-14</td>
+      <td>52.099378</td>
+      <td>-53.950485</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>300.0</td>
+      <td>8859.0</td>
+      <td>-47.9</td>
+      <td>NaN</td>
+      <td>304.0</td>
+      <td>96.0</td>
+      <td>1M1</td>
+      <td>1993-03-14</td>
+      <td>79.587607</td>
+      <td>-53.682519</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>500.0</td>
+      <td>5110.0</td>
+      <td>-43.5</td>
+      <td>-54.5</td>
+      <td>310.0</td>
+      <td>23.0</td>
+      <td>CWPL</td>
+      <td>1993-03-14</td>
+      <td>17.619022</td>
+      <td>-14.784115</td>
+      <td>51.466667</td>
+      <td>-90.2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>300.0</td>
+      <td>8420.0</td>
+      <td>-53.9</td>
+      <td>-62.9</td>
+      <td>300.0</td>
+      <td>27.0</td>
+      <td>CWPL</td>
+      <td>1993-03-14</td>
+      <td>23.382686</td>
+      <td>-13.500000</td>
+      <td>51.466667</td>
+      <td>-90.2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>500.0</td>
+      <td>5470.0</td>
+      <td>-13.7</td>
+      <td>-14.1</td>
+      <td>215.0</td>
+      <td>96.0</td>
+      <td>CWQI</td>
+      <td>1993-03-14</td>
+      <td>55.063338</td>
+      <td>78.638596</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>216</th>
+      <td>300.0</td>
+      <td>8852.0</td>
+      <td>-51.4</td>
+      <td>NaN</td>
+      <td>49.0</td>
+      <td>48.0</td>
+      <td>KYAK</td>
+      <td>1993-03-14</td>
+      <td>-36.226060</td>
+      <td>-31.490833</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>217</th>
+      <td>500.0</td>
+      <td>5220.0</td>
+      <td>-23.7</td>
+      <td>-25.3</td>
+      <td>185.0</td>
+      <td>54.0</td>
+      <td>KYMW</td>
+      <td>1993-03-14</td>
+      <td>4.706410</td>
+      <td>53.794514</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>218</th>
+      <td>300.0</td>
+      <td>8829.0</td>
+      <td>-42.9</td>
+      <td>-46.9</td>
+      <td>195.0</td>
+      <td>92.0</td>
+      <td>KYMW</td>
+      <td>1993-03-14</td>
+      <td>23.811352</td>
+      <td>88.865176</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>219</th>
+      <td>500.0</td>
+      <td>5379.0</td>
+      <td>-30.1</td>
+      <td>-38.1</td>
+      <td>355.0</td>
+      <td>19.0</td>
+      <td>KYXY</td>
+      <td>1993-03-14</td>
+      <td>1.655959</td>
+      <td>-18.927699</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>220</th>
+      <td>300.0</td>
+      <td>8829.0</td>
+      <td>-52.9</td>
+      <td>-61.9</td>
+      <td>15.0</td>
+      <td>25.0</td>
+      <td>KYXY</td>
+      <td>1993-03-14</td>
+      <td>-6.470476</td>
+      <td>-24.148146</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>221 rows × 12 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting the Observations</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PlotObs</span><span class="p">()</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">1993</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">500</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">hPa</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;dewpoint&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">]</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NW&#39;</span><span class="p">,</span> <span class="s1">&#39;SW&#39;</span><span class="p">,</span> <span class="s1">&#39;NE&#39;</span><span class="p">]</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">formats</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">format</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">&#39;.0f&#39;</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]]</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">vector_field</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;u_wind&#39;</span><span class="p">,</span> <span class="s1">&#39;v_wind&#39;</span><span class="p">)</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">reduce_points</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Add map features for the particular panel</span>
+<span class="n">panel</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">MapPanel</span><span class="p">()</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">124</span><span class="p">,</span> <span class="o">-</span><span class="mi">72</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">53</span><span class="p">)</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;lcc&#39;</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coastline&#39;</span><span class="p">,</span> <span class="s1">&#39;borders&#39;</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="s1">&#39;land&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean&#39;</span><span class="p">]</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">obs</span><span class="p">]</span>
+
+<span class="c1"># Collecting panels for complete figure</span>
+<span class="n">pc</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PanelContainer</span><span class="p">()</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">[</span><span class="n">panel</span><span class="p">]</span>
+
+<span class="c1"># Showing the results</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Declarative-Example_32_0.png" src="../../_images/Declarative-Example_32_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="model-data">
+<h2>4. Model data<a class="headerlink" href="#model-data" title="Permalink to this headline">¶</a></h2>
+<p>Read in most recent NAM data from the Unidata Thredds Server Other model data can be found using the following website https://thredds.ucar.edu/thredds/catalog.html</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import data and remotely access it via Siphon using xarray</span>
+<span class="n">cat_string</span> <span class="o">=</span> <span class="s1">&#39;https://thredds.ucar.edu/thredds/catalog/grib/NCEP/NAM/CONUS_12km/latest.xml&#39;</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">TDSCatalog</span><span class="p">(</span><span class="n">cat_string</span><span class="p">)</span>
+<span class="n">model_ds</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">datasets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">remote_access</span><span class="p">(</span><span class="n">use_xarray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">metpy</span><span class="o">.</span><span class="n">parse_cf</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the first time</span>
+<span class="n">model_ds</span> <span class="o">=</span> <span class="n">model_ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span> <span class="o">=</span> <span class="n">model_ds</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert data to proper units using MetPy conversion tools</span>
+<span class="n">model_ds</span><span class="p">[</span><span class="s1">&#39;Pressure_reduced_to_MSL_msl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_ds</span><span class="o">.</span><span class="n">Pressure_reduced_to_MSL_msl</span><span class="o">.</span><span class="n">metpy</span><span class="o">.</span><span class="n">convert_units</span><span class="p">(</span><span class="s1">&#39;hPa&#39;</span><span class="p">)</span>
+<span class="n">model_ds</span><span class="p">[</span><span class="s1">&#39;Temperature_height_above_ground&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_ds</span><span class="o">.</span><span class="n">Temperature_height_above_ground</span><span class="o">.</span><span class="n">metpy</span><span class="o">.</span><span class="n">convert_units</span><span class="p">(</span><span class="s1">&#39;degF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Smooth the data using gaussian smoothing from SciPy</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">metpy.calc</span> <span class="kn">import</span> <span class="n">smooth_gaussian</span>
+
+<span class="c1"># Smooth contour for MSLP</span>
+<span class="n">model_ds</span><span class="p">[</span><span class="s1">&#39;Pressure_reduced_to_MSL_msl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smooth_gaussian</span><span class="p">(</span><span class="n">model_ds</span><span class="p">[</span><span class="s1">&#39;Pressure_reduced_to_MSL_msl&#39;</span><span class="p">],</span> <span class="mf">3.0</span><span class="p">)</span>
+
+<span class="c1"># Smooth contour for surface temperature</span>
+<span class="n">model_ds</span><span class="p">[</span><span class="s1">&#39;Temperature_height_above_ground&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smooth_gaussian</span><span class="p">(</span><span class="n">model_ds</span><span class="p">[</span><span class="s1">&#39;Temperature_height_above_ground&#39;</span><span class="p">],</span> <span class="mf">3.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup the ContourPlot, setting the desired variable to plot</span>
+<span class="n">contour_mslp</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">ContourPlot</span><span class="p">()</span>
+<span class="n">contour_mslp</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">model_ds</span>
+<span class="n">contour_mslp</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;Pressure_reduced_to_MSL_msl&#39;</span> <span class="c1"># Variable within the xarray dataset that will be plotted</span>
+<span class="n">contour_mslp</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+<span class="n">contour_mslp</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">contour_mslp</span><span class="o">.</span><span class="n">linecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+<span class="n">contour_mslp</span><span class="o">.</span><span class="n">clabels</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">contour_mslp</span><span class="o">.</span><span class="n">contours</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">900</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="c1"># Contour intervals</span>
+
+<span class="c1"># Setup another ContourPlot for temperature (in degrees Fahrenheit)</span>
+<span class="n">contour_temp</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">ContourPlot</span><span class="p">()</span>
+<span class="n">contour_temp</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">model_ds</span>
+<span class="n">contour_temp</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;Temperature_height_above_ground&#39;</span>
+<span class="n">contour_temp</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+<span class="n">contour_temp</span><span class="o">.</span><span class="n">linecolor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
+<span class="n">contour_temp</span><span class="o">.</span><span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dashed&#39;</span>
+<span class="n">contour_temp</span><span class="o">.</span><span class="n">clabels</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">contour_temp</span><span class="o">.</span><span class="n">contours</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="c1"># Contour intervals</span>
+
+<span class="c1"># Plot the east coast </span>
+<span class="n">panel</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">MapPanel</span><span class="p">()</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="s1">&#39;east&#39;</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coastline&#39;</span><span class="p">,</span> <span class="s1">&#39;borders&#39;</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">,</span> <span class="s1">&#39;land&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean&#39;</span><span class="p">]</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">contour_temp</span><span class="p">,</span> <span class="n">contour_mslp</span><span class="p">]</span>
+
+<span class="n">pc</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PanelContainer</span><span class="p">()</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">[</span><span class="n">panel</span><span class="p">]</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">mpplots</span><span class="o">.</span><span class="n">add_timestamp</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">ax</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">())</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Declarative-Example_39_0.png" src="../../_images/Declarative-Example_39_0.png" />
+</div>
+</div>
+<p>Now try using a <code class="docutils literal notranslate"><span class="pre">FilledContourPlot</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cfill</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">FilledContourPlot</span><span class="p">()</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">model_ds</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;Temperature_isobaric&#39;</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">850</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">hPa</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">colormap</span> <span class="o">=</span> <span class="s1">&#39;RdBu_r&#39;</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">contours</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span> <span class="mi">320</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">colorbar</span> <span class="o">=</span> <span class="s1">&#39;vertical&#39;</span>
+
+<span class="c1"># Plot the east coast </span>
+<span class="n">panel</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">MapPanel</span><span class="p">()</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="s1">&#39;east&#39;</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coastline&#39;</span><span class="p">,</span> <span class="s1">&#39;borders&#39;</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">]</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">cfill</span><span class="p">]</span>
+
+<span class="n">pc</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PanelContainer</span><span class="p">()</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">[</span><span class="n">panel</span><span class="p">]</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">mpplots</span><span class="o">.</span><span class="n">add_timestamp</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">ax</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">start_time</span><span class="p">)</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Declarative-Example_41_0.png" src="../../_images/Declarative-Example_41_0.png" />
+</div>
+</div>
+<p>We can also add wind barbs on there using <code class="docutils literal notranslate"><span class="pre">BarbPlot</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot wind barbs</span>
+<span class="n">barb</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">BarbPlot</span><span class="p">()</span>
+<span class="n">barb</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+<span class="n">barb</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">model_ds</span>
+<span class="n">barb</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">850</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">hPa</span>
+<span class="n">barb</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;u-component_of_wind_isobaric&#39;</span><span class="p">,</span> <span class="s1">&#39;v-component_of_wind_isobaric&#39;</span><span class="p">]</span>
+<span class="n">barb</span><span class="o">.</span><span class="n">skip</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">barb</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+<span class="n">barb</span><span class="o">.</span><span class="n">barblength</span> <span class="o">=</span> <span class="mf">6.5</span>
+<span class="n">barb</span><span class="o">.</span><span class="n">earth_relative</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># Use the same colorfill from the cells above</span>
+<span class="n">cfill</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">FilledContourPlot</span><span class="p">()</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">model_ds</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;Temperature_isobaric&#39;</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">850</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">hPa</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">colormap</span> <span class="o">=</span> <span class="s1">&#39;RdBu_r&#39;</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">contours</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span> <span class="mi">320</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">cfill</span><span class="o">.</span><span class="n">colorbar</span> <span class="o">=</span> <span class="s1">&#39;vertical&#39;</span>
+
+<span class="c1"># Plot the east coast </span>
+<span class="n">panel</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">MapPanel</span><span class="p">()</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="s1">&#39;east&#39;</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coastline&#39;</span><span class="p">,</span> <span class="s1">&#39;borders&#39;</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">]</span>
+<span class="n">panel</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">cfill</span><span class="p">,</span> <span class="n">barb</span><span class="p">]</span>
+
+<span class="n">pc</span> <span class="o">=</span> <span class="n">mpplots</span><span class="o">.</span><span class="n">PanelContainer</span><span class="p">()</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">panels</span> <span class="o">=</span> <span class="p">[</span><span class="n">panel</span><span class="p">]</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">mpplots</span><span class="o">.</span><span class="n">add_timestamp</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">ax</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">start_time</span><span class="p">)</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Declarative-Example_43_0.png" src="../../_images/Declarative-Example_43_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>Be sure to check out other resources</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://unidata.github.io/MetPy/latest/tutorials/declarative_tutorial.html">Declarative Plotting Tutorial</a></p></li>
+<li><p><a class="reference external" href="https://unidata.github.io/python-gallery/examples/Declarative_300hPa.html#sphx-glr-examples-declarative-300hpa-py">300 hPa Map Example</a></p></li>
+</ul>
+<div class="section" id="related-notebooks">
+<h3>Related Notebooks<a class="headerlink" href="#related-notebooks" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Siphon remote access</p></li>
+<li><p>Siphon remote open
+?
+<a href="#top">Top</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="../visualization.html" title="previous page">Visualization Notebooks</a>
+    <a class='right-next' id="next-link" href="MetPy%20SkewT.html" title="next page">MetPy Skew-T</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

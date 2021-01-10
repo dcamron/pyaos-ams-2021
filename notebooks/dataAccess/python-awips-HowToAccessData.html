@@ -1,0 +1,1413 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>python-awips: How to Access Data &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Siphon (remote_access)" href="siphon-RemoteAccess.html" />
+    <link rel="prev" title="Pandas and Numpy for CSV files" href="pandas_and_numpy_csv.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../agenda.html">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../../resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+        
+        
+        
+          
+            
+                <li class="">
+                    <a href="../dataAccess.html">Data Access Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../analysis.html">Analysis Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../visualization.html">Visualization Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../notebook_enhancements.html">Enhancing Your Notebooks</a>
+                </li>
+            
+          
+            
+  
+                <li class="active">
+                    <a href="../index.html">Notebook Index</a>
+                    <ul>
+                    
+                        <li class="">
+                            <a href="../analysis/metpy_basics.html">MetPy Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../analysis/numpy.html">Numpy</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../analysis/pandas.html">Pandas</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="pandas_and_numpy_csv.html">Pandas and Numpy for CSV files</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href="">python-awips: How to Access Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="siphon-RemoteAccess.html">Siphon (remote_access)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="siphon-RemoteOpen.html">Siphon (remote_open)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../notebook_enhancements/NotebookWidgetsTraining.html">Working with Jupyter Widgets</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/Declarative-Example.html">Declarative Syntax Example</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/MetPy%20SkewT.html">MetPy Skew-T</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/isentropic_introduction.html">Overview of Isentropic Analysis</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-basics.html">Matplotlib: Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-intermediate.html">Matplotlib: Intermediate</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithMapsTopoDatabases.html">python-awips: Working with the Maps and Topo Databases</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithModels.html">python-awips: Working with Models</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSatelliteData.html">python-awips: Working with Satellite Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSurfaceObs.html">python-awips: Working with Surface Obs</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithUpperAirObs.html">python-awips: Working with Upper Air Obs</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+          
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#unidata-ams-2021-student-conference" class="nav-link">Unidata AMS 2021 Student Conference</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#focuses" class="nav-link">Focuses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#objectives" class="nav-link">Objectives</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#imports" class="nav-link">Imports</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#connect-to-edex" class="nav-link">1. Connect to EDEX</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#get-a-list-of-supported-data-types" class="nav-link">2. Get a List of Supported Data Types</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#create-a-new-data-request-and-set-the-type" class="nav-link">3. Create a New Data Request and Set the Type</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#get-available-locations" class="nav-link">4. Get Available Locations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#get-available-parameters" class="nav-link">5. Get Available Parameters</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#get-available-levels" class="nav-link">6. Get Available Levels</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#get-available-times" class="nav-link">7. Get Available Times</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#get-the-data" class="nav-link">8. Get the Data!</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#see-also" class="nav-link">See also</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#related-notebooks" class="nav-link">Related Notebooks</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <p><a name="top"></a></p>
+<div style="width:1000 px">
+<div style="float:right; width:98 px; height:98px;">
+<img src="https://raw.githubusercontent.com/Unidata/MetPy/master/src/metpy/plots/_static/unidata_150x150.png" alt="Unidata Logo" style="height: 98px;">
+</div>
+<div class="section" id="python-awips-how-to-access-data">
+<h1>python-awips: How to Access Data<a class="headerlink" href="#python-awips-how-to-access-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unidata-ams-2021-student-conference">
+<h2>Unidata AMS 2021 Student Conference<a class="headerlink" href="#unidata-ams-2021-student-conference" title="Permalink to this headline">¶</a></h2>
+<div style="clear:both"></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="focuses">
+<h2>Focuses<a class="headerlink" href="#focuses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Cover the relevant methods for accessing EDEX and investigating what data is available.</p></li>
+<li><p>This example we look at the “grid” data type and investigate the Global Forcast System (GFS) model.</p></li>
+<li><p>We will talk quite a bit about the <strong>DataAccessLayer</strong> utility, and its <a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html">online documentation</a> might be a helpful reference.</p></li>
+</ul>
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#1.-Connect-to-EDEX">Connect to EDEX</a></p></li>
+<li><p><a class="reference external" href="#2.-Get-a-List-of-Supported-Data-Types">Get a List of Supported Data Types</a></p></li>
+<li><p><a class="reference external" href="#3.-Create-a-New-Data-Request-and-Set-the-Type">Create a New Data Request and Set the Type</a></p></li>
+<li><p><a class="reference external" href="#4.-Get-Available-Locations">Get Available Locations</a></p></li>
+<li><p><a class="reference external" href="#5.-Get-Available-Parameters">Get Available Parameters</a></p></li>
+<li><p><a class="reference external" href="#6.-Get-Available-Levels">Get Available Levels</a></p></li>
+<li><p><a class="reference external" href="#7.-Get-Available-Times">Get Available Times</a></p></li>
+<li><p><a class="reference external" href="#8.-Get-the-Data%21">Get the Data!</a></p></li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>Start by importing the DataAccessLayer package from python-awips:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">awips.dataaccess</span> <span class="kn">import</span> <span class="n">DataAccessLayer</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="connect-to-edex">
+<h2>1. Connect to EDEX<a class="headerlink" href="#connect-to-edex" title="Permalink to this headline">¶</a></h2>
+<p>Define a url for your EDEX connection, and then point python-awips at that EDEX</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unidata&#39;s cloud EDEX instance is used in this example</span>
+<span class="n">edex_url</span> <span class="o">=</span> <span class="s2">&quot;edex-cloud.unidata.ucar.edu&quot;</span>
+<span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">changeEDEXHost</span><span class="p">(</span><span class="n">edex_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="get-a-list-of-supported-data-types">
+<h2>2. Get a List of Supported Data Types<a class="headerlink" href="#get-a-list-of-supported-data-types" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html#awips.dataaccess.DataAccessLayer.getSupportedDatatypes"><em><strong>DataAccessLayer.getSupportedDatatypes()</strong></em></a> returns a list of supported data types offered by the EDEX server defined above. The code below shows how to populate, sort, and print out that list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataTypes</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getSupportedDatatypes</span><span class="p">()</span>
+<span class="n">dataTypes</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">dataTypes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;acars&#39;,
+ &#39;airep&#39;,
+ &#39;binlightning&#39;,
+ &#39;bufrmosAVN&#39;,
+ &#39;bufrmosETA&#39;,
+ &#39;bufrmosGFS&#39;,
+ &#39;bufrmosHPC&#39;,
+ &#39;bufrmosLAMP&#39;,
+ &#39;bufrmosMRF&#39;,
+ &#39;bufrua&#39;,
+ &#39;climate&#39;,
+ &#39;common_obs_spatial&#39;,
+ &#39;gfe&#39;,
+ &#39;gfeEditArea&#39;,
+ &#39;grid&#39;,
+ &#39;maps&#39;,
+ &#39;modelsounding&#39;,
+ &#39;obs&#39;,
+ &#39;pirep&#39;,
+ &#39;practicewarning&#39;,
+ &#39;profiler&#39;,
+ &#39;radar&#39;,
+ &#39;radar_spatial&#39;,
+ &#39;satellite&#39;,
+ &#39;sfcobs&#39;,
+ &#39;topo&#39;,
+ &#39;warning&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="create-a-new-data-request-and-set-the-type">
+<h2>3. Create a New Data Request and Set the Type<a class="headerlink" href="#create-a-new-data-request-and-set-the-type" title="Permalink to this headline">¶</a></h2>
+<p>Now create a new data request using <a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html#awips.dataaccess.DataAccessLayer.newDataRequest"><em><strong>DataAccessLayer.newDataRequest()</strong></em></a>, and set the data type using <a class="reference external" href="http://unidata.github.io/python-awips/api/IDataRequest.html#awips.dataaccess.IDataRequest.setDatatype"><em><strong>request.setDatatype()</strong></em></a>.  Below we create a few different requests with different data types to show some differences with other methods.</p>
+<p>For this example we are going to look at the “grid” data type, which is the model data can be found, along with some other datasets (such as MRMS).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a request for data type grid</span>
+<span class="n">grid_request</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">newDataRequest</span><span class="p">()</span>
+<span class="n">grid_request</span><span class="o">.</span><span class="n">setDatatype</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="get-available-locations">
+<h2>4. Get Available Locations<a class="headerlink" href="#get-available-locations" title="Permalink to this headline">¶</a></h2>
+<p>Use the <a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html#awips.dataaccess.DataAccessLayer.getAvailableLocationNames"><em><strong>DataAccessLayer.getAvailableLocationNames(request)</strong></em></a> method to find out what locations are available for the given dataset.  Typically these will be geographic locations or NWS sites, although in some instances it will be something else.  Take a look at what’s outputted for the grid_request, for example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grid Locations</span>
+<span class="n">grid_locations</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getAvailableLocationNames</span><span class="p">(</span><span class="n">grid_request</span><span class="p">)</span>
+<span class="n">grid_locations</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">grid_locations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;AUTOSPE&#39;,
+ &#39;ESTOFS&#39;,
+ &#39;ETSS&#39;,
+ &#39;FFG-ALR&#39;,
+ &#39;FFG-FWR&#39;,
+ &#39;FFG-KRF&#39;,
+ &#39;FFG-MSR&#39;,
+ &#39;FFG-ORN&#39;,
+ &#39;FFG-PTR&#39;,
+ &#39;FFG-RHA&#39;,
+ &#39;FFG-RSA&#39;,
+ &#39;FFG-STR&#39;,
+ &#39;FFG-TAR&#39;,
+ &#39;FFG-TIR&#39;,
+ &#39;FFG-TUA&#39;,
+ &#39;FNMOC-NCODA&#39;,
+ &#39;FNMOC-WW3&#39;,
+ &#39;GFS&#39;,
+ &#39;GFS20&#39;,
+ &#39;HFR-EAST_6KM&#39;,
+ &#39;HFR-EAST_PR_6KM&#39;,
+ &#39;HFR-US_EAST_DELAWARE_1KM&#39;,
+ &#39;HFR-US_EAST_FLORIDA_2KM&#39;,
+ &#39;HFR-US_EAST_NORTH_2KM&#39;,
+ &#39;HFR-US_EAST_SOUTH_2KM&#39;,
+ &#39;HFR-US_EAST_VIRGINIA_1KM&#39;,
+ &#39;HFR-US_HAWAII_1KM&#39;,
+ &#39;HFR-US_HAWAII_2KM&#39;,
+ &#39;HFR-US_HAWAII_6KM&#39;,
+ &#39;HFR-US_WEST_500M&#39;,
+ &#39;HFR-US_WEST_CENCAL_2KM&#39;,
+ &#39;HFR-US_WEST_LOSANGELES_1KM&#39;,
+ &#39;HFR-US_WEST_LOSOSOS_1KM&#39;,
+ &#39;HFR-US_WEST_NORTH_2KM&#39;,
+ &#39;HFR-US_WEST_SANFRAN_1KM&#39;,
+ &#39;HFR-US_WEST_SOCAL_2KM&#39;,
+ &#39;HFR-US_WEST_WASHINGTON_1KM&#39;,
+ &#39;HFR-WEST_6KM&#39;,
+ &#39;HPCGuide&#39;,
+ &#39;HPCqpfNDFD&#39;,
+ &#39;HRRR&#39;,
+ &#39;LAMP2p5&#39;,
+ &#39;MRMS_0500&#39;,
+ &#39;MRMS_1000&#39;,
+ &#39;NAM12&#39;,
+ &#39;NAM40&#39;,
+ &#39;NOHRSC-SNOW&#39;,
+ &#39;RAP13&#39;,
+ &#39;RTMA&#39;,
+ &#39;RTOFS-Now-WestAtl&#39;,
+ &#39;RTOFS-Now-WestConus&#39;,
+ &#39;RTOFS-WestAtl&#39;,
+ &#39;RTOFS-WestConus&#39;,
+ &#39;SPCGuide&#39;,
+ &#39;SeaIce&#39;,
+ &#39;TPCWindProb&#39;,
+ &#39;URMA25&#39;,
+ &#39;WaveWatch&#39;,
+ &#39;navgem0p5&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="get-available-parameters">
+<h2>5. Get Available Parameters<a class="headerlink" href="#get-available-parameters" title="Permalink to this headline">¶</a></h2>
+<p>We’re setting the “location” (in this case, what model we are interested in) to specify our request before we look at the available parameters.</p>
+<p>Take a look at the available parameters for the data set by using <a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html#awips.dataaccess.DataAccessLayer.getAvailableParameters"><em><strong>DataAccessLayer.getAvailableParameters(request)</strong></em></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pick a model and set the location for the grid request -- we&#39;ll be using the Global Forecast System (GFS)</span>
+<span class="n">grid_request</span><span class="o">.</span><span class="n">setLocationNames</span><span class="p">(</span><span class="s2">&quot;GFS&quot;</span><span class="p">)</span>
+<span class="n">grid_params</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getAvailableParameters</span><span class="p">(</span><span class="n">grid_request</span><span class="p">)</span>
+<span class="n">grid_params</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">grid_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;36SHRMi&#39;,
+ &#39;50dbzZ&#39;,
+ &#39;ALBDO3hr&#39;,
+ &#39;ALBDO6hr&#39;,
+ &#39;AV&#39;,
+ &#39;Along&#39;,
+ &#39;AppT&#39;,
+ &#39;BLI&#39;,
+ &#39;BRN&#39;,
+ &#39;BRNEHIi&#39;,
+ &#39;BRNSHR&#39;,
+ &#39;BRNmag&#39;,
+ &#39;BRNvec&#39;,
+ &#39;BdEPT06&#39;,
+ &#39;BlkMag&#39;,
+ &#39;BlkShr&#39;,
+ &#39;CAPE&#39;,
+ &#39;CCP&#39;,
+ &#39;CFRZR&#39;,
+ &#39;CFRZR3hr&#39;,
+ &#39;CFRZR6hr&#39;,
+ &#39;CICEP&#39;,
+ &#39;CICEP3hr&#39;,
+ &#39;CICEP6hr&#39;,
+ &#39;CIn&#39;,
+ &#39;CLWMR&#39;,
+ &#39;CP-GFS&#39;,
+ &#39;CPRAT3hr&#39;,
+ &#39;CPRAT6hr&#39;,
+ &#39;CPr&#39;,
+ &#39;CPrD&#39;,
+ &#39;CRAIN&#39;,
+ &#39;CRAIN3hr&#39;,
+ &#39;CRAIN6hr&#39;,
+ &#39;CSNOW&#39;,
+ &#39;CSNOW3hr&#39;,
+ &#39;CSNOW6hr&#39;,
+ &#39;CURU&#39;,
+ &#39;CWAT&#39;,
+ &#39;CWORK3hr&#39;,
+ &#39;CWORK6hr&#39;,
+ &#39;CapeStk&#39;,
+ &#39;Corf&#39;,
+ &#39;CorfF&#39;,
+ &#39;CorfFM&#39;,
+ &#39;CorfM&#39;,
+ &#39;CritT1&#39;,
+ &#39;CumNrm&#39;,
+ &#39;CumShr&#39;,
+ &#39;DLWRF3hr&#39;,
+ &#39;DLWRF6hr&#39;,
+ &#39;DSWRF3hr&#39;,
+ &#39;DSWRF6hr&#39;,
+ &#39;DivF&#39;,
+ &#39;DivFn&#39;,
+ &#39;DivFs&#39;,
+ &#39;DpD&#39;,
+ &#39;DpT&#39;,
+ &#39;EHI&#39;,
+ &#39;EHI01&#39;,
+ &#39;EHIi&#39;,
+ &#39;EMSP&#39;,
+ &#39;EPT&#39;,
+ &#39;EPTA&#39;,
+ &#39;EPTC&#39;,
+ &#39;EPTGrd&#39;,
+ &#39;EPTGrdM&#39;,
+ &#39;EPTs&#39;,
+ &#39;EPVg&#39;,
+ &#39;EPVs&#39;,
+ &#39;EPVt1&#39;,
+ &#39;EPVt2&#39;,
+ &#39;ESP&#39;,
+ &#39;ESP2&#39;,
+ &#39;FLDCP&#39;,
+ &#39;FVecs&#39;,
+ &#39;FeatMot&#39;,
+ &#39;FnVecs&#39;,
+ &#39;FsVecs&#39;,
+ &#39;Fzra1&#39;,
+ &#39;Fzra2&#39;,
+ &#39;GFLUX3hr&#39;,
+ &#39;GFLUX6hr&#39;,
+ &#39;GH&#39;,
+ &#39;GHxSM&#39;,
+ &#39;GHxSM2&#39;,
+ &#39;GRAUP&#39;,
+ &#39;GVV&#39;,
+ &#39;Gust&#39;,
+ &#39;HI&#39;,
+ &#39;HI1&#39;,
+ &#39;HI3&#39;,
+ &#39;HI4&#39;,
+ &#39;HINDEX&#39;,
+ &#39;HIdx&#39;,
+ &#39;HPBL&#39;,
+ &#39;Heli&#39;,
+ &#39;HeliC&#39;,
+ &#39;ICAHT&#39;,
+ &#39;ICEC&#39;,
+ &#39;ICEG&#39;,
+ &#39;ICMR&#39;,
+ &#39;INV&#39;,
+ &#39;IPLayer&#39;,
+ &#39;Into&#39;,
+ &#39;KI&#39;,
+ &#39;L-I&#39;,
+ &#39;LAND&#39;,
+ &#39;LHF3hr&#39;,
+ &#39;LHF6hr&#39;,
+ &#39;LIsfc2x&#39;,
+ &#39;LM5&#39;,
+ &#39;LM6&#39;,
+ &#39;MAdv&#39;,
+ &#39;MCon&#39;,
+ &#39;MCon2&#39;,
+ &#39;MLLCL&#39;,
+ &#39;MMP&#39;,
+ &#39;MSFDi&#39;,
+ &#39;MSFi&#39;,
+ &#39;MSFmi&#39;,
+ &#39;MSG&#39;,
+ &#39;MTV&#39;,
+ &#39;Mix1&#39;,
+ &#39;Mix2&#39;,
+ &#39;Mmag&#39;,
+ &#39;MnT3hr&#39;,
+ &#39;MnT6hr&#39;,
+ &#39;MpV&#39;,
+ &#39;MxT3hr&#39;,
+ &#39;MxT6hr&#39;,
+ &#39;NBE&#39;,
+ &#39;NST&#39;,
+ &#39;NST1&#39;,
+ &#39;NST2&#39;,
+ &#39;O3MR&#39;,
+ &#39;OmDiff&#39;,
+ &#39;P&#39;,
+ &#39;P3hr&#39;,
+ &#39;P6hr&#39;,
+ &#39;PAdv&#39;,
+ &#39;PBE&#39;,
+ &#39;PEC&#39;,
+ &#39;PEVPR&#39;,
+ &#39;PFrnt&#39;,
+ &#39;PGrd&#39;,
+ &#39;PGrd1&#39;,
+ &#39;PGrdM&#39;,
+ &#39;PIVA&#39;,
+ &#39;PLPL&#39;,
+ &#39;PMSL&#39;,
+ &#39;PR&#39;,
+ &#39;PR3hr&#39;,
+ &#39;PR6hr&#39;,
+ &#39;PTvA&#39;,
+ &#39;PTyp&#39;,
+ &#39;PVV&#39;,
+ &#39;PW&#39;,
+ &#39;PW2&#39;,
+ &#39;PoT&#39;,
+ &#39;PoTA&#39;,
+ &#39;QPV1&#39;,
+ &#39;QPV2&#39;,
+ &#39;QPV3&#39;,
+ &#39;QPV4&#39;,
+ &#39;RH&#39;,
+ &#39;RH_001_bin&#39;,
+ &#39;RH_002_bin&#39;,
+ &#39;RM5&#39;,
+ &#39;RM6&#39;,
+ &#39;RMprop&#39;,
+ &#39;RMprop2&#39;,
+ &#39;RV&#39;,
+ &#39;RWMR&#39;,
+ &#39;Rain1&#39;,
+ &#39;Rain2&#39;,
+ &#39;Rain3&#39;,
+ &#39;Ro&#39;,
+ &#39;SH&#39;,
+ &#39;SHF3hr&#39;,
+ &#39;SHF6hr&#39;,
+ &#39;SHx&#39;,
+ &#39;SLI&#39;,
+ &#39;SNMR&#39;,
+ &#39;SNSQ&#39;,
+ &#39;SNW&#39;,
+ &#39;SNWA&#39;,
+ &#39;SOILW&#39;,
+ &#39;SRMl&#39;,
+ &#39;SRMlM&#39;,
+ &#39;SRMm&#39;,
+ &#39;SRMmM&#39;,
+ &#39;SRMr&#39;,
+ &#39;SRMrM&#39;,
+ &#39;SSP&#39;,
+ &#39;SSi&#39;,
+ &#39;STP&#39;,
+ &#39;STP1&#39;,
+ &#39;SUNSD&#39;,
+ &#39;Shear&#39;,
+ &#39;ShrMag&#39;,
+ &#39;SnD&#39;,
+ &#39;Snow1&#39;,
+ &#39;Snow2&#39;,
+ &#39;Snow3&#39;,
+ &#39;SnowT&#39;,
+ &#39;StrTP&#39;,
+ &#39;StrmMot&#39;,
+ &#39;SuCP&#39;,
+ &#39;T&#39;,
+ &#39;T3hr&#39;,
+ &#39;T6hr&#39;,
+ &#39;TAdv&#39;,
+ &#39;TCC&#39;,
+ &#39;TCC3hr&#39;,
+ &#39;TCC6hr&#39;,
+ &#39;TGrd&#39;,
+ &#39;TGrdM&#39;,
+ &#39;TORi&#39;,
+ &#39;TORi2&#39;,
+ &#39;TOZNE&#39;,
+ &#39;TP-GFS&#39;,
+ &#39;TQIND&#39;,
+ &#39;TSOIL&#39;,
+ &#39;TShrMi&#39;,
+ &#39;TV&#39;,
+ &#39;TW&#39;,
+ &#39;T_001_bin&#39;,
+ &#39;Tdef&#39;,
+ &#39;Tdend&#39;,
+ &#39;ThGrd&#39;,
+ &#39;Thom5&#39;,
+ &#39;Thom5a&#39;,
+ &#39;Thom6&#39;,
+ &#39;TmDpD&#39;,
+ &#39;Tmax&#39;,
+ &#39;Tmin&#39;,
+ &#39;TotQi&#39;,
+ &#39;Tstk&#39;,
+ &#39;TwMax&#39;,
+ &#39;TwMin&#39;,
+ &#39;Twstk&#39;,
+ &#39;TxSM&#39;,
+ &#39;U-GWD3hr&#39;,
+ &#39;U-GWD6hr&#39;,
+ &#39;UFLX3hr&#39;,
+ &#39;UFLX6hr&#39;,
+ &#39;ULWRF3hr&#39;,
+ &#39;ULWRF6hr&#39;,
+ &#39;USTM&#39;,
+ &#39;USWRF3hr&#39;,
+ &#39;USWRF6hr&#39;,
+ &#39;V-GWD3hr&#39;,
+ &#39;V-GWD6hr&#39;,
+ &#39;VAdv&#39;,
+ &#39;VAdvAdvection&#39;,
+ &#39;VFLX3hr&#39;,
+ &#39;VFLX6hr&#39;,
+ &#39;VGP&#39;,
+ &#39;VRATE&#39;,
+ &#39;VSS&#39;,
+ &#39;VSTM&#39;,
+ &#39;Vis&#39;,
+ &#39;WATR3hr&#39;,
+ &#39;WATR6hr&#39;,
+ &#39;WCD&#39;,
+ &#39;WD&#39;,
+ &#39;WEASD&#39;,
+ &#39;WGH&#39;,
+ &#39;WGS&#39;,
+ &#39;WILT&#39;,
+ &#39;Wind&#39;,
+ &#39;WndChl&#39;,
+ &#39;ageoVC&#39;,
+ &#39;ageoW&#39;,
+ &#39;ageoWM&#39;,
+ &#39;cCape&#39;,
+ &#39;cCin&#39;,
+ &#39;cTOT&#39;,
+ &#39;capeToLvl&#39;,
+ &#39;dCape&#39;,
+ &#39;dP&#39;,
+ &#39;dT&#39;,
+ &#39;dVAdv&#39;,
+ &#39;dZ&#39;,
+ &#39;defV&#39;,
+ &#39;del2gH&#39;,
+ &#39;df&#39;,
+ &#39;fGen&#39;,
+ &#39;fnD&#39;,
+ &#39;fsD&#39;,
+ &#39;gamma&#39;,
+ &#39;gammaE&#39;,
+ &#39;geoVort&#39;,
+ &#39;geoW&#39;,
+ &#39;geoWM&#39;,
+ &#39;loCape&#39;,
+ &#39;maxEPT&#39;,
+ &#39;minEPT&#39;,
+ &#39;mixRat&#39;,
+ &#39;msl-P&#39;,
+ &#39;muCape&#39;,
+ &#39;pV&#39;,
+ &#39;pVeq&#39;,
+ &#39;qDiv&#39;,
+ &#39;qVec&#39;,
+ &#39;qnVec&#39;,
+ &#39;qsVec&#39;,
+ &#39;shWlt&#39;,
+ &#39;snoRatCrocus&#39;,
+ &#39;snoRatEMCSREF&#39;,
+ &#39;snoRatSPC&#39;,
+ &#39;snoRatSPCdeep&#39;,
+ &#39;snoRatSPCsurface&#39;,
+ &#39;swtIdx&#39;,
+ &#39;tTOT&#39;,
+ &#39;tWind&#39;,
+ &#39;tWindU&#39;,
+ &#39;tWindV&#39;,
+ &#39;uFX&#39;,
+ &#39;uW&#39;,
+ &#39;uWStk&#39;,
+ &#39;vSmthW&#39;,
+ &#39;vTOT&#39;,
+ &#39;vW&#39;,
+ &#39;vWStk&#39;,
+ &#39;vertCirc&#39;,
+ &#39;wDiv&#39;,
+ &#39;wSp&#39;,
+ &#39;wSp_001_bin&#39;,
+ &#39;wSp_002_bin&#39;,
+ &#39;wSp_003_bin&#39;,
+ &#39;wSp_004_bin&#39;,
+ &#39;zAGL&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="get-available-levels">
+<h2>6. Get Available Levels<a class="headerlink" href="#get-available-levels" title="Permalink to this headline">¶</a></h2>
+<p>Setting the parameters is just an option, you do not need to filter the data if you do not wish to.  Also, although we are only setting one parameter in this example, you can set multiple parameters by using an array:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;param1&quot;</span><span class="p">,</span> <span class="s2">&quot;param2&quot;</span><span class="p">,</span> <span class="s2">&quot;param3&quot;</span><span class="o">...</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="n">setParameters</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Set a parameter, from the output above and take a look at what “levels” are available for the data set you’re looking at using <a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html#awips.dataaccess.DataAccessLayer.getAvailableLevels"><em><strong>DataAccessLayer.getAvailableLevels(request)</strong></em></a>.</p>
+<blockquote>
+<div><p>Note: Not all datasets support levels.  If you are trying this with another dataset and run into an exception (error), it’s most likely because levels are not supported for that data type.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For grid data we&#39;ll use the temperature parameter (&quot;T&quot;)</span>
+<span class="n">grid_request</span><span class="o">.</span><span class="n">setParameters</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="n">grid_levels</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getAvailableLevels</span><span class="p">(</span><span class="n">grid_request</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">lvl</span> <span class="ow">in</span> <span class="n">grid_levels</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">lvl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0SFC
+350.0MB
+610.0_40000.0FHAG
+900.0MB
+0.0_610.0FHAG
+450.0MB
+10.0MB
+100.0MB
+1000.0MB
+1.0PV
+950.0MB
+150.0MB
+1.5PV
+30.0MB
+700.0MB
+20.0MB
+250.0MB
+2743.0FH
+1000.0_500.0MB
+50.0MB
+800.0MB
+4000.0FHAG
+925.0MB
+2.0PV
+80.0FHAG
+0.5PV
+0.0TROP
+750.0MB
+70.0MB
+500.0MB
+400.0MB
+0.0FHAG
+2.0FHAG
+2.0MB
+5.0MB
+7.0MB
+0.0_1000.0FHAG
+850.0MB
+600.0MB
+0.0_6000.0FHAG
+975.0MB
+550.0MB
+0.0_3000.0FHAG
+3658.0FH
+200.0MB
+0.0MAXW
+0.0_30.0BL
+650.0MB
+300.0MB
+1829.0FH
+1000.0FHAG
+340.0_350.0K
+290.0_300.0K
+700.0_600.0MB
+700.0_300.0MB
+320.0Ke
+800.0_750.0MB
+60.0TILT
+5.3TILT
+1000.0_900.0MB
+340.0K
+5500.0_6000.0FHAG
+255.0K
+255.0_265.0K
+3000.0_6000.0FHAG
+25.0TILT
+2000.0FHAG
+0.0_500.0FHAG
+1000.0_850.0MB
+850.0_250.0MB
+280.0_290.0Ke
+1524.0FHAG
+320.0_330.0K
+0.0TILT
+310.0_320.0Ke
+310.0Ke
+330.0K
+900.0_800.0MB
+550.0_500.0MB
+2.4TILT
+50.0TILT
+3500.0FHAG
+35.0TILT
+12.0TILT
+300.0_310.0K
+3000.0_12000.0FHAG
+0.9TILT
+320.0K
+400.0_350.0MB
+500.0FHAG
+750.0_700.0MB
+1000.0_400.0MB
+345.0K
+250.0_260.0K
+300.0Ke
+290.0Ke
+950.0_900.0MB
+4572.0FHAG
+275.0_285.0Ke
+335.0Ke
+295.0_305.0Ke
+275.0_285.0K
+600.0_550.0MB
+310.0K
+9000.0FHAG
+335.0K
+1000.0_7000.0FHAG
+700.0_500.0MB
+9144.0FHAG
+325.0_335.0K
+2000.0_8000.0FHAG
+0.0_609.6FHAG
+300.0K
+0.0MAXOMEGA
+315.0_325.0K
+325.0K
+340.0Ke
+0.0_4000.0FHAG
+5000.0_5500.0FHAG
+300.0_250.0MB
+1.5TILT
+335.0_345.0K
+315.0K
+3.4TILT
+2500.0FHAG
+10000.0FHAG
+0.0_2000.0FHAG
+7000.0FHAG
+5000.0FHAG
+330.0Ke
+500.0_400.0MB
+1000.0_1500.0FHAG
+305.0K
+285.0_295.0Ke
+14.0TILT
+3000.0_3500.0FHAG
+325.0_335.0Ke
+2000.0_5000.0FHAG
+7620.0FHAG
+850.0_800.0MB
+6096.0FHAG
+6000.0_7000.0FHAG
+2000.0_7000.0FHAG
+9000.0_10000.0FHAG
+295.0Ke
+305.0Ke
+100.0FHAG
+265.0_275.0K
+7000.0_8000.0FHAG
+3000.0_8000.0FHAG
+700.0_650.0MB
+1000.0_6000.0FHAG
+0.5TILT
+450.0_400.0MB
+1.8TILT
+330.0_340.0K
+800.0_700.0MB
+850.0_300.0MB
+6.0TILT
+900.0_850.0MB
+3657.6FHAG
+0.0_5000.0FHAG
+320.0_330.0Ke
+8.7TILT
+650.0_600.0MB
+600.0_400.0MB
+55.0TILT
+270.0_280.0Ke
+30.0TILT
+310.0_320.0K
+1500.0FHAG
+1000.0_950.0MB
+5500.0FHAG
+250.0_200.0MB
+500.0_1000.0FHAG
+400.0_300.0MB
+500.0_100.0MB
+1000.0_3000.0FHAG
+8000.0FHAG
+285.0Ke
+290.0K
+305.0_315.0K
+285.0_295.0K
+0.0_2500.0FHAG
+925.0_850.0MB
+275.0Ke
+1500.0_2000.0FHAG
+300.0_200.0MB
+260.0_270.0K
+2743.2FHAG
+3000.0FHAG
+315.0_325.0Ke
+600.0_500.0MB
+16.7TILT
+280.0K
+500.0_250.0MB
+40.0TILT
+3048.0FHAG
+400.0_200.0MB
+300.0_310.0Ke
+270.0_280.0K
+1000.0_700.0MB
+45.0TILT
+850.0_500.0MB
+2500.0_3000.0FHAG
+609.6FHAG
+0.0_8000.0FHAG
+295.0K
+4.3TILT
+295.0_305.0K
+330.0_340.0Ke
+270.0K
+4000.0_4500.0FHAG
+280.0_290.0K
+925.0_700.0MB
+0.0_1500.0FHAG
+260.0K
+10.0TILT
+3500.0_4000.0FHAG
+325.0Ke
+285.0K
+290.0_300.0Ke
+7.5TILT
+1828.8FHAG
+280.0Ke
+500.0_450.0MB
+305.0_315.0Ke
+250.0K
+4500.0FHAG
+1250.0FHAG
+0.0_10000.0FHAG
+4500.0_5000.0FHAG
+250.0_350.0K
+270.0Ke
+275.0K
+315.0Ke
+500.0_300.0MB
+350.0_300.0MB
+750.0FHAG
+19.5TILT
+2000.0_2500.0FHAG
+850.0_700.0MB
+350.0K
+265.0K
+6000.0FHAG
+8000.0_9000.0FHAG
+3.0MB
+1.0MB
+0.4MB
+15.0MB
+40.0MB
+0.995SIG
+-2.0PV
+700.0_300.0LYRMB
+850.0_700.0LYRMB
+1000.0_500.0LYRMB
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>0.0SFC</strong> is the Surface level</p></li>
+<li><p><strong>FHAG</strong> stands for Fixed Height Above Ground (in meters)</p></li>
+<li><p><strong>NTAT</strong> stands for Nominal Top of the ATmosphere</p></li>
+<li><p><strong>BL</strong> stands for Boundary Layer, where <strong>0.0_30.0BL</strong> reads as <em>0-30 mb above ground level</em></p></li>
+<li><p><strong>TROP</strong> is the Tropopause level</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We&#39;ll set the level to surface level</span>
+<span class="n">grid_request</span><span class="o">.</span><span class="n">setLevels</span><span class="p">(</span><span class="s2">&quot;0.0SFC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="get-available-times">
+<h2>7. Get Available Times<a class="headerlink" href="#get-available-times" title="Permalink to this headline">¶</a></h2>
+<p>Take a look at what time options are available for the data you’re looking at using the <a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html#awips.dataaccess.DataAccessLayer.getAvailableTimes"><em><strong>DataAccessLayer.getAvailableTimes()</strong></em></a> method:</p>
+<ul class="simple">
+<li><p><strong>getAvailableTimes(request, True)</strong> will return an object of <em>run times</em> - formatted as <code class="docutils literal notranslate"><span class="pre">YYYY-MM-DD</span> <span class="pre">HH:MM:SS</span></code></p></li>
+<li><p><strong>getAvailableTimes(request)</strong> will return an object of all times - formatted as <code class="docutils literal notranslate"><span class="pre">YYYY-MM-DD</span> <span class="pre">HH:MM:SS</span> <span class="pre">(F:ff)</span></code></p></li>
+<li><p><strong>getForecastRun(cycle, times)</strong> will return a DataTime array for a single forecast cycle.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Available grid times</span>
+<span class="n">grid_cycles</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getAvailableTimes</span><span class="p">(</span><span class="n">grid_request</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">grid_times</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getAvailableTimes</span><span class="p">(</span><span class="n">grid_request</span><span class="p">)</span>
+<span class="c1">## Using -1 in an array will access the last element of the array </span>
+<span class="c1">##  (using -2 will access the second last element, and so on)</span>
+<span class="n">grid_fcstRun</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getForecastRun</span><span class="p">(</span><span class="n">grid_cycles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">grid_times</span><span class="p">)</span>
+
+<span class="c1">## print out the time instances</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fcst</span> <span class="ow">in</span> <span class="n">grid_fcstRun</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fcst</span><span class="o">.</span><span class="n">getRefTime</span><span class="p">(),</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">fcst</span><span class="o">.</span><span class="n">getFcstTime</span><span class="p">(),</span> <span class="s1">&#39;seconds&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-01-09 18:00:00.000 : 0 seconds
+2021-01-09 18:00:00.000 : 10800 seconds
+2021-01-09 18:00:00.000 : 21600 seconds
+2021-01-09 18:00:00.000 : 32400 seconds
+2021-01-09 18:00:00.000 : 43200 seconds
+2021-01-09 18:00:00.000 : 54000 seconds
+2021-01-09 18:00:00.000 : 64800 seconds
+2021-01-09 18:00:00.000 : 75600 seconds
+2021-01-09 18:00:00.000 : 86400 seconds
+2021-01-09 18:00:00.000 : 97200 seconds
+2021-01-09 18:00:00.000 : 108000 seconds
+2021-01-09 18:00:00.000 : 118800 seconds
+2021-01-09 18:00:00.000 : 129600 seconds
+2021-01-09 18:00:00.000 : 140400 seconds
+2021-01-09 18:00:00.000 : 151200 seconds
+2021-01-09 18:00:00.000 : 162000 seconds
+2021-01-09 18:00:00.000 : 172800 seconds
+2021-01-09 18:00:00.000 : 183600 seconds
+2021-01-09 18:00:00.000 : 194400 seconds
+2021-01-09 18:00:00.000 : 205200 seconds
+2021-01-09 18:00:00.000 : 216000 seconds
+2021-01-09 18:00:00.000 : 226800 seconds
+2021-01-09 18:00:00.000 : 237600 seconds
+2021-01-09 18:00:00.000 : 248400 seconds
+2021-01-09 18:00:00.000 : 259200 seconds
+2021-01-09 18:00:00.000 : 270000 seconds
+2021-01-09 18:00:00.000 : 280800 seconds
+2021-01-09 18:00:00.000 : 291600 seconds
+2021-01-09 18:00:00.000 : 302400 seconds
+2021-01-09 18:00:00.000 : 313200 seconds
+2021-01-09 18:00:00.000 : 324000 seconds
+2021-01-09 18:00:00.000 : 334800 seconds
+2021-01-09 18:00:00.000 : 345600 seconds
+2021-01-09 18:00:00.000 : 356400 seconds
+2021-01-09 18:00:00.000 : 367200 seconds
+2021-01-09 18:00:00.000 : 378000 seconds
+2021-01-09 18:00:00.000 : 388800 seconds
+2021-01-09 18:00:00.000 : 399600 seconds
+2021-01-09 18:00:00.000 : 410400 seconds
+2021-01-09 18:00:00.000 : 421200 seconds
+2021-01-09 18:00:00.000 : 432000 seconds
+2021-01-09 18:00:00.000 : 442800 seconds
+2021-01-09 18:00:00.000 : 453600 seconds
+2021-01-09 18:00:00.000 : 464400 seconds
+2021-01-09 18:00:00.000 : 475200 seconds
+2021-01-09 18:00:00.000 : 486000 seconds
+2021-01-09 18:00:00.000 : 496800 seconds
+2021-01-09 18:00:00.000 : 507600 seconds
+2021-01-09 18:00:00.000 : 518400 seconds
+2021-01-09 18:00:00.000 : 529200 seconds
+2021-01-09 18:00:00.000 : 540000 seconds
+2021-01-09 18:00:00.000 : 550800 seconds
+2021-01-09 18:00:00.000 : 561600 seconds
+2021-01-09 18:00:00.000 : 572400 seconds
+2021-01-09 18:00:00.000 : 583200 seconds
+2021-01-09 18:00:00.000 : 594000 seconds
+2021-01-09 18:00:00.000 : 604800 seconds
+2021-01-09 18:00:00.000 : 615600 seconds
+2021-01-09 18:00:00.000 : 626400 seconds
+2021-01-09 18:00:00.000 : 637200 seconds
+2021-01-09 18:00:00.000 : 648000 seconds
+2021-01-09 18:00:00.000 : 658800 seconds
+2021-01-09 18:00:00.000 : 669600 seconds
+2021-01-09 18:00:00.000 : 680400 seconds
+2021-01-09 18:00:00.000 : 691200 seconds
+2021-01-09 18:00:00.000 : 702000 seconds
+2021-01-09 18:00:00.000 : 712800 seconds
+2021-01-09 18:00:00.000 : 723600 seconds
+2021-01-09 18:00:00.000 : 734400 seconds
+2021-01-09 18:00:00.000 : 745200 seconds
+2021-01-09 18:00:00.000 : 756000 seconds
+2021-01-09 18:00:00.000 : 766800 seconds
+2021-01-09 18:00:00.000 : 777600 seconds
+2021-01-09 18:00:00.000 : 788400 seconds
+2021-01-09 18:00:00.000 : 799200 seconds
+2021-01-09 18:00:00.000 : 810000 seconds
+2021-01-09 18:00:00.000 : 820800 seconds
+2021-01-09 18:00:00.000 : 831600 seconds
+2021-01-09 18:00:00.000 : 842400 seconds
+2021-01-09 18:00:00.000 : 853200 seconds
+2021-01-09 18:00:00.000 : 864000 seconds
+2021-01-09 18:00:00.000 : 907200 seconds
+2021-01-09 18:00:00.000 : 950400 seconds
+2021-01-09 18:00:00.000 : 993600 seconds
+2021-01-09 18:00:00.000 : 1036800 seconds
+2021-01-09 18:00:00.000 : 1080000 seconds
+2021-01-09 18:00:00.000 : 1123200 seconds
+2021-01-09 18:00:00.000 : 1166400 seconds
+2021-01-09 18:00:00.000 : 1209600 seconds
+2021-01-09 18:00:00.000 : 1252800 seconds
+2021-01-09 18:00:00.000 : 1296000 seconds
+2021-01-09 18:00:00.000 : 1339200 seconds
+2021-01-09 18:00:00.000 : 1382400 seconds
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="get-the-data">
+<h2>8. Get the Data!<a class="headerlink" href="#get-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our <code class="docutils literal notranslate"><span class="pre">request</span></code> and DataTime <code class="docutils literal notranslate"><span class="pre">fcstRun</span></code> arrays ready, it’s time to request the data array from EDEX.  Depending on what kind of data we’re working with, we’ll either use <a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html#awips.dataaccess.DataAccessLayer.getGridData"><em><strong>DataAccessLayer.getGridData()</strong></em></a> or <a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html#awips.dataaccess.DataAccessLayer.getGeometryData"><em><strong>DataAccessLayer.getGeometryData()</strong></em></a></p>
+<blockquote>
+<div><p>Note: We have more, detailed notebooks about how analyze and visualize the data once you have what you want.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Grid Data</span>
+<span class="n">grid_response</span> <span class="o">=</span> <span class="n">DataAccessLayer</span><span class="o">.</span><span class="n">getGridData</span><span class="p">(</span><span class="n">grid_request</span><span class="p">,</span> <span class="p">[</span><span class="n">grid_fcstRun</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="k">for</span> <span class="n">grid</span> <span class="ow">in</span> <span class="n">grid_response</span><span class="p">:</span>
+    <span class="n">grid_data</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">getRawData</span><span class="p">()</span>
+    <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">getLatLonCoords</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Time :&#39;</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">getDataTime</span><span class="p">(),</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">getDataTime</span><span class="p">()</span><span class="o">.</span><span class="n">getFcstTime</span><span class="p">(),</span> <span class="s1">&#39;seconds&#39;</span><span class="p">)</span>
+
+<span class="c1">## Take a look at some information in our data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model:&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">getLocationName</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Parm :&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">getParameter</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unit :&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">getUnit</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time : 2021-01-09 18:00:00 - 1382400 seconds
+Model: GFS
+Parm : T
+Unit : K
+(721, 1440)
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>Several functions are used throughout this notebook from the DataAccessLayer class in python-awips, to see full documentation for these functions vist <a class="reference external" href="http://unidata.github.io/python-awips/api/DataAccessLayer.html"><strong>here</strong></a>.</p>
+<div class="section" id="related-notebooks">
+<h3>Related Notebooks<a class="headerlink" href="#related-notebooks" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/visualization/python-awips-WorkingWithSurfaceObs.ipynb">python-awips: Working with Surface Obs</a></p></li>
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/visualization/python-awips-WorkingWithModels.ipynb">python-awips: Working with Models</a></p></li>
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/visualization/python-awips-WorkingWithSatelliteData.ipynb">python-awips: Working with Satellite Data</a></p></li>
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/visualization/python-awips-WorkingWithUpperAirObs.ipynb">python-awips: Working with Upper Air Obs</a></p></li>
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/visualization/python-awips-WorkingWithMapsTopoDatabases.ipynb">python-awips: Working with Maps and Topography Databases</a></p></li>
+</ul>
+<p><a href="#top">Top</a></p>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="pandas_and_numpy_csv.html" title="previous page">Pandas and Numpy for CSV files</a>
+    <a class='right-next' id="next-link" href="siphon-RemoteAccess.html" title="next page">Siphon (remote_access)</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

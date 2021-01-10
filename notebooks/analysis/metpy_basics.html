@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MetPy Basics &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Numpy" href="numpy.html" />
+    <link rel="prev" title="Analysis Notebooks" href="../analysis.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../agenda.html">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../../resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+        
+        
+        
+          
+            
+                <li class="">
+                    <a href="../dataAccess.html">Data Access Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../analysis.html">Analysis Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../visualization.html">Visualization Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../notebook_enhancements.html">Enhancing Your Notebooks</a>
+                </li>
+            
+          
+            
+  
+                <li class="active">
+                    <a href="../index.html">Notebook Index</a>
+                    <ul>
+                    
+                        <li class="active">
+                            <a href="">MetPy Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="numpy.html">Numpy</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="pandas.html">Pandas</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../dataAccess/pandas_and_numpy_csv.html">Pandas and Numpy for CSV files</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../dataAccess/python-awips-HowToAccessData.html">python-awips: How to Access Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../dataAccess/siphon-RemoteAccess.html">Siphon (remote_access)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../dataAccess/siphon-RemoteOpen.html">Siphon (remote_open)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../notebook_enhancements/NotebookWidgetsTraining.html">Working with Jupyter Widgets</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/Declarative-Example.html">Declarative Syntax Example</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/MetPy%20SkewT.html">MetPy Skew-T</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/isentropic_introduction.html">Overview of Isentropic Analysis</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-basics.html">Matplotlib: Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-intermediate.html">Matplotlib: Intermediate</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithMapsTopoDatabases.html">python-awips: Working with the Maps and Topo Databases</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithModels.html">python-awips: Working with Models</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSatelliteData.html">python-awips: Working with Satellite Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSurfaceObs.html">python-awips: Working with Surface Obs</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithUpperAirObs.html">python-awips: Working with Upper Air Obs</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+          
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#unidata-ams-2021-student-conference" class="nav-link">Unidata AMS 2021 Student Conference</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#focuses" class="nav-link">Focuses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#objectives" class="nav-link">Objectives</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#imports" class="nav-link">Imports</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#basic-calculations" class="nav-link">1. Basic Calculations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#thermodynamic-calculations" class="nav-link">2. Thermodynamic Calculations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#other-calculations" class="nav-link">3. Other Calculations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#see-also" class="nav-link">4. See also</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <p><a name="top"></a></p>
+<div style="width:1000 px">
+<div style="float:right; width:98 px; height:98px;">
+<img src="https://raw.githubusercontent.com/Unidata/MetPy/master/src/metpy/plots/_static/unidata_150x150.png" alt="Unidata Logo" style="height: 98px;">
+</div>
+<div class="section" id="metpy-basics">
+<h1>MetPy Basics<a class="headerlink" href="#metpy-basics" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unidata-ams-2021-student-conference">
+<h2>Unidata AMS 2021 Student Conference<a class="headerlink" href="#unidata-ams-2021-student-conference" title="Permalink to this headline">¶</a></h2>
+<div style="clear:both"></div>
+</div>
+<hr class="docutils" />
+<p>This notebook will introduce the use of <a class="reference external" href="https://unidata.github.io/MetPy/latest/index.html">MetPy</a> for meteorological
+calculations. MetPy is an open-source python package designed to provide support for flexible calculations of various
+meteorological quantities in support of educational, operational, and research needs. This notebook will introduce some basic
+computations and provide an overview of some available computations within the MetPy package.</p>
+<!-- <div style="float:right; width:250 px"><img src="../../instructors/images/Template_preview.png" alt="sin(x) with few data points" style="height: 300px;"></div> -->
+</div>
+<div class="section" id="focuses">
+<h2>Focuses<a class="headerlink" href="#focuses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Introduce the use of the MetPy package for meteorological calculations</p></li>
+<li><p>Demonstrate simple meteorological calculations with MetPy</p></li>
+</ul>
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#1.-Basic-Calculations">Basic Calculations</a></p></li>
+<li><p><a class="reference external" href="#2.-Thermodynamic-Calculations">Thermodynamic Calculations</a></p></li>
+<li><p><a class="reference external" href="#3.-Other-Calculations">Other Calculations</a></p></li>
+<li><p><a class="reference external" href="#4.-See-also">See also</a></p></li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">metpy.calc</span>
+<span class="kn">from</span> <span class="nn">metpy.units</span> <span class="kn">import</span> <span class="n">units</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="basic-calculations">
+<h2>1. Basic Calculations<a class="headerlink" href="#basic-calculations" title="Permalink to this headline">¶</a></h2>
+<p>Let’s first start with some simple calculations. To do this, we will need some data to work with. Let’s pretend we have a timeseries of surface observations consisting of wind components, temperature, dewpoint temperature, and pressure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">68</span><span class="p">)</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;degF&#39;</span><span class="p">)</span>
+<span class="n">dewpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;degC&#39;</span><span class="p">)</span>
+<span class="n">uwind</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;kt&#39;</span><span class="p">)</span>
+<span class="n">vwind</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;m/s&#39;</span><span class="p">)</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">*</span> <span class="n">units</span><span class="p">(</span><span class="s1">&#39;hPa&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have some data we can start making some calculations. Notice that the data units are all different. Ordinarily this would require units conversions before any calculations. However, MetPy will handle those for us, meaning that as long as the units are defined, we can simply tell MetPy what units we want. Let’s start with determining the wind speed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="n">metpy</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">wind_speed</span><span class="p">(</span><span class="n">uwind</span><span class="p">,</span> <span class="n">vwind</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;m/s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s it! We now have a timeseries of wind speed with units of m/s. Let’s see what it looks like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ws</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/metpy_basics_10_0.png" src="../../_images/metpy_basics_10_0.png" />
+</div>
+</div>
+<p>We can also calculate wind direction</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wd</span> <span class="o">=</span> <span class="n">metpy</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">wind_direction</span><span class="p">(</span><span class="n">uwind</span><span class="p">,</span> <span class="n">vwind</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wd</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/metpy_basics_12_0.png" src="../../_images/metpy_basics_12_0.png" />
+</div>
+</div>
+<p>What if we want a plot of relative humidity? This can be easily done as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rh</span> <span class="o">=</span> <span class="n">metpy</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">relative_humidity_from_dewpoint</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rh</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/metpy_basics_14_0.png" src="../../_images/metpy_basics_14_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="thermodynamic-calculations">
+<h2>2. Thermodynamic Calculations<a class="headerlink" href="#thermodynamic-calculations" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have introduced some basic calculations, let’s try some more complicated thermodynamic calculations. First, let’s calculate the potential temperature and equivalent potential temperature</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="n">metpy</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">potential_temperature</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/metpy_basics_17_0.png" src="../../_images/metpy_basics_17_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta_e</span> <span class="o">=</span> <span class="n">metpy</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">equivalent_potential_temperature</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta_e</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/metpy_basics_18_0.png" src="../../_images/metpy_basics_18_0.png" />
+</div>
+</div>
+<p>We can also calculate the saturation values for vairous moisture variables, such as saturation vapor pressure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">es</span> <span class="o">=</span> <span class="n">metpy</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">saturation_vapor_pressure</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">es</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/metpy_basics_20_0.png" src="../../_images/metpy_basics_20_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="other-calculations">
+<h2>3. Other Calculations<a class="headerlink" href="#other-calculations" title="Permalink to this headline">¶</a></h2>
+<p>MetPy also has support for computation of common indicies and standard atmosphere values. Let’s calculate the standard atmosphere height based on the pressure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">height</span> <span class="o">=</span> <span class="n">metpy</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">pressure_to_height_std</span><span class="p">(</span><span class="n">pressure</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">height</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;meter&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/metpy_basics_24_0.png" src="../../_images/metpy_basics_24_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="see-also">
+<h2>4. See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>There are many other calculations available within the MetPy package. Be sure to check out the <a class="reference external" href="https://unidata.github.io/MetPy/latest/api/generated/metpy.calc.html#module-metpy.calc">docs</a> for a complete listing and see the other notebooks within this training for detailed examples.</p>
+<p><a href="#top">Top</a></p>
+<hr class="docutils" />
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="../analysis.html" title="previous page">Analysis Notebooks</a>
+    <a class='right-next' id="next-link" href="numpy.html" title="next page">Numpy</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

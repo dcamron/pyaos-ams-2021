@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Numpy &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pandas" href="pandas.html" />
+    <link rel="prev" title="MetPy Basics" href="metpy_basics.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../agenda.html">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../../resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+        
+        
+        
+          
+            
+                <li class="">
+                    <a href="../dataAccess.html">Data Access Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../analysis.html">Analysis Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../visualization.html">Visualization Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../notebook_enhancements.html">Enhancing Your Notebooks</a>
+                </li>
+            
+          
+            
+  
+                <li class="active">
+                    <a href="../index.html">Notebook Index</a>
+                    <ul>
+                    
+                        <li class="">
+                            <a href="metpy_basics.html">MetPy Basics</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href="">Numpy</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="pandas.html">Pandas</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../dataAccess/pandas_and_numpy_csv.html">Pandas and Numpy for CSV files</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../dataAccess/python-awips-HowToAccessData.html">python-awips: How to Access Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../dataAccess/siphon-RemoteAccess.html">Siphon (remote_access)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../dataAccess/siphon-RemoteOpen.html">Siphon (remote_open)</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../notebook_enhancements/NotebookWidgetsTraining.html">Working with Jupyter Widgets</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/Declarative-Example.html">Declarative Syntax Example</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/MetPy%20SkewT.html">MetPy Skew-T</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/isentropic_introduction.html">Overview of Isentropic Analysis</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-basics.html">Matplotlib: Basics</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/matplotlib-intermediate.html">Matplotlib: Intermediate</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithMapsTopoDatabases.html">python-awips: Working with the Maps and Topo Databases</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithModels.html">python-awips: Working with Models</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSatelliteData.html">python-awips: Working with Satellite Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithSurfaceObs.html">python-awips: Working with Surface Obs</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="../visualization/python-awips-WorkingWithUpperAirObs.html">python-awips: Working with Upper Air Obs</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+          
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#unidata-ams-2021-student-conference" class="nav-link">Unidata AMS 2021 Student Conference</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#focuses" class="nav-link">Focuses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#objectives" class="nav-link">Objectives</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#imports" class="nav-link">Imports</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#numpy-gymnastics" class="nav-link">1. Numpy Gymnastics</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#working-with-multidimensional-data" class="nav-link">2. Working with multidimensional data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#plot-random-station-data" class="nav-link">3. Plot Random Station Data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#congrats" class="nav-link">Congrats!</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <p><a name="top"></a></p>
+<div style="width:1000 px">
+<div style="float:right; width:98 px; height:98px;">
+<img src="https://raw.githubusercontent.com/Unidata/MetPy/master/src/metpy/plots/_static/unidata_150x150.png" alt="Unidata Logo" style="height: 98px;">
+</div>
+<div class="section" id="numpy">
+<h1>Numpy<a class="headerlink" href="#numpy" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unidata-ams-2021-student-conference">
+<h2>Unidata AMS 2021 Student Conference<a class="headerlink" href="#unidata-ams-2021-student-conference" title="Permalink to this headline">¶</a></h2>
+<div style="clear:both"></div>
+</div>
+<hr class="docutils" />
+<div style="float:right; width:250 px"><img src="../../instructors/images/randomized_station_data.png" alt="Timeseries of Temperature and Pressure from Aug 1st to 15th" style="height: 300px;"></div>
+</div>
+<div class="section" id="focuses">
+<h2>Focuses<a class="headerlink" href="#focuses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Using this notebook we will become familiar with Numpy <a class="reference external" href="https://numpy.org/learn/">Numpy</a></p></li>
+<li><p>Learn basic usage of numpy arrays instead of lists</p></li>
+<li><p>We will use numpy to organize and manipulate data</p></li>
+<li><p>Plot data from a numpy array <a class="reference external" href="https://matplotlib.org/">Matplotlib</a></p></li>
+</ul>
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#1.-Numpy-Gymnastics">Numpy gymastics</a></p></li>
+<li><p><a class="reference external" href="#2.-Working-with-multidimensional-data">Working with multidimensional data</a></p></li>
+<li><p><a class="reference external" href="#3.-Plot-Random-Station-Data">Plot Random Station Data</a></p></li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="numpy-gymnastics">
+<h2>1. Numpy Gymnastics<a class="headerlink" href="#numpy-gymnastics" title="Permalink to this headline">¶</a></h2>
+<p>Below is a list of integers that is 20 elements long.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">47</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">27</span><span class="p">,</span> <span class="o">-</span><span class="mi">33</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="o">-</span><span class="mi">44</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="o">-</span><span class="mi">19</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span> 
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">integers</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">integers</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
+&lt;class &#39;list&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lets say we need to add 20 to every element in this list. How can we do this?
+Typically, this would be done with a for loop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integers_plus_20</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># This will be our new list of integers after we add 20 to each element</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">integers</span><span class="p">:</span> <span class="c1"># This will loop through each element in our list</span>
+    <span class="n">new_integer</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">20</span> <span class="c1"># At each elememnt we add 20</span>
+    <span class="n">integers_plus_20</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_integer</span><span class="p">)</span> <span class="c1"># Now append this new element to our new list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">integers_plus_20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[31, -27, 59, 41, 15, -7, -13, 38, 11, 32, 34, -24, 30, 45, 38, 4, 1, 42, 64, 43]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This took us 4 lines of code and a print statement to make sure all was going right. You can image for a more complicated set of opperations that this code can quickly inflate leaving lots of room for error. A faster and easier way to do opperations on a whole list at once is to use numpy.</p>
+<p>To use numpy we can declare our list of integers as a numpy array using the np.array() function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numpy_array_of_integers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">integers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy_array_of_integers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">numpy_array_of_integers</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 11 -47  39  21  -5 -27 -33  18  -9  12  14 -44  10  25  18 -16 -19  22
+  44  23]
+&lt;class &#39;numpy.ndarray&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we are working with a numpy array, lets try to preform the same opperation of adding 20 to each element in our numpy array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numpy_array_plus_20</span> <span class="o">=</span> <span class="n">numpy_array_of_integers</span> <span class="o">+</span> <span class="mi">20</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">numpy_array_plus_20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 31 -27  59  41  15  -7 -13  38  11  32  34 -24  30  45  38   4   1  42
+  64  43]
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see that using numpy we only need one line of code plus a print statement to get the same result. The benefit of numpy is that we can manipulate data much more quickly and efficiently using numpy arrays as compared to lists.</p>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="working-with-multidimensional-data">
+<h2>2. Working with multidimensional data<a class="headerlink" href="#working-with-multidimensional-data" title="Permalink to this headline">¶</a></h2>
+<p>Under this objective, we will see how numpy arrays can help us handle multidimensional data. Below are random values that we will pretend are temperature from 5 different stations. We can generate random data using numpy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># below we have 10 random measurements of temperature at 5 stations</span>
+<span class="n">station_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">station_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">station_3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">station_4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">station_5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># If we composite all of these stations in a list, we then have a list with 5 elements, each with 10 measurements.</span>
+<span class="n">station_data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">station_1</span><span class="p">,</span> <span class="n">station_2</span><span class="p">,</span> <span class="n">station_3</span><span class="p">,</span> <span class="n">station_4</span><span class="p">,</span> <span class="n">station_5</span><span class="p">]</span>
+
+<span class="c1"># Finally, we declare our list as a numpy array</span>
+<span class="n">station_data_np_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">station_data_list</span><span class="p">)</span>
+
+<span class="c1"># Print the shape of the station data numpy array</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">station_data_np_array</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perfect! The shape is (5, 10), 5 for each of the stations and 10 because we have 10 measurements for each station. Numpy also makes matrix operations very easy in python. If we wanted to swap the rows and columns we can use the np.transpose() function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">station_data_np_transpose</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">station_data_np_array</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">station_data_np_transpose</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="plot-random-station-data">
+<h2>3. Plot Random Station Data<a class="headerlink" href="#plot-random-station-data" title="Permalink to this headline">¶</a></h2>
+<p>We can plot temperature and pressure data by using subsetting the columns as we did above and using matplotlib. Instead, we will try to use the pandas built in plot functions!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">station_data_np_transpose</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x114051610&gt;,
+ &lt;matplotlib.lines.Line2D at 0x114051730&gt;,
+ &lt;matplotlib.lines.Line2D at 0x114051670&gt;,
+ &lt;matplotlib.lines.Line2D at 0x1140517f0&gt;,
+ &lt;matplotlib.lines.Line2D at 0x1140518b0&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/numpy_21_1.png" src="../../_images/numpy_21_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">station_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Station 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Station 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Station 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Station 4&#39;</span><span class="p">,</span> <span class="s1">&#39;Station 5&#39;</span><span class="p">]</span>
+<span class="n">StationPlots</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">station_data_np_transpose</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">station_labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">StationPlots</span><span class="p">),</span> <span class="n">station_labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Random Station Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Time&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/numpy_22_1.png" src="../../_images/numpy_22_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="congrats">
+<h2>Congrats!<a class="headerlink" href="#congrats" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Nice job! These are the basics of using numpy. If you want more practice check out <a class="reference external" href="https://www.w3schools.com/python/numpy_intro.asp">this link</a></p></li>
+</ul>
+<p><a href="#top">Top</a></p>
+<hr class="docutils" />
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="metpy_basics.html" title="previous page">MetPy Basics</a>
+    <a class='right-next' id="next-link" href="pandas.html" title="next page">Pandas</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

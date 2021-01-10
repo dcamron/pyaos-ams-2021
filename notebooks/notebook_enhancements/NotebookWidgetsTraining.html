@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Working with Jupyter Widgets &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Notebook Index" href="../index.html" />
+    <link rel="prev" title="Enhancing Your Notebooks" href="../notebook_enhancements.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../agenda.html">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../../resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+        
+        
+        
+          
+            
+                <li class="">
+                    <a href="../dataAccess.html">Data Access Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../analysis.html">Analysis Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../visualization.html">Visualization Notebooks</a>
+                </li>
+            
+          
+            
+  
+                <li class="active">
+                    <a href="../notebook_enhancements.html">Enhancing Your Notebooks</a>
+                    <ul>
+                    
+                        <li class="active">
+                            <a href="">Working with Jupyter Widgets</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../index.html">Notebook Index</a>
+                </li>
+            
+          
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#unidata-ams-2021-student-conference" class="nav-link">Unidata AMS 2021 Student Conference</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#focuses" class="nav-link">Focuses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#objectives" class="nav-link">Objectives</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#create-a-slider-widget" class="nav-link">1. Create a slider widget</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#use-slider-output-to-create-a-dynamic-plot" class="nav-link">2. Use slider output to create a dynamic plot</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#update-automatically" class="nav-link">Update automatically</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#incorporate-user-input-for-customizable-plots" class="nav-link">3. Incorporate user input for customizable plots</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#select-a-variable-from-a-dropdown" class="nav-link">Select a variable from a dropdown</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#select-a-variable-from-radio-buttons" class="nav-link">Select a variable from radio buttons</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#customize-display" class="nav-link">Customize display</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#putting-it-all-together" class="nav-link">4. Putting it all together</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#going-further" class="nav-link">Going further</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#see-also" class="nav-link">See also</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <p><a name="top"></a></p>
+<div style="width:1000 px">
+<div style="float:right; width:98 px; height:98px;">
+<img src="https://raw.githubusercontent.com/Unidata/MetPy/master/src/metpy/plots/_static/unidata_150x150.png" alt="Unidata Logo" style="height: 98px;">
+</div>
+<div class="section" id="working-with-jupyter-widgets">
+<h1>Working with Jupyter Widgets<a class="headerlink" href="#working-with-jupyter-widgets" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unidata-ams-2021-student-conference">
+<h2>Unidata AMS 2021 Student Conference<a class="headerlink" href="#unidata-ams-2021-student-conference" title="Permalink to this headline">¶</a></h2>
+<div style="clear:both"></div>
+</div>
+<hr class="docutils" />
+<p>In this notebook, we’ll explore several interactive <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/user_guide.html">Jupyter Widgets</a> and use them to incorporate user input to make dynamic, customizable plots.</p>
+<div style="float:right; width:100 px"><img src="../../instructors/images/widgets_preview.png" alt="example of customizable plot with widgets" style="height: 250px;"></div>
+</div>
+<div class="section" id="focuses">
+<h2>Focuses<a class="headerlink" href="#focuses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Discover various widgets and their uses</p></li>
+<li><p>Use widgets to create dynamic visualizations</p></li>
+<li><p>Incorporate user input in plots</p></li>
+<li><p>Use interact to create real-time responsive visualizations</p></li>
+</ul>
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#1.-Create-a-slider-widget">Create a slider widget</a></p></li>
+<li><p><a class="reference external" href="#2.-Use-slider-output-to-create-a-dynamic-plot">Use slider output to create a dynamic plot</a></p></li>
+<li><p><a class="reference external" href="#3.-Incorporate-user-input-for-customizable-plots">Incorporate user input for customizable plots</a></p></li>
+<li><p><a class="reference external" href="#4.-Putting-it-all-together">Putting it all together</a></p></li>
+</ol>
+<hr class="docutils" />
+<p>Before beginning, let’s import the packages to be used throughout this training:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-a-slider-widget">
+<h2>1. Create a slider widget<a class="headerlink" href="#create-a-slider-widget" title="Permalink to this headline">¶</a></h2>
+<p>For our first widget, we’ll create a slider for integers 1 to 10.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="nb">min</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "9aa96332c3a8439ba0608125e9d39bcb"}
+</script></div>
+</div>
+<p>Try moving the slide button around. We now have a working slider!<br />
+Notice that we passed several key-value pairs to the widget to set the start value, min value, max value, increment (step), and label (description).</p>
+<p>We can also create a slider for different numeric types, such as floats.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="mf">4.2</span><span class="p">,</span>
+    <span class="nb">min</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span>
+    <span class="n">readout_format</span><span class="o">=</span><span class="s1">&#39;.1f&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "c20bf9ab8fc94d4d87811c3271238b8d"}
+</script></div>
+</div>
+<p><em>Note:</em> In this slider, we have changed some key-value pairs (value and step) and added two more to set the orientation and format.</p>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="use-slider-output-to-create-a-dynamic-plot">
+<h2>2. Use slider output to create a dynamic plot<a class="headerlink" href="#use-slider-output-to-create-a-dynamic-plot" title="Permalink to this headline">¶</a></h2>
+<p>In the section above, we created a slider widget, but nothing happens when we move it. In this section, we’ll learn how to incorporate the slider value in a plot.</p>
+<p>Let’s start by saving the slider as a variable and displaying it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntRangeSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
+    <span class="nb">min</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "9b2f44e870d64fa18f880c855b521ba6"}
+</script></div>
+</div>
+<p>We have now created a handle for the widget so that we can access its properties.<br />
+<em>Note:</em> We have changed our <code class="docutils literal notranslate"><span class="pre">IntSlider</span></code> to an <code class="docutils literal notranslate"><span class="pre">IntRangeSlider</span></code>, which has a tuple value.
+Try moving the slider ends and then executing the cell below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">widget</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s use our slider to create a dynamic plot! We’ll start by creating some data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="c1"># create an array of 20 random values</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.96574468, 0.23980312, 0.45694222, 0.73643747, 0.53173785,
+       0.43393471, 0.82889127, 0.6600678 , 0.06616537, 0.5651788 ,
+       0.12391582, 0.20997352, 0.51433399, 0.95575747, 0.49238891,
+       0.84807331, 0.93449768, 0.61113601, 0.73356236, 0.68298267])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we’ll make a simple plot of the data elements with indices within the slider range.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">value</span> <span class="c1"># save the widget value as a variable</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:],</span> <span class="n">data</span><span class="p">[</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span> <span class="c1"># plot first n elements</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/NotebookWidgetsTraining_19_0.png" src="../../_images/NotebookWidgetsTraining_19_0.png" />
+</div>
+</div>
+<p>Try moving the slider and re-executing the cell above. The plot should update to reflect the new value.</p>
+<div class="section" id="update-automatically">
+<h3>Update automatically<a class="headerlink" href="#update-automatically" title="Permalink to this headline">¶</a></h3>
+<p>That’s cool, but what if we don’t want to re-run the cell to see updates?<br />
+We can make the plot update automatically using <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Using%20Interact.html"><code class="docutils literal notranslate"><span class="pre">interact</span></code></a>.</p>
+<p>First, we wrap our plot in a function, <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:],</span> <span class="n">data</span><span class="p">[</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we create our slider widget using <code class="docutils literal notranslate"><span class="pre">widgets.interact</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntRangeSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
+    <span class="nb">min</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">fixed</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "92493d3edad94e4b8b590379e7ecee9d"}
+</script></div>
+</div>
+<p>The first parameter is the function that will be called when the slider value changes (<code class="docutils literal notranslate"><span class="pre">f</span></code> in this case).<br />
+The next two parameters are the arguments passed to the function <code class="docutils literal notranslate"><span class="pre">f</span></code>: our slider widget and our data array.<br />
+<em>Note:</em> We used the <code class="docutils literal notranslate"><span class="pre">widgets.fixed</span></code> keyword to indicate that <code class="docutils literal notranslate"><span class="pre">data</span></code> is a constant, rather than a value produced by a widget.</p>
+<p><a href="#top">Top</a></p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="incorporate-user-input-for-customizable-plots">
+<h2>3. Incorporate user input for customizable plots<a class="headerlink" href="#incorporate-user-input-for-customizable-plots" title="Permalink to this headline">¶</a></h2>
+<p>Wigets can be used to let users provide input to visualizations.  In this section, we’ll add several widgets to customize our plot.</p>
+<div class="section" id="select-a-variable-from-a-dropdown">
+<h3>Select a variable from a dropdown<a class="headerlink" href="#select-a-variable-from-a-dropdown" title="Permalink to this headline">¶</a></h3>
+<p>One use for widgets is to allow the Notebook user to choose from serveral variables to display. Let’s create three variables: <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="c1"># array of ints, 0-19</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># array of ints, 19-0</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="c1"># array of 20 random values</span>
+<span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="c1"># save our three variables in a single array</span>
+<span class="n">var</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19]),
+ array([19, 18, 17, 16, 15, 14, 13, 12, 11, 10,  9,  8,  7,  6,  5,  4,  3,
+         2,  1,  0]),
+ array([0.06446437, 0.73356716, 0.53587587, 0.89853653, 0.03658032,
+        0.99653517, 0.50223153, 0.89799485, 0.75028984, 0.69215043,
+        0.55060903, 0.48587189, 0.4969021 , 0.79917116, 0.16592615,
+        0.64925129, 0.79300438, 0.41237162, 0.1717236 , 0.69506698])]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll make a dropdown menu to choose between our three variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Variable:&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Note:</em> The options we have listed are an array of tuples; the first tuple value is the option name and the second value is what is returned when the option is selected. The numeric return value will help us find the chosen variable in our <code class="docutils literal notranslate"><span class="pre">var</span></code> array.</p>
+<p>Finally, we make a plot which displays the variable selected in our dropdown.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)[:],</span> <span class="n">var</span><span class="p">[</span><span class="n">selected</span><span class="p">][:],</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span> <span class="c1"># plot selected variable</span>
+    
+<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="n">widget</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">fixed</span><span class="p">(</span><span class="n">var</span><span class="p">));</span> <span class="c1"># pass dropdown value as selected and var as fixed</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "8d256473be0b48b7a75aad311f0e45fd"}
+</script></div>
+</div>
+</div>
+<div class="section" id="select-a-variable-from-radio-buttons">
+<h3>Select a variable from radio buttons<a class="headerlink" href="#select-a-variable-from-radio-buttons" title="Permalink to this headline">¶</a></h3>
+<p>We can achieve the same function as above using radio buttons.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">RadioButtons</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Variable:&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)[:],</span> <span class="n">var</span><span class="p">[</span><span class="n">selected</span><span class="p">][:],</span> <span class="s1">&#39;bo&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span> <span class="c1"># plot selected variable</span>
+
+<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="n">widget</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">fixed</span><span class="p">(</span><span class="n">var</span><span class="p">));</span> <span class="c1"># pass radio value as selected and var as fixed  </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "0676337585744547b038ecf3578d47d7"}
+</script></div>
+</div>
+</div>
+<div class="section" id="customize-display">
+<h3>Customize display<a class="headerlink" href="#customize-display" title="Permalink to this headline">¶</a></h3>
+<p>We can also use widgets to customize features in our plot, such as color, marker size and shape, etc.</p>
+<p>Let’s first create a plot with a color picker.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ColorPicker</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Marker color&#39;</span><span class="p">,</span>
+    <span class="n">value</span> <span class="o">=</span><span class="s1">&#39;blue&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)[:],</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span> <span class="c1"># plot with chosien markerfacecolor</span>
+
+<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">widget</span><span class="p">);</span> <span class="c1"># pass color from color picker</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "af40df0dd6e74154a15a8fb375c3e8e6"}
+</script></div>
+</div>
+<p>Next, we’ll make make a toggle button to turn on and off the connecting line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ToggleButton</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Show line&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;bo-&#39;</span> <span class="k">if</span> <span class="n">val</span> <span class="k">else</span> <span class="s1">&#39;bo&#39;</span> <span class="c1"># set marker to include line only in toggle button is on (True)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)[:],</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">marker</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
+    
+<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">widget</span><span class="p">);</span> <span class="c1"># pass on/off</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "2482d06269e84c3094a759ae14cb3bdc"}
+</script></div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="putting-it-all-together">
+<h2>4. Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permalink to this headline">¶</a></h2>
+<p>Finally, let’s create a dynamic plot which incorporates all of the widgets we’ve just used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># slider</span>
+<span class="n">slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntRangeSlider</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
+    <span class="nb">min</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># radio buttons</span>
+<span class="n">radio</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">RadioButtons</span><span class="p">(</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
+    <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Variable:&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># color picker</span>
+<span class="n">color</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ColorPicker</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Marker color&#39;</span><span class="p">,</span>
+    <span class="n">value</span> <span class="o">=</span><span class="s1">&#39;blue&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># toggle</span>
+<span class="n">toggle</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ToggleButton</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Show line&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">slider</span><span class="o">.</span><span class="n">value</span> <span class="c1"># select number to plot</span>
+<span class="n">selected</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">value</span> <span class="c1"># get chosen variable</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">value</span> <span class="c1"># set marker face color</span>
+
+<span class="c1"># plot selections function</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">selected</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+    <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o-&#39;</span> <span class="k">if</span> <span class="n">val</span> <span class="k">else</span> <span class="s1">&#39;o&#39;</span> <span class="c1"># toggle line on/off accroding to val</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:],</span> <span class="n">var</span><span class="p">[</span><span class="n">selected</span><span class="p">][</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">marker</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span>
+    
+<span class="c1"># pass all widget values and fixed var</span>
+<span class="n">widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">slider</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="n">radio</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">toggle</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">fixed</span><span class="p">(</span><span class="n">var</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "8fb6e9ebbb2247eeacba4a9682793fc4"}
+</script></div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="going-further">
+<h2>Going further<a class="headerlink" href="#going-further" title="Permalink to this headline">¶</a></h2>
+<p>In this notebook, we’ve covered just a few uses of Jupyter Widgets. Some other uses include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html#Play-(Animation)-widget">Animations</a></p></li>
+<li><p><a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html#Container/Layout-widgets">Layouts</a></p></li>
+<li><p><a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html#File-Upload">File uploads</a></p></li>
+<li><p><a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html#Image">Embedding images</a></p></li>
+</ul>
+<p>Try using different widgets to make scripts that are dynamic and interactive!</p>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>To read more about Jupyter Widgets, see the <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/user_guide.html">documentation</a></p>
+<p>For a complete list of widget types, see <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html">here</a>.</p>
+<p><a href="#top">Top</a></p>
+</div>
+</div>
+<hr class="docutils" />
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"02b54310e0c041679b132e0c3df3b537": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "da143ec15a5d41f6bbd1c6d70ac0a84b": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "9aa96332c3a8439ba0608125e9d39bcb": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "n", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_02b54310e0c041679b132e0c3df3b537", "max": 10, "min": 1, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_da143ec15a5d41f6bbd1c6d70ac0a84b", "value": 5}}, "b3baf9b3e3ca4afd97ecbe8ca9d4773a": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "02baed05e4d34e33a93e0aaba0cbe122": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "c20bf9ab8fc94d4d87811c3271238b8d": {"model_name": "FloatSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatSliderView", "continuous_update": true, "description": "n", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_b3baf9b3e3ca4afd97ecbe8ca9d4773a", "max": 10.0, "min": 1.0, "orientation": "vertical", "readout": true, "readout_format": ".1f", "step": 0.1, "style": "IPY_MODEL_02baed05e4d34e33a93e0aaba0cbe122", "value": 4.2}}, "e90e85b6d9cd47b7b1e1ce28f9a981a8": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "17b0705ff446445ca427a4941088920c": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "9b2f44e870d64fa18f880c855b521ba6": {"model_name": "IntRangeSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntRangeSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntRangeSliderView", "continuous_update": true, "description": "n", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_e90e85b6d9cd47b7b1e1ce28f9a981a8", "max": 20, "min": 1, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_17b0705ff446445ca427a4941088920c", "value": [5, 10]}}, "c8df7238ff9549468a3b42513195dbc9": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b76b2fcbaa984c528a081b6ed74e10bb": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "24569aa1e1f34b3b9a272cf3dfaa14b3": {"model_name": "IntRangeSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntRangeSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntRangeSliderView", "continuous_update": true, "description": "n", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_c8df7238ff9549468a3b42513195dbc9", "max": 20, "min": 1, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_b76b2fcbaa984c528a081b6ed74e10bb", "value": [5, 10]}}, "759d7b0da56244438c88b394478a7502": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "92493d3edad94e4b8b590379e7ecee9d": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_24569aa1e1f34b3b9a272cf3dfaa14b3", "IPY_MODEL_7c3137ac8aa343edaaf32e2978ac527b"], "layout": "IPY_MODEL_759d7b0da56244438c88b394478a7502"}}, "71ddcbf6361f4ecd8667f92b96ac9212": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "7c3137ac8aa343edaaf32e2978ac527b": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_71ddcbf6361f4ecd8667f92b96ac9212", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"needs_background": "light"}, "data": {"text/plain": "<Figure size 432x288 with 1 Axes>", "image/png": "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\n"}}]}}, "ffe050060d9d4f15ad5940789ab399ae": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9c0f32db83ae49acbdd405ce49d868e3": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "923deebf24b04de3a60e7925b782fa34": {"model_name": "DropdownModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DropdownModel", "_options_labels": ["x", "y", "z"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "DropdownView", "description": "Variable:", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_ffe050060d9d4f15ad5940789ab399ae", "style": "IPY_MODEL_9c0f32db83ae49acbdd405ce49d868e3"}}, "2a79d1ea47f9498487392d648be85cdc": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8d256473be0b48b7a75aad311f0e45fd": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_923deebf24b04de3a60e7925b782fa34", "IPY_MODEL_5ef6e09f161a4cfca4f2f95bbccc8305"], "layout": "IPY_MODEL_2a79d1ea47f9498487392d648be85cdc"}}, "f6340dccd97d4aff91fbb33f5e20a05c": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5ef6e09f161a4cfca4f2f95bbccc8305": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_f6340dccd97d4aff91fbb33f5e20a05c", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"needs_background": "light"}, "data": {"text/plain": "<Figure size 432x288 with 1 Axes>", "image/png": "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\n"}}]}}, "0c433f9032cd4cd7851d8df24502621b": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b21801b3b4e54a91979b849c407cae8c": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "b931a61eb83e4830a9e1953bbcceb13b": {"model_name": "RadioButtonsModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "RadioButtonsModel", "_options_labels": ["x", "y", "z"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "RadioButtonsView", "description": "Variable:", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_0c433f9032cd4cd7851d8df24502621b", "style": "IPY_MODEL_b21801b3b4e54a91979b849c407cae8c"}}, "1473eb51b8b34b3db3874db99857c5b5": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "0676337585744547b038ecf3578d47d7": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_b931a61eb83e4830a9e1953bbcceb13b", "IPY_MODEL_bc7268e63ce142448609a2f42c591055"], "layout": "IPY_MODEL_1473eb51b8b34b3db3874db99857c5b5"}}, "9566e92083ac4377a70270477d812e7a": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bc7268e63ce142448609a2f42c591055": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_9566e92083ac4377a70270477d812e7a", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"needs_background": "light"}, "data": {"text/plain": "<Figure size 432x288 with 1 Axes>", "image/png": "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\n"}}]}}, "50a60ef7d4634c518e28f6bc81404cd1": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "0bd9c58120014fd49f3f368c22b65345": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "9c9fd900f8af4660903f86ec9e2e4ae5": {"model_name": "ColorPickerModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ColorPickerModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ColorPickerView", "concise": false, "description": "Marker color", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_50a60ef7d4634c518e28f6bc81404cd1", "style": "IPY_MODEL_0bd9c58120014fd49f3f368c22b65345", "value": "blue"}}, "239b75f16efe45488bf1fe00301fa4f0": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "af40df0dd6e74154a15a8fb375c3e8e6": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_9c9fd900f8af4660903f86ec9e2e4ae5", "IPY_MODEL_d1812fe5f88c4e73814f2054aef6c9be"], "layout": "IPY_MODEL_239b75f16efe45488bf1fe00301fa4f0"}}, "ed930b88c86f485fa4bec23881ec76e7": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d1812fe5f88c4e73814f2054aef6c9be": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_ed930b88c86f485fa4bec23881ec76e7", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"needs_background": "light"}, "data": {"text/plain": "<Figure size 432x288 with 1 Axes>", "image/png": "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\n"}}]}}, "a683507d8dbf4820854741dd42c9348f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b3eec6425b694581b492c6600e822266": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "e06b715c72e34a3ba9e55739839596ea": {"model_name": "ToggleButtonModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ToggleButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ToggleButtonView", "button_style": "", "description": "Show line", "description_tooltip": null, "disabled": false, "icon": "", "layout": "IPY_MODEL_a683507d8dbf4820854741dd42c9348f", "style": "IPY_MODEL_b3eec6425b694581b492c6600e822266", "tooltip": "", "value": false}}, "ef3b81b346d74b56ab79d0146cbd79f1": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2482d06269e84c3094a759ae14cb3bdc": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_e06b715c72e34a3ba9e55739839596ea", "IPY_MODEL_386f7668683b4de2b947049644b84f3e"], "layout": "IPY_MODEL_ef3b81b346d74b56ab79d0146cbd79f1"}}, "d2a6bba47d88454c98197d7cf34add62": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "386f7668683b4de2b947049644b84f3e": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_d2a6bba47d88454c98197d7cf34add62", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"needs_background": "light"}, "data": {"text/plain": "<Figure size 432x288 with 1 Axes>", "image/png": "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\n"}}]}}, "093a540e8ddc45fc96a90805f8c1d7eb": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1680899bcb4949c5b2952626205aad1f": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "eae3558b99ae47f1a6a6255c9e51e631": {"model_name": "IntRangeSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntRangeSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntRangeSliderView", "continuous_update": true, "description": "n", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_093a540e8ddc45fc96a90805f8c1d7eb", "max": 20, "min": 1, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_1680899bcb4949c5b2952626205aad1f", "value": [5, 10]}}, "aee326f11a784103bb65923931ae42a6": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8411c22463f740f09f19ed1866025e65": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "18dc13ecb6b543f58e4cc5513c7043d1": {"model_name": "RadioButtonsModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "RadioButtonsModel", "_options_labels": ["x", "y", "z"], "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "RadioButtonsView", "description": "Variable:", "description_tooltip": null, "disabled": false, "index": 0, "layout": "IPY_MODEL_aee326f11a784103bb65923931ae42a6", "style": "IPY_MODEL_8411c22463f740f09f19ed1866025e65"}}, "c5fcab8e07d7493ea6474eb1299678ac": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "23f9ede08f514c968f7413d3cff5b76d": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "de0cdb0146764428a221c3d6fb55178b": {"model_name": "ColorPickerModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ColorPickerModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ColorPickerView", "concise": false, "description": "Marker color", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_c5fcab8e07d7493ea6474eb1299678ac", "style": "IPY_MODEL_23f9ede08f514c968f7413d3cff5b76d", "value": "blue"}}, "c6f43fb55fc241b2a022f15bb5458cae": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d360ede697c342be89ccd016b462b1ca": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "9f7cd7931f224fbf88373ef3dcec78f7": {"model_name": "ToggleButtonModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ToggleButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ToggleButtonView", "button_style": "", "description": "Show line", "description_tooltip": null, "disabled": false, "icon": "", "layout": "IPY_MODEL_c6f43fb55fc241b2a022f15bb5458cae", "style": "IPY_MODEL_d360ede697c342be89ccd016b462b1ca", "tooltip": "", "value": false}}, "f0153e9853204cffaefb802c1e9a28e6": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8fb6e9ebbb2247eeacba4a9682793fc4": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_eae3558b99ae47f1a6a6255c9e51e631", "IPY_MODEL_18dc13ecb6b543f58e4cc5513c7043d1", "IPY_MODEL_de0cdb0146764428a221c3d6fb55178b", "IPY_MODEL_9f7cd7931f224fbf88373ef3dcec78f7", "IPY_MODEL_f3c9134e14ad47dcba24c81e4778bc9b"], "layout": "IPY_MODEL_f0153e9853204cffaefb802c1e9a28e6"}}, "f6049a944052464babb3a60e3696a526": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "f3c9134e14ad47dcba24c81e4778bc9b": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_f6049a944052464babb3a60e3696a526", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"needs_background": "light"}, "data": {"text/plain": "<Figure size 432x288 with 1 Axes>", "image/png": "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\n"}}]}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="../notebook_enhancements.html" title="previous page">Enhancing Your Notebooks</a>
+    <a class='right-next' id="next-link" href="../index.html" title="next page">Notebook Index</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agenda &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Workshop Environment" href="setup.html" />
+    <link rel="prev" title="Unidata AMS 2021 Python Workshop" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="index.html">
+    
+      <img src="_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+          
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#registration-br-span-class-subhead-complete-by-thursday-january-7th-2021-span" class="nav-link">Registration<br><span class="subhead">Complete by Thursday, January 7th, 2021</span></a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#workshop-kickoff-br-span-class-subhead-sunday-january-10th-2021-br-session-a-1-00-pm-est-to-1-30-pm-est-br-session-b-1-30-pm-est-to-2-00-pm-est-span" class="nav-link">Workshop Kickoff<br><span class="subhead">Sunday, January 10th, 2021<br>(Session A: 1:00 pm EST to 1:30 pm EST,<br>Session B: 1:30 pm EST to 2:00 pm EST)</span></a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#asynchronous-workshop-br-span-class-subhead-throughout-the-week-of-ams-br-january-10th-january-14th-2021-span" class="nav-link">Asynchronous Workshop<br><span class="subhead">Throughout the week of AMS<br>(January 10th — January 14th, 2021)</span></a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#post-ams" class="nav-link">Post AMS</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="agenda">
+<h1>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="registration-br-span-class-subhead-complete-by-thursday-january-7th-2021-span">
+<h2>Registration<br><span class="subhead">Complete by Thursday, January 7th, 2021</span><a class="headerlink" href="#registration-br-span-class-subhead-complete-by-thursday-january-7th-2021-span" title="Permalink to this headline">¶</a></h2>
+<p>Students interested in joining this workshop will need to
+<a class="reference external" href="https://docs.google.com/forms/d/e/1FAIpQLSdJAC7Zowt_2-Eci83_HYyluHEZCG80RV2o_M1eSPHROcRt2A/viewform?usp=sf_link">register</a>
+in advance.  We’ll need your GitHub user ID in order to provision the Jupyterhub resources
+you’ll be using. If you don’t already have a GitHub ID yet, don’t worry — they’re easy to
+create and the accounts are free: <a class="reference external" href="https://github.com/join">GitHub</a>.</p>
+</div>
+<div class="section" id="workshop-kickoff-br-span-class-subhead-sunday-january-10th-2021-br-session-a-1-00-pm-est-to-1-30-pm-est-br-session-b-1-30-pm-est-to-2-00-pm-est-span">
+<h2>Workshop Kickoff<br><span class="subhead">Sunday, January 10th, 2021<br>(Session A: 1:00 pm EST to 1:30 pm EST,<br>Session B: 1:30 pm EST to 2:00 pm EST)</span><a class="headerlink" href="#workshop-kickoff-br-span-class-subhead-sunday-january-10th-2021-br-session-a-1-00-pm-est-to-1-30-pm-est-br-session-b-1-30-pm-est-to-2-00-pm-est-span" title="Permalink to this headline">¶</a></h2>
+<p>We will offer two 30-minute sessions with the intent to kick-start the workshop.
+Each session will cover the same material, and each is limited to 100 participants.
+Interested students will need to register for this workshop: see the registration link
+above. <strong>The deadline to register is 8:00 pm EST on January 7th, 2021.</strong>
+The only requirement is that you have a GitHub account prior to the workshop.
+No experience with GitHub or Python are necessary to participate!</p>
+<p>Each session will begin with a 10 minute overview, followed by a 15 minute, small group (10 students or less per group) breakout session.
+These sessions will take place in a Zoom meeting hosted by the American Meteorological Society.
+The following topics will be covered:</p>
+<ul class="simple">
+<li><p>asynchronous workshop resources</p></li>
+<li><p>accessing the jupyterhub server</p></li>
+<li><p>a tour of the jupyterhub environment:</p>
+<ul>
+<li><p>exploring the interface and opening a notebook</p></li>
+<li><p>executing notebook cells</p></li>
+<li><p>creating a new notebook</p></li>
+<li><p>importing/exporting notebooks</p></li>
+</ul>
+</li>
+<li><p>where to go for help</p></li>
+<li><p>information about the workshop showcase</p></li>
+</ul>
+<p>Participants will be working in a Unidata Science Gateway Jypyterhub environment throughout the week, so it is critical that these small group sessions are attended by those interested in participating in the workshop.
+Students are encouraged to pair up into small groups to work on the projects as a team, although it is possible to tackle projects solo.</p>
+</div>
+<div class="section" id="asynchronous-workshop-br-span-class-subhead-throughout-the-week-of-ams-br-january-10th-january-14th-2021-span">
+<h2>Asynchronous Workshop<br><span class="subhead">Throughout the week of AMS<br>(January 10th — January 14th, 2021)</span><a class="headerlink" href="#asynchronous-workshop-br-span-class-subhead-throughout-the-week-of-ams-br-january-10th-january-14th-2021-span" title="Permalink to this headline">¶</a></h2>
+<p>The week of AMS will largely be a period of asynchronous exploration.
+The <a class="reference external" href="https://github.com/Unidata/pyaos-ams-2021/discussions">GitHub Discussions</a> area of the repository is a great place to post questions and interact with other workshop participants asynchronously.
+Workshop instructors will hold multiple formal “office hours” sessions throughout the week to assist participants directly as they progress through their workshop projects.
+Office hours will be held on a platform called Airmeet, where the first step in getting
+support is as easy as pulling up a chair at a virtual table (no, seriously, we have
+tables).
+The office hour schedule is:</p>
+<ul class="simple">
+<li><p>Monday, January 11th from 12:00 pm EST - 1:00 pm EST</p></li>
+<li><p>Tuesday, January 12th from 12:00 pm EST - 1:00 pm EST, and 3:30 pm EST - 4:00 pm EST</p></li>
+<li><p>Wednesday, January 13th from 12:00 pm EST - 1:00 pm EST</p></li>
+<li><p>Thursday, January 14th from 12:00 pm EST - 1:00 pm EST, and 3:30 pm EST - 4:00 pm EST</p></li>
+<li><p>Friday, January 15th from 12:00 pm EST - 1:00 pm EST</p></li>
+</ul>
+<p>While Unidata staff will be monitoring email/social media for questions, we hope the
+office hours will provide some structure to the otherwise nebulous nature of this period
+of the workshop.</p>
+<p>Office hours are also posted on the <a class="reference external" href="https://www.unidata.ucar.edu/2021AMS">Unidata Virtual AMS Booth
+page</a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>During office hours, you can <a class="reference external" href="https://www.airmeet.com/e/c30c2b30-4ab6-11eb-ae1f-335a915d8752"><strong>join the Airmeet video conference</strong></a>
+(or click the big button on the Unidata booth page).</p>
+</div>
+</div>
+<div class="section" id="post-ams">
+<h2>Post AMS<a class="headerlink" href="#post-ams" title="Permalink to this headline">¶</a></h2>
+<p>Support from the staff at Unidata does not stop at the end of the week!
+The same instructors you interact with at the workshop will be available after AMS through the <a class="reference external" href="https://www.unidata.ucar.edu/support/index.html#process">usual support channels offered by Unidata</a>, only now you will have a face to go with the help (and so will we!).</p>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">Unidata AMS 2021 Python Workshop</a>
+    <a class='right-next' id="next-link" href="setup.html" title="next page">Workshop Environment</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

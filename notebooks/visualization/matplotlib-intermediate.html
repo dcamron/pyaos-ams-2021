@@ -1,0 +1,609 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matplotlib: Intermediate &#8212; Unidata AMS 2021 Python Workshop</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+</style>
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-unidata.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="python-awips: Working with the Maps and Topo Databases" href="python-awips-WorkingWithMapsTopoDatabases.html" />
+    <link rel="prev" title="Matplotlib: Basics" href="matplotlib-basics.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-unidata fixed-top bd-navbar shadow" id="navbar-main">
+<div class="container-xl">
+
+    <a class="navbar-brand" href="../../index.html">
+    
+      <img src="../../_static/Unidata_logo_horizontal.png" class="logo" alt="logo" />
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../agenda.html">Agenda</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../setup.html">Workshop Environment</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../projects.html">Project Ideas</a>
+        </li>
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../../resources.html">Resources</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../showcase.html">Workshop Showcase</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/Unidata/pyaos-ams-2021" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/Unidata" target="_blank" rel="noopener">
+              <span><i class="fab fa-twitter-square"></i></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+    <div class="bd-toc-item active">
+    
+  
+    <ul class="nav bd-sidenav">
+        
+        
+        
+        
+        
+        
+        
+        
+          
+            
+                <li class="">
+                    <a href="../dataAccess.html">Data Access Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../analysis.html">Analysis Notebooks</a>
+                </li>
+            
+          
+            
+  
+                <li class="active">
+                    <a href="../visualization.html">Visualization Notebooks</a>
+                    <ul>
+                    
+                        <li class="">
+                            <a href="Declarative-Example.html">Declarative Syntax Example</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="MetPy%20SkewT.html">MetPy Skew-T</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="isentropic_introduction.html">Overview of Isentropic Analysis</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="matplotlib-basics.html">Matplotlib: Basics</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href="">Matplotlib: Intermediate</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithMapsTopoDatabases.html">python-awips: Working with the Maps and Topo Databases</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithModels.html">python-awips: Working with Models</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithSatelliteData.html">python-awips: Working with Satellite Data</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithSurfaceObs.html">python-awips: Working with Surface Obs</a>
+                        </li>
+                    
+                        <li class="">
+                            <a href="python-awips-WorkingWithUpperAirObs.html">python-awips: Working with Upper Air Obs</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../notebook_enhancements.html">Enhancing Your Notebooks</a>
+                </li>
+            
+          
+            
+                <li class="">
+                    <a href="../index.html">Notebook Index</a>
+                </li>
+            
+          
+        
+        
+        
+        
+      </ul>
+  
+  </nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#unidata-ams-2021-student-conference" class="nav-link">Unidata AMS 2021 Student Conference</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#focuses" class="nav-link">Focuses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#objectives" class="nav-link">Objectives</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#imports" class="nav-link">Imports</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#create-test-data" class="nav-link">1. Create Test Data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#multiple-plots-on-one-figure" class="nav-link">2. Multiple Plots on One Figure</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#colorizing-scatter-plots" class="nav-link">3. Colorizing Scatter Plots</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#plot-a-heat-map-with-imshow" class="nav-link">4. Plot a Heat Map with Imshow</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#plot-with-contour" class="nav-link">5. Plot with Contour</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#plot-with-contourf" class="nav-link">6. Plot with Contourf</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#combine-imshow-and-contour" class="nav-link">7. Combine Imshow and Contour</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#see-also" class="nav-link">See also</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#related-notebooks" class="nav-link">Related Notebooks</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <p><a name="top"></a></p>
+<div style="width:1000 px">
+<div style="float:right; width:98 px; height:98px;">
+<img src="https://raw.githubusercontent.com/Unidata/MetPy/master/src/metpy/plots/_static/unidata_150x150.png" alt="Unidata Logo" style="height: 98px;">
+</div>
+<div class="section" id="matplotlib-intermediate">
+<h1>Matplotlib: Intermediate<a class="headerlink" href="#matplotlib-intermediate" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="unidata-ams-2021-student-conference">
+<h2>Unidata AMS 2021 Student Conference<a class="headerlink" href="#unidata-ams-2021-student-conference" title="Permalink to this headline">¶</a></h2>
+<div style="clear:both"></div>
+</div>
+<hr class="docutils" />
+<div style="float:right; width:250 px"><img src="../../instructors/images/matplotlib-intermediate-preview.png" alt="Colorized scatter plot and contour plot" style="height: 300px;"></div>
+</div>
+<div class="section" id="focuses">
+<h2>Focuses<a class="headerlink" href="#focuses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Draw multiple plots in the same figure.</p></li>
+<li><p>Colorize individual scatter plot points based on some criteria.</p></li>
+<li><p>Use imshow, contour and contourf to draw a heat maps and contour plots.</p></li>
+</ul>
+</div>
+<div class="section" id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#1.-Create-Test-Data">Create Test Data</a></p></li>
+<li><p><a class="reference external" href="#2.-Multiple-Plots-on-One-Figure">Multiple Plots on One Figure</a></p></li>
+<li><p><a class="reference external" href="#3.-Colorizing-Scatter-Plots">Colorizing Scatter Plots</a></p></li>
+<li><p><a class="reference external" href="#4.-Plot-a-Heat-Map-with-Imshow">Plot a Heat Map with Imshow</a></p></li>
+<li><p><a class="reference external" href="#5.-Plot-with-Contour">Plot with Contour</a></p></li>
+<li><p><a class="reference external" href="#6.-Plot-with-Contourf">Plot with Contourf</a></p></li>
+<li><p><a class="reference external" href="#7.-Combine-Imshow-and-Contour">Combine Imshow and Contour</a></p></li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-test-data">
+<h2>1. Create Test Data<a class="headerlink" href="#create-test-data" title="Permalink to this headline">¶</a></h2>
+<p>First, instantiate some test data to work with in this notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the test data to work with</span>
+<span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">93.</span><span class="p">,</span>  <span class="mf">96.</span><span class="p">,</span>  <span class="mf">99.</span><span class="p">,</span> <span class="mf">102.</span><span class="p">,</span> <span class="mf">105.</span><span class="p">,</span> <span class="mf">108.</span><span class="p">,</span> <span class="mf">111.</span><span class="p">,</span> <span class="mf">114.</span><span class="p">,</span> <span class="mf">117.</span><span class="p">,</span>
+                  <span class="mf">120.</span><span class="p">,</span> <span class="mf">123.</span><span class="p">,</span> <span class="mf">126.</span><span class="p">,</span> <span class="mf">129.</span><span class="p">,</span> <span class="mf">132.</span><span class="p">,</span> <span class="mf">135.</span><span class="p">,</span> <span class="mf">138.</span><span class="p">,</span> <span class="mf">141.</span><span class="p">,</span> <span class="mf">144.</span><span class="p">,</span>
+                  <span class="mf">147.</span><span class="p">,</span> <span class="mf">150.</span><span class="p">,</span> <span class="mf">153.</span><span class="p">,</span> <span class="mf">156.</span><span class="p">,</span> <span class="mf">159.</span><span class="p">,</span> <span class="mf">162.</span><span class="p">])</span>
+<span class="n">temps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">310.7</span><span class="p">,</span> <span class="mf">308.0</span><span class="p">,</span> <span class="mf">296.4</span><span class="p">,</span> <span class="mf">289.5</span><span class="p">,</span> <span class="mf">288.5</span><span class="p">,</span> <span class="mf">287.1</span><span class="p">,</span> <span class="mf">301.1</span><span class="p">,</span> <span class="mf">308.3</span><span class="p">,</span>
+                  <span class="mf">311.5</span><span class="p">,</span> <span class="mf">305.1</span><span class="p">,</span> <span class="mf">295.6</span><span class="p">,</span> <span class="mf">292.4</span><span class="p">,</span> <span class="mf">290.4</span><span class="p">,</span> <span class="mf">289.1</span><span class="p">,</span> <span class="mf">299.4</span><span class="p">,</span> <span class="mf">307.9</span><span class="p">,</span>
+                  <span class="mf">316.6</span><span class="p">,</span> <span class="mf">293.9</span><span class="p">,</span> <span class="mf">291.2</span><span class="p">,</span> <span class="mf">289.8</span><span class="p">,</span> <span class="mf">287.1</span><span class="p">,</span> <span class="mf">285.8</span><span class="p">,</span> <span class="mf">303.3</span><span class="p">,</span> <span class="mf">310.</span><span class="p">])</span>
+<span class="n">temps_1000</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">316.0</span><span class="p">,</span> <span class="mf">316.3</span><span class="p">,</span> <span class="mf">308.9</span><span class="p">,</span> <span class="mf">304.0</span><span class="p">,</span> <span class="mf">302.0</span><span class="p">,</span> <span class="mf">300.8</span><span class="p">,</span> <span class="mf">306.2</span><span class="p">,</span> <span class="mf">309.8</span><span class="p">,</span>
+                       <span class="mf">313.5</span><span class="p">,</span> <span class="mf">313.3</span><span class="p">,</span> <span class="mf">308.3</span><span class="p">,</span> <span class="mf">304.9</span><span class="p">,</span> <span class="mf">301.0</span><span class="p">,</span> <span class="mf">299.2</span><span class="p">,</span> <span class="mf">302.6</span><span class="p">,</span> <span class="mf">309.0</span><span class="p">,</span>
+                       <span class="mf">311.8</span><span class="p">,</span> <span class="mf">304.7</span><span class="p">,</span> <span class="mf">304.6</span><span class="p">,</span> <span class="mf">301.8</span><span class="p">,</span> <span class="mf">300.6</span><span class="p">,</span> <span class="mf">299.9</span><span class="p">,</span> <span class="mf">306.3</span><span class="p">,</span> <span class="mf">311.3</span><span class="p">])</span>
+<span class="c1"># Fake dewpoint data to plot</span>
+<span class="n">dewpoint</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">temps</span>
+<span class="n">dewpoint_1000</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">temps_1000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="multiple-plots-on-one-figure">
+<h2>2. Multiple Plots on One Figure<a class="headerlink" href="#multiple-plots-on-one-figure" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/visualization/matplotlib-basics.ipynb">Matplotlib: Basics notebook</a> explained how to create a figure and add a plot to that figure.  It is also possible to add multiple plots to the same figure.  In this step, a figure is first created and then multiple plots are added, each with their own titles, axes, etc.  Each plot is added using the <em>add_subplot()</em> function, which lays out multiple plots in a grid by passing the number of rows, columns, and which plot within the grid (starting with 1, not 0).</p>
+<blockquote>
+<div><p>So for example, if you wanted to create a plot in the lower left corner of a (hypothetical) grid of plots with 2 rows and 3 columns, you could write fig.add_subplot(2, 3, 4), where 4 means the 4th plot, counting across rows and down columns.”</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cell content replaced by load magic replacement.</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Specify how our lines should look</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">temps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Temperature (surface)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">temps_1000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Temperature (isobaric level)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add labels, title, and display settings</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Temperature Forecast&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create the second plot</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dewpoint (surface)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">dewpoint_1000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dewpoint (isobaric level)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add labels, title, and display settings</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Dewpoint&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Dewpoint Forecast&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">257</span><span class="p">,</span> <span class="mi">312</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">95</span><span class="p">,</span> <span class="mi">162</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(95.0, 162.0)
+</pre></div>
+</div>
+<img alt="../../_images/matplotlib-intermediate_6_1.png" src="../../_images/matplotlib-intermediate_6_1.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="colorizing-scatter-plots">
+<h2>3. Colorizing Scatter Plots<a class="headerlink" href="#colorizing-scatter-plots" title="Permalink to this headline">¶</a></h2>
+<p>Previously, in the <a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/visualization/matplotlib-basics.ipynb">Matplotlib: Basics notebook</a>, an example for drawing scatter plots was provided by setting the <strong>linestyle</strong> to none, and adding ‘o’ markers.  Another alternative is to use the <strong>scatter</strong> methods, while these are slower, they allow more visualization options of the data, such as style or color of the individual markers.  In this case, the data points will be colorized individually based upon a third variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># From the axes, get the scatter and set the display parameters</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">285</span><span class="p">,</span> <span class="mi">320</span><span class="p">],</span> <span class="p">[</span><span class="mi">285</span><span class="p">,</span> <span class="mi">320</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">temps</span><span class="p">,</span> <span class="n">temps_1000</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span> <span class="n">temps</span> <span class="o">-</span> <span class="n">temps_1000</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="c1"># Add labels, title, and gridlines</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (surface)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (1000 hPa)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Temperature Cross Plot&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/matplotlib-intermediate_8_0.png" src="../../_images/matplotlib-intermediate_8_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="plot-a-heat-map-with-imshow">
+<h2>4. Plot a Heat Map with Imshow<a class="headerlink" href="#plot-a-heat-map-with-imshow" title="Permalink to this headline">¶</a></h2>
+<p>Switching up context now, we can take a look at a different style of plotting.  Three other functions called: <strong>imshow</strong>, <strong>contour</strong>, and <strong>contourf</strong> can be used to create different plots.</p>
+<p><strong>imshow</strong> displays the values in an array as colored pixels, similar to a map.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create some data to work with</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">Z1</span> <span class="o">-</span> <span class="n">Z2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="c1"># Create a simple imshow plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlGn&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/matplotlib-intermediate_10_0.png" src="../../_images/matplotlib-intermediate_10_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="plot-with-contour">
+<h2>5. Plot with Contour<a class="headerlink" href="#plot-with-contour" title="Permalink to this headline">¶</a></h2>
+<p><strong>contour</strong> creates contours around the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create one figure for two plots</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Create a simple contour</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span>
+
+<span class="c1"># Create a second contour with labels</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;a list of 13 text.Text objects&gt;
+</pre></div>
+</div>
+<img alt="../../_images/matplotlib-intermediate_12_1.png" src="../../_images/matplotlib-intermediate_12_1.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="plot-with-contourf">
+<h2>6. Plot with Contourf<a class="headerlink" href="#plot-with-contourf" title="Permalink to this headline">¶</a></h2>
+<p><strong>contourf</strong> creates filled contours around data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/matplotlib-intermediate_14_0.png" src="../../_images/matplotlib-intermediate_14_0.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="combine-imshow-and-contour">
+<h2>7. Combine Imshow and Contour<a class="headerlink" href="#combine-imshow-and-contour" title="Permalink to this headline">¶</a></h2>
+<p>Create a figure using imshow and contour that is a heatmap in the colormap of your choice. Overlay black contours with a 0.5 contour interval.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cell content replaced by load magic replacement.</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;PiYG&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;a list of 6 text.Text objects&gt;
+</pre></div>
+</div>
+<img alt="../../_images/matplotlib-intermediate_16_1.png" src="../../_images/matplotlib-intermediate_16_1.png" />
+</div>
+</div>
+<p><a href="#top">Top</a></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p>Documentation for:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.html">matplotlib.pyplot</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.figure.html">matplotlib.pyplot.figure</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.axes.html">matplotlib.pyplot.axes</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.imshow.html">matplotlib.pyplot.imshow</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.contour.html">matplotlib.pyplot.contour</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.contourf.html">matplotlib.pyplot.contourf</a></p></li>
+</ul>
+<div class="section" id="related-notebooks">
+<h3>Related Notebooks<a class="headerlink" href="#related-notebooks" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/Unidata/pyaos-ams-2021/blob/master/notebooks/visualization/matplotlib-basics.ipynb">Matplotlib: Basics</a></p></li>
+</ul>
+<p><a href="#top">Top</a></p>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="matplotlib-basics.html" title="previous page">Matplotlib: Basics</a>
+    <a class='right-next' id="next-link" href="python-awips-WorkingWithMapsTopoDatabases.html" title="next page">python-awips: Working with the Maps and Topo Databases</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-92978945-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2020, Unidata. Development supported by National Science Foundation grant AGS-1901712.<br/>
+        Last updated on Jan 09, 2021 at 17:40:43.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
